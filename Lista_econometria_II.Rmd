@@ -128,6 +128,5 @@ cbind(dados,V12=t) %>%
 # Remover objetos desnecessários
 rm(base,dados,r,ref,t,list=ls(pattern = "V\\d"),b,i,j,nl,nm)
 }
-
 ```
 

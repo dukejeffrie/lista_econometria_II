@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.07.0 (MiKTeX 2.9.6730 64-bit)  (format=lualatex 2018.8.2)  15 JUN 2019 20:36
+This is LuaTeX, Version 1.07.0 (MiKTeX 2.9.6730 64-bit)  (format=lualatex 2018.8.2)  16 JUN 2019 13:18
  restricted system commands enabled.
 **Lista_econometria_II.tex
 (./Lista_econometria_II.tex
@@ -33,7 +33,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.977 seconds ("C:/Program File
+luaotfload | main : initialization completed in 0.936 seconds ("C:/Program File
 s/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size12.clo"
@@ -1729,80 +1729,81 @@ LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
 (Font)              scaled to size 6.64929pt on input line 238.
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
 (Font)              scaled to size 4.98697pt on input line 238.
-[2] [3] [4] [5]
+[2] [3] [4] [5] [6]
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 8.31161pt on input line 449.
+(Font)              scaled to size 8.31161pt on input line 509.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 449.
+(Font)              <10> on input line 509.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 449.
+(Font)              <7> on input line 509.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 449.
+(Font)              <5> on input line 509.
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 5.81813pt on input line 449.
+(Font)              scaled to size 5.81813pt on input line 509.
+[7]
 
-Package xcolor Warning: Incompatible color definition on input line 500.
+Package xcolor Warning: Incompatible color definition on input line 566.
 
-[6](load luc: C:/Users/thiga/AppData/Local/MiKTeX/2.9/luatex-cache/generic/fonts
-/otl/lmmono12-regular.luc)(load luc: C:/Users/thiga/AppData/Local/MiKTeX/2.9/lua
-tex-cache/generic/fonts/otl/lmmono10-italic.luc)
+(load luc: C:/Users/thiga/AppData/Local/MiKTeX/2.9/luatex-cache/generic/fonts/ot
+l/lmmono12-regular.luc)(load luc: C:/Users/thiga/AppData/Local/MiKTeX/2.9/luatex
+-cache/generic/fonts/otl/lmmono10-italic.luc)
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 504.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 570.
 (load luc: C:/Users/thiga/AppData/Local/MiKTeX/2.9/luatex-cache/generic/fonts/ot
 l/lmmonolt10-bold.luc)
 
-Package xcolor Warning: Incompatible color definition on input line 513.
+Package xcolor Warning: Incompatible color definition on input line 579.
 
 
-Package xcolor Warning: Incompatible color definition on input line 513.
-
-[7]
-
-Package xcolor Warning: Incompatible color definition on input line 564.
-
-
-Package xcolor Warning: Incompatible color definition on input line 665.
-
-
-Package xcolor Warning: Incompatible color definition on input line 665.
-
-
-Package xcolor Warning: Incompatible color definition on input line 665.
+Package xcolor Warning: Incompatible color definition on input line 579.
 
 [8]
 
-Package xcolor Warning: Incompatible color definition on input line 665.
+Package xcolor Warning: Incompatible color definition on input line 630.
 
 
-Package xcolor Warning: Incompatible color definition on input line 665.
+Package xcolor Warning: Incompatible color definition on input line 731.
 
 
-Underfull \vbox (badness 10000) detected at line 665
- []
+Package xcolor Warning: Incompatible color definition on input line 731.
 
 
-Underfull \vbox (badness 10000) detected at line 665
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 665.
+Package xcolor Warning: Incompatible color definition on input line 731.
 
 [9]
 
-Package xcolor Warning: Incompatible color definition on input line 665.
+Package xcolor Warning: Incompatible color definition on input line 731.
 
 
-Package xcolor Warning: Incompatible color definition on input line 665.
+Package xcolor Warning: Incompatible color definition on input line 731.
 
-[10] [11] [12] [13]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 839.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 839.
+
+Underfull \vbox (badness 10000) detected at line 731
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 731
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 731.
+
+[10]
+
+Package xcolor Warning: Incompatible color definition on input line 731.
+
+
+Package xcolor Warning: Incompatible color definition on input line 731.
+
+[11] [12] [13] [14]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 905.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 905.
 (./Lista_econometria_II.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 839.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 839.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 905.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 905.
 Package rerunfilecheck Info: File `Lista_econometria_II.out' has not changed.
 (rerunfilecheck)             Checksum: 40A8BEB12DE8186E1FDD29EE01971C2F;1421.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 839.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 905.
 )
 (\end occurred inside a group at level 1)
 
@@ -1810,12 +1811,12 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 839.
 ### bottom level
 
 Here is how much of LuaTeX's memory you used:
- 37531 strings out of 494412
+ 37532 strings out of 494412
  125017,953878 words of node,token memory allocated
- 896 words of node memory still in use:
-   8 hlist, 2 vlist, 3 rule, 7 glue, 1 kern, 36 attribute, 103 glue_spec, 36 att
+ 900 words of node memory still in use:
+   8 hlist, 2 vlist, 3 rule, 7 glue, 1 kern, 37 attribute, 103 glue_spec, 37 att
 ribute_list, 1 write nodes
-   avail lists: 2:1839,3:120,4:364,5:336,6:22,7:3411,8:89,9:239,10:9,11:300
+   avail lists: 2:1839,3:120,4:364,5:336,6:22,7:3617,8:89,9:241,10:33,11:346
  40418 multiletter control sequences out of 65536+200000
  78 fonts using 19930383 bytes
  55i,10n,117p,421b,13152s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1841,9 +1842,9 @@ s/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
 ype1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lms
 y8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.p
 fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Lista_econometria_II.pdf (13 pages, 324729 bytes).
+Output written on Lista_econometria_II.pdf (14 pages, 331789 bytes).
 
-PDF statistics: 230 PDF objects out of 1000 (max. 8388607)
- 43 named destinations out of 1000 (max. 131072)
+PDF statistics: 234 PDF objects out of 1000 (max. 8388607)
+ 44 named destinations out of 1000 (max. 131072)
  88 words of extra memory for PDF output out of 10000 (max. 100000000)
 

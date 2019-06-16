@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{15/06/2019}
+    \date{16/06/2019}
 
 \setlength\parindent{24pt}
 \usepackage{indentfirst}
@@ -403,6 +403,12 @@ Rust fez as hipóteses simplificadoras
 
 \(EV(x_t)=\mathbb{E}_t[\text{max}\{-c(x_t,\theta_1)+\varepsilon_{0,t} + \beta \int EV(x_{t+1})P(dx_{t+1}|x_t); \\ -R -c(0,\theta) + \varepsilon_{1,t} + \beta \int EV(x_{t+1})P(dx_{t+1}|0)\}]\)
 
+\emph{Ao assumir a ``Conditional Independence Assumption'' (CI), duas
+restrições estão envolvidas. Conforme argumenta Rust, \(x_{t+1}\) é uma
+estatística suficiente para \(\varepsilon_{t+1}\), o que significa que
+\(x_{t+1}\) transmite qualquer dependência estatística entre
+\(\varepsilon_{t}\) e \(\varepsilon_{t+1}\).}
+
 \textbf{h) (*) Prove que a equação anterior é um mapeamento de contração
 (contraction mapping).}
 
@@ -411,7 +417,31 @@ condicional (CI). Use um exemplo concreto para explicar o que é
 descartado (ou deixado de lado). O que esta hipótese ``compra''
 (i.e.~ela entrega) para a estimação? Essa hipótese é razoável?}
 
-Embora equação anterior é uma contração, ainda é difícil computar sem
+\emph{Ao adotar a CI, conforme apontado no item g), qualquer dependência
+entre os termos não observados pelo econometrista depende apenas de
+\(x_t\), o que acaba sendo uma hipótese forte, conforme Rust aponta.
+Todavia, ao adotar tal estratégia, \(EV_\theta\) deixa de ser função do
+termo não observado, dispensando que as pobrabilidades de escolham
+envolvam uma integração sobre essa função desconhecida. Além disso, a CI
+implica que \(EV_\theta\) é um ponto fixo de uma contração sobre o
+espaço de estado reduzido (\(\Gamma=\{(x,i)|x\in R^k, i \in C(x)\}\) ao
+invés de \(S=\{(x,i)|x\in R^k, \varepsilon \in R^{\#C(x)}\}\)), o que
+confere mais um ganho computacional ao evitar o cômputo de mais uma
+integral para obter \(EV_\theta\) a partir de \(V_\theta\). Ao fazer
+isso, para o caso dos ônibus, as decisões de troca do motor não
+observadas pelo econometristas em dois períodos podem depender de outras
+coisas além da milhagem percorrida. O agente pode, por exemplo, observar
+as condições das ruas ou a temperatura do ambiente (que pode afetar a
+temperatura dos componentes do motor e acelerar seu desgaste) para
+decidir sobre a troca do motor. Pode ainda, por exemplo, optar por
+direcionar a troca do motor para o períodos em que a demanda por ônibus
+é menor (como férias) de modo a diminuir eventuais impactos da troca do
+motor. Todos esses fatores independem da milhagem \(x_t\), afetando a
+escolha da troca. Apesar de ser uma hipótese forte, parece ser razoável
+supor que \(x_t\) seja o principal fator a influenciar a parcela não
+observada pelo econometrista}
+
+Embora equação anterior seja uma contração, ainda é difícil computar sem
 fazer hipóteses distribucionais adicionais sobre \(\varepsilon\). Rust
 assume que o choque \(\varepsilon_{it,t}\)\$ segue uma distribuição
 valor extremo Tipo I normalizada. Então:
@@ -424,13 +454,35 @@ valor extremo Tipo I normalizada. Então:
 \textbf{j) Por que Rust escolheu uma distribuição padrão para o termo de
 erro ao invés de adicionar um parâmetro para a sua variância?}
 
+\emph{Conforme Rust aponta, um valor alto e negativo para
+\(\varepsilon_t(0)\) pode ser interpretado como uma falha não observada
+de algum componente do ônibus que força para a oficina, enquanto um
+valor alto e positivo pode ser o reporte do motorista de que o ônibus
+está bem ajustado. Já \(\varepsilon_t(1)\) pode ser associado ao custo
+associado à troca do motor, em que um valor alto e negativo pode indicar
+que não há espaço disponível para reparo ou que não existem motores
+disponíveis para troca, enquanto um valor alto e positivo indica o
+inverso. Como o autor não consegue identificar esses tipos de custo sem
+informação adicional, ele optou por arbitrariamente normalizar a média e
+variância.}
+
 A hipótese de distribuição valor extremo nos permite derivar formas
 funcionais para \(EV(x_t)\), e \(P(1 | x_t, \theta)\).
 
 \textbf{k) Discuta a racionalidade por trás da hipótese da distribução
 de \(\varepsilon_t\). Existem outras alternativas? Escolha uma
-alternativa e discuta os pré e contras em relação à distribuição valor
+alternativa e discuta os prós e contras em relação à distribuição valor
 extremo Tipo I.}
+
+\emph{Ao escolher essa distribuição, o autor assume implicitamente que
+\(\{x_t^j,\varepsilon_t^j\}\) são independentemente distribuídos entre
+os diferentes ônibus, de menor relevância vis-à-vis sua hipótese de CI.
+Uma outra possibilidade seria utilizar uma distribuição normal, como no
+caso de um probit, o que lhe permitiria acomodar possíveis correlações
+entre o processo decisório envolvendo a troca de motores dos ônibus.
+Entretanto, isso levaria a complicações na definição do modelo,
+demandando maiores informações sobre os custos que envolvem o processo
+decisório de troca do motor.}
 
 A última simplificação que Rust faz é discretizar o espaço de xt divindo
 a milhagem em 90 intervalos de 5000 milhas. Ele assume que o processo xt
@@ -439,6 +491,14 @@ reduz a distribuição de \((x_{t+1} - x_t\)) como uma multinomial com
 parâmetros \(\theta_3 = \{\theta_{30}, \theta_{31}\}\).
 
 \textbf{l) Escreva \(P (x_{t+1}| x_t, i_t, \theta)\).}
+
+\[
+P (x_{t+1}| x_t, i_t, \theta) =
+\begin{cases}
+  g(x_{t+1} - x_t,\theta) & \quad \text{if } i_t=0 \\
+  g(x_{t+1} - 0,\theta) & \quad \text{if } i_t=1
+\end{cases}
+\]
 
 Aqui já se está em posição de estimar o modelo. As únicas duas coisas
 que não foram especificadas são \(\beta\) e a forma da função custo.
@@ -457,6 +517,12 @@ c (x_t, \theta_1) = 0.001 \theta_1 x_t
 especificação de função custo. O que aconteceria se isto fosse feito?
 Poderiamos estimar uma constante separadamente? Discuta como isso
 impacta o resultado final de sua estimativa.}
+
+\emph{Segundo Rust, o nível absoluto de \(c\) não é identificado uma vez
+que a subtração de uma constante da função utilidade não afeta as
+probabulidades de escolha. Assim, o que autor busca estimar, ao menos, a
+mudança nos custos operacionais como função da distância percorrida
+pelos ônibus, cuja normalização \(c(0,\theta_1)\) é utilizada}
 
 \hypertarget{estimacao}{%
 \section{Estimação}\label{estimacao}}
@@ -512,8 +578,8 @@ no metadado:
 \end{Highlighting}
 \end{Shaded}
 
-\% latex table generated in R 3.5.3 by xtable 1.8-3 package \% Sat Jun
-15 20:36:28 2019
+\% latex table generated in R 3.5.3 by xtable 1.8-3 package \% Sun Jun
+16 13:17:55 2019
 
 \begin{table}[ht]
 \centering

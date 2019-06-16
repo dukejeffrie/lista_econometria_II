@@ -1,11 +1,57 @@
 ---
 title: "Lista para Modelo Dinâmico"
 author: "Thiago Mendes Rosa"
-date: "13/06/2019"
+date: "`r format(Sys.Date(),'%d/%m/%Y')`"
 output: 
   pdf_document: 
+    fig_caption: yes
+    fig_crop: yes
     keep_tex: yes
     latex_engine: lualatex
+    number_sections: yes
+    #toc: yes
+    fig_height: 4
+    fig_width: 6
+documentclass: article
+classoption: a4paper
+header-includes:
+  - \setlength\parindent{24pt}
+  - \usepackage{indentfirst}
+  - \usepackage[brazilian]{babel}
+  - \usepackage[utf8]{inputenc}
+  - \usepackage{indentfirst}
+  - \usepackage{setspace}
+  - \onehalfspace
+  - \usepackage{color}
+  - \usepackage{graphicx}
+  - \usepackage{microtype}
+  - \usepackage{enumitem}
+  - \usepackage{amsmath}
+  - \usepackage{pdfpages}
+  - \usepackage{fancyhdr}
+  - \usepackage{floatrow}
+  - \usepackage{amsmath}
+  - \usepackage{morefloats}
+  - \usepackage{pbox}
+  - \usepackage{graphicx}
+  - \usepackage{xcolor, grffile}
+  - \usepackage{color, colortbl}
+  - \usepackage{tikz}
+  - \usepackage{booktabs}
+  - \usepackage{tabularx}
+  - \floatplacement{figure}{H}
+  - \floatsetup[figure]{capposition=top}
+  - \floatsetup[table]{capposition=top}
+  - \usepackage[bf]{caption}
+  - \captionsetup{justification=raggedright,singlelinecheck=false}
+  - \usepackage{placeins}
+  - \usepackage{tocloft}
+  - \usepackage{rotating}
+  - \setlength{\cfttabnumwidth}{3em}
+  - \setlength{\cftfignumwidth}{3em}
+mainfont: Arial
+fontsize: 12pt
+dpi: 600
 ---
 
 ```{r setup, include=FALSE}
@@ -27,8 +73,211 @@ despesas operacionais $m(.)$ e o custo $f(.)$ de substituir o motor no caso de f
 
 **a) Escreva o custo como uma combinação destes dois componentes. Indique claramente quais elementos são função de $x_t$. Argumente informalmente que $\frac{\partial c}{\partial x_t} > 0$. Esta hipótese é necessária para a solução do modelo. Ela é uma boa hipótese? Você pode fazer um argumento para explicar por que $\frac{\partial c}{\partial x_t}$ poderia ser negativa (pelo menos para alguns valores de $x_t$)?**
 
-*Considere que o custo $m(.)$ pode ser decomposto em $m(m_r(x_t),m_o(.))$, em que $m_r$ denota as desposas com manutenção regular e $m_o$ as despesas operacionais. A função custo pode ser escrita como $c=(m(m_r(x_t),m_o(.)),f(x_t,.))$. Espera-se que, quanto maior for a utilização de um ônibus da frota, maiores serão tanto os custos de manutenção regular quanto os custos para substituição do motor em caso de falha. Com isso, quanto mais o ônibus roda, maior é o desgaste de suas peças e, portanto, maiores serão os custos. O custo poderia diminuir com $x_t$ em seus valores iniciais se, por exemplo, houvesse uma garantia do fornecedor para qualquer tipo de problema nas milhas iniciais.*
+*Considere que o custo $m(.)$ pode ser decomposto em $m(m_r(x_t),m_o(.))$, em que $m_r$ denota as desposas com manutenção regular e $m_o$ as despesas operacionais. A função custo pode ser escrita como $c=(m(m_r(x_t),m_o(.)),f(x_t,.))$. Espera-se que, quanto maior for a utilização de um ônibus da frota, maiores serão tanto os custos de manutenção regular quanto os custos para substituição do motor em caso de falha. Com isso, quanto mais o ônibus roda, maior é o desgaste de suas peças e, portanto, maiores serão os custos. O custo poderia diminuir com $x_t$ em seus valores iniciais se, por exemplo, houvesse uma garantia do fornecedor para qualquer tipo de problema nas milhas iniciais ou pacotes de manutenção até certo número de milhas. $\square$*
 
+
+**b) Rust não possui dados suficientes para estimar os vários componentes da função custo, então ele simplesmente estimata $c(x_t, \theta_1)$. Que dados ele precisaria e que estratégia ele poderia empregar se fosse querer identificar separadamente $m()$ e $f()$? Descreva qualquer hipótese que você precisa usar com os dados para fazer funcionar a sua solução.**
+
+*Rust afirma que não estavam disponíveis dados detalhados de manutenção e dos custos que envolvem a perda de clientes pela eventual falha de funcionamento nos ônibus, um evento estocástico. Assim, não seria possível decompor o custo como:*
+
+\[
+c(x,\theta_1) = m(x,\theta_{11}+\mu(x,\theta_{12})b(x,\theta_{13}))
+\]
+
+*em que $(x,\theta_{11}$ é a esperança condicional das despesas normais com manutenção e operação, $\mu(x,\theta_{12})$ é a probabilidade condicional de uma falha inesperada no motor e $b(x,\theta_{13})$ é a experança condicional dos custos relacionados a troca do motor (reboque, troca de peças e perda de confiança do consumidor). Assim, Rust estima a soma desses componentes, $c$. Como a solução é especificar e estimar a soma dos custos, é preciso que estes custos representem efetivamente uma soma e não sejam dependentes entre si. $\square$*
+
+No começo de cada período $t$ Harold Zurcher observa $x_t$ e decide quando pagar o custo de manutenção $c(x_t, \theta_1)$ ou substituir o motor, que instantaneamente leva a medida de uso para zero $x_t = 0$. Então, o benefício de um único período é dado por
+
+\[ u(x_t,i_t,\theta) = 
+  \begin{cases}
+    -c(x_t,\theta)    & \quad \text{if } i_t=0\\
+    R - c(0,\theta)  & \quad \text{if } i_t=1
+  \end{cases}
+\]
+
+tal que $R$ é o custo esperado de substituição do motor e it é a decisão binária de investimento. 
+
+Faça $F(x_{t+1}| x_t, i_t, \theta)$ representar a função de distribuição cumulativa do processo estocástico que governa a evolução da variável de estado.
+
+
+**c) Escreva a equação de Bellman para este problema.**
+
+*Considere que o processo estocástico governando $\{i_t,x_t\}$ é solução para o seguinte problema de parada ótima regenerativo:*
+
+\[
+V_\theta(x_t)=\sup_\pi \mathbb{E}\Bigg\{\sum_{j=t}^\infty \beta^{j-t}u(x_j,f_j,\theta_1)|x_t\Bigg\} 
+\]
+
+*com a função utilidade definida anteriormente e $\Pi$ é sequência infinita das regras de decisão $\Pi=\{f_t,f_{t+1},...\}$ e $f_t$ é a decisão de troca do motor no período $t$, função de toda a história do processo $i_t=f_t(x_t,i_{t-1},x_{t-1},i_{t-2},x_{t-2},...)$, em que a expectativa anterior é tomada com respeito ao processo estocástico controlado $\{x_t\}$, cuja probabilidade é definida por $F$ definida anteriormente, cuja probabilidade de transição é:*
+
+\[
+F(x_{t+1}| x_t, i_t, \theta) = 
+  \begin{cases}
+    \theta_2exp\{\theta_2(x_{t+1}-x_t)\}    & \quad \text{if } i_t=0  \quad \text{and } x_{t+1} \geq x_t \\
+    \theta_2exp\{\theta_2(x_{t+1})\}    & \quad \text{if } i_t=1  \quad \text{and } x_{t+1} \geq 0 \\
+     0 &  \quad \text{otherwise}
+  \end{cases}
+\]
+
+*Que mostra a lógica de que a milhagem acumulada advém de uma distribuição exponencial quando o motor é mantido, considerando a diferença entre o período futuro e o atual. Por outro lado, quando a troca é efetuada, a milhagem se regenera e a distribuição da milhagem acumulada é função apenas do período futuro.*
+
+*A função definida anteriormente, $V_\theta(x_t)$ é o valor da função e é a solução única para a equação de Bellman, dada por:*
+
+\[
+V_\theta(x_t) = \max_{i_t \in C(x_t)}[u(x_t,i_t,\theta_1)+\beta\mathbb{E}V_\theta(x_t,i_t)]
+\]
+
+*em que $C(x_t)=\{0,1\}$ e $\mathbb{E}V_\theta(x_t,i_t)$ é definido como:*
+
+\[
+\mathbb{E}V_\theta(x_t,i_t)=\int_0^\infty V_\theta(y)p(dy|x_t,i_t,\theta_2) \quad \square
+\]
+
+Se pode obter uma solução analítica para a equação de Bellman em **c)** assumindo que a distância percorrida em cada período é distribuida exponencialmente com o parâmetro $\theta_2$, que é independente da milhagem rodada no período anterior:
+\[
+F(x_{t+1} - x_t) = 1 - exp(-\theta_2(x_{t+1} - x_t))
+\]
+
+Fazendo isso implica em uma função política estacionária
+
+\[ i(x_t,\theta) = 
+  \begin{cases}
+    1    & \quad \text{if } x_t \ge \gamma(\theta) \\
+    0    & \quad \text{if } x_t < \gamma(\theta)
+  \end{cases}
+\]
+
+tal que \gamma(\theta) é a solução única para
+
+\[R(1-\beta) = \int_0^{\gamma(\theta)}[1 - \beta exp(-\theta_2(1 - \beta)y)]\frac{\partial c(y,\theta_1)}{\partial y}dy\]
+
+Caso esteja interessado em detalhes deste modelo, ele foi derivado por Rust em um paper anterior ("Stationary Equilibrium in a Market for Durable Assets", Econometrica 1985).
+
+**d) Este modelo sofre de um problema de "sobre-previsão". Explique o que significa. Se pode usar este modelo para estimação? Por que ou por que não?**
+
+
+
+## Modelo Estocástico
+
+Para estimar o comportamento que vemos nos dados é preciso adicionar termos de erro ao modelo. Uma forma de fazer isso é assumindo que os agentes desviam da solução ótima do modelo:
+
+\[i_t = i(x_t, \theta) + \omega_t\]
+
+Rust opta por uma estratégia diferente. Ele assume que os payoffs recebem choques aleatórios $\varepsilon_{it,t}$:
+
+\[ U(x,i,\theta) = 
+  \begin{cases}
+    -c(x_t,\theta_1) + \varepsilon_{0,t}    & \quad \text{if } i_t=0\\
+    R - c(0,\theta_1) + \varepsilon_{1,t}  & \quad \text{if } i_t=1
+  \end{cases}
+\]
+
+$\varepsilon_{it,t}$ é observado por Harold Zurcher, mas não pelo econometrista.
+
+**e) Interprete $\omega_t$ e $\varepsilon_t$. Que tipo de erro eles representam? Discuta as vantagens e desvantagens de cada escolha de modelagem. Por que você acha que Rust optou pela segunda opção?**
+
+*Em $\omega_t$, tem-se um componente com variáveis de estado que influenciam a decisão tomada pelo agente, mas desconhecida pelo econometrista. O caso de $\varepsilon_t$ é análogo, mas ele entra na função utilidade, como sendo um componente da alternativa $i$ no período $t$ que, igualmente, é conhecido pelo agente mas desconhecido pelo econometrista. Rust argumenta que a primeira opção seria internamente inconsistente, uma vez que o modelo estrutural partiu da hipótese de que o comportamento do agente é compatível com a solução de um problema de otimização dinâmico. A segunda abordagem trata o termo estocástico de modo que ele seja internamente consistente, sendo incorporado explicitamente na solução do problema, com a interpretação de que $\varepsilon_t$ é uma variável de estado não observável pelo econometrista, mas pelo observada pelo agente. O autor comente ainda que essa estratégia garante um benefício adicional ao abrir a possibilidade de que mais parâmetros possam ser estimados. $\square$*
+
+
+
+**f) Escreva a nova função-valor $V(x_t,\varepsilon_t)$**
+
+\[
+V_\theta (x_t,\varepsilon_t) = \sup_\Pi \mathbb{E}\Bigg\{\sum_{j=t}^\infty \beta^{(j-t)}[u(x_j,f_j,\theta_1) + \varepsilon_j(f_j)]|x_t,\varepsilon_t,\theta_2,\theta_3 \Bigg\}
+\]
+
+*Em que $\Pi = \{f_t,f_{t+1},f_{t+2},...\}$, $f \in C(x_t), \forall t$, que é o conjunto de escolha, e a esperança é tomada com respeito ao processo estocástico controlado $\{x_t,\varepsilon_t\}$ cuja densidade de probabilidade é definida a partir de $\Pi$ e a transição de probabilidade $p$ é dada por:*
+
+\[
+dp\{x_{t+1},\varepsilon_{t+1},...,x_{N+1},\varepsilon_{N+1}|x_t,\varepsilon_t\} \\ = \prod_{i=t}^{N-1}p(x_{t+1},\varepsilon_{t+1}|x_{i},\varepsilon_{i},\theta_2,\theta_3) \quad \square
+\]
+
+Asolução para este problema é dada por uma regra de decisão estacionária $i_t = i(x_t,\varepsilon_t;\theta)$, que especifica a decisão ótima do agente quando a variável de estado é $(x_t, \varepsilon_t)$. Neste ponto, o modelo estatístico é completamente especificado mas ainda é muito complicado de estimar – especialmente com dados limitados.
+
+## Simplificando as hipóteses para estimação
+
+Rust fez as hipóteses simplificadoras $P (x_{t+1}; \varepsilon_{t+1}| x_t, \varepsilon_t) = P_1 ( x_{t+1}| x_t)P_2(\varepsilon_{t+1})$ (ele chama isso de "Conditional Independence Assumption").
+
+**g) Defina o valor esperado condicional de $V(x_t)$ sobre $\varepsilon$ como**
+
+**\[EV(x_t)= \int V(x_t;\varepsilon_t)P_2(\varepsilon_t)\]**
+
+**Mostre que**
+
+
+$EV(x_t)=\mathbb{E}_t[\text{max}\{-c(x_t,\theta_1)+\varepsilon_{0,t} + \beta \int EV(x_{t+1})P(dx_{t+1}|x_t); \\ -R -c(0,\theta) + \varepsilon_{1,t} + \beta \int EV(x_{t+1})P(dx_{t+1}|0)\}]$
+
+
+**h) (\*) Prove que a equação anterior é um mapeamento de contração (contraction mapping).**
+
+**i) Explique o tradeoff resultante da hipótese de indenpendência condicional (CI). Use um exemplo concreto para explicar o que é descartado (ou deixado de lado). O que esta hipótese "compra" (i.e. ela entrega) para a estimação? Essa hipótese é razoável?**
+
+Embora equação anterior é uma contração, ainda é difícil computar sem fazer hipóteses distribucionais adicionais sobre $\varepsilon$. Rust assume que o choque $\varepsilon_{it,t}$$ segue uma distribuição valor extremo Tipo I normalizada. Então:
+
+\[
+\varepsilon_{it,t} \sim EV1 \Bigg( \begin{bmatrix} 
+0   \\ 0 \end{bmatrix}, \begin{matrix} \frac{\pi^2}{6} & 0 \\ 0 & \frac{\pi^2}{6} \end{matrix} \Bigg) 
+\]
+
+**j) Por que Rust escolheu uma distribuição padrão para o termo de erro ao invés de adicionar um parâmetro para a sua variância?**
+
+A hipótese de distribuição valor extremo nos permite derivar formas funcionais para $EV(x_t)$, e $P(1 | x_t, \theta)$.
+
+**k) Discuta a racionalidade por trás da hipótese da distribução de $\varepsilon_t$. Existem outras alternativas? Escolha uma alternativa e discuta os pré e contras em relação à distribuição valor extremo Tipo I.**
+
+A última simplificação que Rust faz é discretizar o espaço de xt divindo a milhagem em 90 intervalos de 5000 milhas. Ele assume que o processo xt por avançar com pelo menos dois incrementos no tempo, que essencialmente reduz a distribuição de $(x_{t+1} - x_t$) como uma multinomial com parâmetros $\theta_3 = \{\theta_{30}, \theta_{31}\}$.
+
+**l) Escreva $P (x_{t+1}| x_t, i_t, \theta)$.**
+
+Aqui já se está em posição de estimar o modelo. As únicas duas coisas que não foram especificadas são $\beta$ e a forma da função custo. Aqui podemos colocar $\beta = 0.9999$^[$\beta$ e $R$ são em geral altamente colineares e portanto de difícil distinção. Para um tratamento rigoroso desta questão veja a seção 3.5 do capítulo escrito por Rust no Handbook of Econometrics (1994). Outra referência útil é o paper de Magnac e Thesmar (Econometrica, 2002).]. Finalmente, se pode assumir que a função custo é linear:
+
+\[
+c (x_t, \theta_1) = 0.001 \theta_1 x_t
+\]
+
+**m) Observe que não foi incluída uma constante nesta especificação de função custo. O que aconteceria se isto fosse feito? Poderiamos estimar uma constante separadamente? Discuta como isso impacta o resultado final de sua estimativa.**
+
+
+# Estimação
+
+## Dados
+
+Primeiro é necessário construir a base de dados. A base consiste em oito arquivos ASCII, contendo dados da leitura mensal do odômetro dos 162 ônibus do frota (Madison Metropolitan Bus Company). Estes dados são da operação dos ônibus entre Dezembro de 1974 e Maio de 1985. Cada arquivo corresponde a um modelo/categoria de ônibus da frota da Madison Metro:
+
+1. g870.ASC 36x15 matriz do modelo Grumman 870
+2. rt50.ASC 60x4 matriz do modelo Chance RT50
+3. t8h203.ASC 81x48 matriz do GMC T8H203
+4. a452372.ASC 137x18 matriz do GMC A4523, modelo ano 1972
+5. a452374.ASC 137x10 matriz do GMC A4523, modelo ano 1974
+6. a530872.ASC 137x18 matriz do GMC A5308, modelo ano 1972
+7. a530874.ASC 137x12 matriz do GMC A5308, modelo ano 1974
+8. a530875.ASC 128x37 matriz do GMC A5308, modelo ano 1975
+
+Os dados em cada arquivo estão vetorizados em uma única coluna: e.g. g870.ASC é um vetor 540x1 consistindo nas colunas de uma matriz 110x4 que foi empilhada. Comece importando os dados e reorganizando cada vetor em uma matriz. As primeiras 11 "linhas" de cada matriz consiste no metadado:
+
+```{r,results='asis'}
+#  Extrair tabela do PDF com a descrição das variáveis
+
+tabulizer::extract_tables("lista2019.pdf",
+                          output = "data.frame")[[1]] %>%
+  dplyr::bind_rows(dplyr::bind_cols(Row=12, 
+                                    Field="Monthly odometer reading",
+                                    Sample.Entry=4235)) %>%
+  xtable::xtable(digits = c(0,0,0,0),
+                 caption="Dicionário de variáveis") %>%
+  print(include.rownames=F)
+
+```
+
+Você deve organizar os dados em objetos que são fáceis de manipular para realizar a sua estimação. Em particular, observe que os dados do odômetro NÃO são zerados quando o motor é substituído. Você deve realizar esse ajuste.
+Importante: Todos os dados estão nos arquivos em anexo, mas Rust roda o principal procedimento para um conjunto restrito de ônibus. Esta restrição é devido a aparente heterogeneidade na matriz de transição do espaço de estado entre os ônibus. Os arquivos que devem ser usados para comparar com os resultados de Rust são 1, 2, 3 e 8.
+
+Você deve organizar os dados em objetos que são fáceis de manipular para realizar a sua estimação. Em particular, *observe que os dados do odômetro NÃO são zerados quando o motor é substituído. Você deve realizar esse ajuste.*
+
+
+**Importante:** Todos os dados estão nos arquivos em anexo, mas Rust roda o principal procedimento para um conjunto restrito de ônibus. Esta restrição é devido a aparente heterogeneidade na matriz de transição do espaço de estado entre os ônibus. Os arquivos que devem ser usados para comparar com os resultados de Rust são 1, 2, 3 e 8.
+
+## Carga da base de dados
 ```{r, results='asis'}
 # Carregar a base de dados
 
@@ -130,3 +379,103 @@ rm(base,dados,r,ref,t,list=ls(pattern = "V\\d"),b,i,j,nl,nm)
 }
 ```
 
+## Computação I: NFXP de Rust
+
+Dada as observações $(\{x_0, i_0\},\{x_1,i_1\} , . . . , \{x_T, i_T\})$ podemos escrever uma função verossimilhança
+
+\[
+\ell (x_1,...,x_T,i_1,...,i_T|x_0,i_0,\theta) = \prod_{t=1}^T P(i_t|x_t,\theta).P(x_t|x_{t-1},i_{t-1},\theta)
+\label{eq:2}
+\]
+
+Você deve ter fórmulas para $P(i_t|x_t,\theta)$ e $P(x_t|x_{t-1},i_{t-1},\theta)$ da Parte 1 da lista.
+
+Rust usa o seguinte procedimento:
+
+**Passo 1:** Estime $\hat{\theta_3}$ usando
+
+\[
+\ell^1 (x_1,...,x_T,i_1,...,i_T|x_0,i_0,\theta) = \prod_{t=1}^T P(x_t|x_{t-1},i_{t-1},\theta_3)
+\]
+
+**Passo 2**: Use as estimativas $\hat{\theta_3}$ como valores consistentes e a estimativa $(\hat{\theta_1},\hat{R})$ usando
+
+\[
+\ell^2 (x_1,...,x_T,i_1,...,i_T|\theta)= \prod_{t=1}^T P(i_t|x_t,\theta)
+\]
+
+Para implementar este método você precisará calcular $EV(x_t)$ para cada valor de $\theta$ considerado o algoritmo de maxima verossimilhança. Portanto, o seu código deve ser estruturado para ter um algoritmo de ponto fixo "interno" que calcula $EV(x_t)$ (usando a expressão derivada na parte **k)** e um algoritmo de busca "externo" que maximiza a função de verossimilhança. Um bom ponto de partida pode ser o *payoff* do período ou mesmo o valor de $EV(x_t)$ computado na iteração anterior da estimação.
+
+**Passo 3:** Usando $(\hat{\theta_1},\hat{R},\hat{\theta_3})$ como um ponto inicial, use a função de verossimilhança completa para obter uma estimativa eficiente dos parâmetros.
+
+**n) Estime $(\theta_1, R,\theta_3)$ usando a metodologia de Rust de maximização da função de verossimilhança na equação 2 (ou uma função log-verossimilhança equivalente)**^[Você pode cair em um problema de estimação porque sua linguagem de programação aproxima números bem pequenos para zero. Este é um problema quando estiver calculando (como você verá) $log(exp(x_1) + exp(x_2))$ onde tanto $x_1$ ou $x_2$ (ou ambos) são números negativos bem grandes. Nesse caso, se sua linguagem de programação soluciona $exp(x_1)= 0$, então $log(exp(x_1) + exp(x_2))=x_2$, que é errado. Você pode encontrar uma descrição detalhada deste problema em \url{https://lips.cs.princeton.edu/computing-log-sum-exp/}. A solução consiste enssencialmente em tirar $exp (x_1)$ da soma do log: 
+\[
+log(exp(x_1) + exp(x_2))= log (exp(x_1).(1 + exp (x_2 - x_1))) \\
+= x_1 + log((1+exp(x_2-x_1)))
+\]]. **Você deve comparar os números que estimou com os obtidos por Rust no seu paper (a tabela relevante é Table IX).**
+
+**o) Explique como você pode calcular os erros padrão para estes coeficientes.**
+
+**p) (\*)) Calcule o erro padrão usando a metodologia que você descreveu no item o).**
+
+**q) (\*) Rust estimou diferentes versões do seu modelo, variando (i) a função custo, (ii) o parâmetro $\beta$ e (iii) o número de valores possíveis para a variável de estado $x_t$. Ele relata alguns resultados para todas parametrizações diferentes do modelo. Baseado apenas no que ele apresenta no paper, argumente argumente quais destas três hipóteses possuem maior consequência. Descreva e motive uma forma de relaxar a hipótese (cabe a você desenvolver isto e fique a vontade para usar uma das expansões apresentadas por Rust). Refaça a estimação com esta hipótese relaxada. Comente sobre qualquer diferença relevante nos resultados.**
+
+## Computação II: método CCP
+
+O método de estimação montado por Rust é "time-consuming" porque requer que você
+compute um ponto fixo para cada "guess" de $\theta$. Hotz e Miller propõem um método alternativo.
+
+**r) Estime $\hat{F}(x_{t+1}|x_t,i_t)$ a partir dos dados. Você pode usar qualquer método (parametric, non-parametric, etc.). Justifique sua escolha.**
+
+*s) Estime $\hat{P}(i_t=1|x_t)$ a partir dos dados. Novamente justifique sua escolha de método.**
+
+Agora faça
+
+\[
+\tilde{V} (i_t,x_t;\theta) \equiv \mathbb{E}_{\varepsilon_{i_{t},t}}[V(i_t,x_t,\varepsilon_t;\theta)]
+\]
+
+Uma vez que o termo de erro é média zero, temos
+
+\[
+\tilde{V} (i_t,x_t;\theta) \equiv -c(x_t,i_t;\theta_1) + \beta \mathbb{E}_{\varepsilon_{i_{t+1},t+1}}\Big[u(x_{t+1},i_{t+1};\theta)+\varepsilon_{i_{t+1},t+1}+\beta\mathbb{E}_{\varepsilon_{i_{t+2},t+2}}[\cdots]\Big]
+\]
+
+tal que as variáveis são distribuídas como
+
+\[
+x_{t+1} \sim \hat{F}(.|x_t,i_t) \\
+i_{t+1} \sim \hat{P}(.|x_{t+1}) \\
+x_{t+2} \sim \hat{F}(.|x_{t+1},i_{t+1}) \\
+\]
+
+e as expectativas são condicional, significando que elas são tomadas mantendo a história fixa (e conhecida). As propriedades da distribuição valor extremo Tipo I nos dizem que
+
+\[
+\mathbb{E}[\varepsilon_{i_{t},t}|i_t,x_t] = \gamma - log(P(i_t|x_t))
+\]
+
+tal que $\gamma$ é a constante de Euler.
+
+**t) Use um argumento recursivo para escrever $\tilde{V}(i_t,x_t;\theta)$ como uma soma infinitamente descontada (infinite discounted sum).**
+
+Você deve ser capaz de calcular a expressão que você derivou para $\tilde{V}(i_t,x_t;\theta)$ usando simulação numérica. Faça $\{(x_t^s,i_s^t)\}_{t=1,s=1}^{T,S}$ serem os valores simulados de $x_t$ e $i_t$. Então você pode calcular $\tilde{V}^s(i_t^s,x_t^s;\theta)$ e obter uma estimativa consistente de
+
+\[
+\tilde{V}^{sim}(i,x;\theta)=\frac{1}{S}\sum_{s=1}^S \tilde{V}^s(i_t^s,x_t^s;\theta)
+\]
+
+Seu $\tilde{V}^{sim}$ deve ser uma função de q que é essencialmente calculado para cada "guess". Observe que este passo deve fazer o estimador mais rápido (uma vez que você não precisa computar a iteração de ponto fixo toda vez que tiver um novo "guess" de $\theta$. Entretanto, o quão rápido será o seu estimador depende do quão "objetivo" (esperto) será a sua escolha de simulação. Em particular tenha em mente o seguinte: (i) é mais rápido sortear um
+número de uma matriz existente do que simular um número; e (ii) seus sorteios de $(x_t^s , i_t^s )$ não dependem dos parâmetros que você está estimando.
+
+Para concluir o procedimento, relembre do começo que usando a hipótese valor extremo T1
+
+\[
+\tilde{P}(i_t=1|x_t;\theta)=\frac{exp(\tilde{V}(x_t,i_t=1;\theta))}{exp(\tilde{V}(x_t,i_t=0;\theta))+exp(\tilde{V}(x_t,i_t=1;\theta))}
+\]
+
+Isto fornece um $\tilde{P}$ simulado para cada "guess" de $\theta$ e agora o que falta fazer é encontrar a condição de momento para a estimação (basicamente qualquer coisa que é baseado em $\| \tilde{P} - \hat{P} \| = 0$ irá funcionar, embora você pode pensar se irá querer uma matriz de pesos para tornar a estimação mais eficiente).
+
+**u) Estime $\theta_1$ e $R$ usando a metodologia Hotz-Miller. Compare os resultados com aqueles obtidos usando o método de Rust. Comente as diferenças.**
+
+**v) Faça um gráfico de como as estimativas Hotz-Miller mudam a medida que você varia $T$ e $S$. Para quais níveis de $T$ e $S$ suas estimativas ficam estáveis? Por que novos aumentos no valor de $T$ não mudam suas estimativas?**

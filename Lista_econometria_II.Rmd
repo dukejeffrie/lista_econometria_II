@@ -27,6 +27,7 @@ header-includes:
   - \usepackage{microtype}
   - \usepackage{enumitem}
   - \usepackage{amsmath}
+  - \newtheorem{definition}{Definição}
   - \usepackage{pdfpages}
   - \usepackage{fancyhdr}
   - \usepackage{floatrow}
@@ -73,7 +74,7 @@ despesas operacionais $m(.)$ e o custo $f(.)$ de substituir o motor no caso de f
 
 **a) Escreva o custo como uma combinação destes dois componentes. Indique claramente quais elementos são função de $x_t$. Argumente informalmente que $\frac{\partial c}{\partial x_t} > 0$. Esta hipótese é necessária para a solução do modelo. Ela é uma boa hipótese? Você pode fazer um argumento para explicar por que $\frac{\partial c}{\partial x_t}$ poderia ser negativa (pelo menos para alguns valores de $x_t$)?**
 
-*Considere que o custo $m(.)$ pode ser decomposto em $m(m_r(x_t),m_o(.))$, em que $m_r$ denota as desposas com manutenção regular e $m_o$ as despesas operacionais. A função custo pode ser escrita como $c=(m(m_r(x_t),m_o(.)),f(x_t,.))$. Espera-se que, quanto maior for a utilização de um ônibus da frota, maiores serão tanto os custos de manutenção regular quanto os custos para substituição do motor em caso de falha. Com isso, quanto mais o ônibus roda, maior é o desgaste de suas peças e, portanto, maiores serão os custos. O custo poderia diminuir com $x_t$ em seus valores iniciais se, por exemplo, houvesse uma garantia do fornecedor para qualquer tipo de problema nas milhas iniciais ou pacotes de manutenção até certo número de milhas. $\square$*
+*Considere que o custo $m(.)$ pode ser decomposto em $m(m_r(x_t),m_o(.))$, em que $m_r$ denota as despesas com manutenção regular e $m_o$ as despesas operacionais. A função custo pode ser escrita como $c=(m(m_r(x_t),m_o(.)),f(x_t,.))$. Espera-se que, quanto maior for a utilização de um ônibus da frota, maiores serão tanto os custos de manutenção regular quanto os custos para substituição do motor em caso de falha (numa eventual retifica do motor). Com isso, quanto mais o ônibus roda, maior é o desgaste de suas peças e, portanto, maiores serão os custos. O custo poderia diminuir com $x_t$ em seus valores iniciais se, por exemplo, houvesse uma garantia do fornecedor para qualquer tipo de problema nas milhas iniciais ou pacotes de manutenção até certo número de milhas inclusos com a compra do veículo. $\square$*
 
 
 **b) Rust não possui dados suficientes para estimar os vários componentes da função custo, então ele simplesmente estimata $c(x_t, \theta_1)$. Que dados ele precisaria e que estratégia ele poderia empregar se fosse querer identificar separadamente $m()$ e $f()$? Descreva qualquer hipótese que você precisa usar com os dados para fazer funcionar a sua solução.**
@@ -84,7 +85,7 @@ despesas operacionais $m(.)$ e o custo $f(.)$ de substituir o motor no caso de f
 c(x,\theta_1) = m(x,\theta_{11}+\mu(x,\theta_{12})b(x,\theta_{13}))
 \]
 
-*em que $(x,\theta_{11}$ é a esperança condicional das despesas normais com manutenção e operação, $\mu(x,\theta_{12})$ é a probabilidade condicional de uma falha inesperada no motor e $b(x,\theta_{13})$ é a experança condicional dos custos relacionados a troca do motor (reboque, troca de peças e perda de confiança do consumidor). Assim, Rust estima a soma desses componentes, $c$. Como a solução é especificar e estimar a soma dos custos, é preciso que estes custos representem efetivamente uma soma e não sejam dependentes entre si. $\square$*
+*em que $(x,\theta_{11}$ é a esperança condicional das despesas normais com manutenção e operação, $\mu(x,\theta_{12})$ é a probabilidade condicional de uma falha inesperada no motor e $b(x,\theta_{13})$ é a experança condicional dos custos relacionados a troca do motor (reboque, troca de peças e perda de confiança do consumidor). Assim, Rust estima apenas a soma desses componentes, $c$. Como a solução é especificar e estimar a soma dos custos, é preciso que estes custos representem efetivamente separáveis em soma e não sejam dependentes entre si. $\square$*
 
 No começo de cada período $t$ Harold Zurcher observa $x_t$ e decide quando pagar o custo de manutenção $c(x_t, \theta_1)$ ou substituir o motor, que instantaneamente leva a medida de uso para zero $x_t = 0$. Então, o benefício de um único período é dado por
 
@@ -95,7 +96,7 @@ No começo de cada período $t$ Harold Zurcher observa $x_t$ e decide quando pag
   \end{cases}
 \]
 
-tal que $R$ é o custo esperado de substituição do motor e it é a decisão binária de investimento. 
+tal que $R$ é o custo esperado de substituição do motor e $i_t$ é a decisão binária de investimento. 
 
 Faça $F(x_{t+1}| x_t, i_t, \theta)$ representar a função de distribuição cumulativa do processo estocástico que governa a evolução da variável de estado.
 
@@ -105,10 +106,10 @@ Faça $F(x_{t+1}| x_t, i_t, \theta)$ representar a função de distribuição cu
 *Considere que o processo estocástico governando $\{i_t,x_t\}$ é solução para o seguinte problema de parada ótima regenerativo:*
 
 \[
-V_\theta(x_t)=\sup_\pi \mathbb{E}\Bigg\{\sum_{j=t}^\infty \beta^{j-t}u(x_j,f_j,\theta_1)|x_t\Bigg\} 
+V_\theta(x_t)=\sup_\Pi \mathbb{E}\Bigg\{\sum_{j=t}^\infty \beta^{j-t}u(x_j,f_j,\theta_1)|x_t\Bigg\} 
 \]
 
-*com a função utilidade definida anteriormente e $\Pi$ é sequência infinita das regras de decisão $\Pi=\{f_t,f_{t+1},...\}$ e $f_t$ é a decisão de troca do motor no período $t$, função de toda a história do processo $i_t=f_t(x_t,i_{t-1},x_{t-1},i_{t-2},x_{t-2},...)$, em que a expectativa anterior é tomada com respeito ao processo estocástico controlado $\{x_t\}$, cuja probabilidade é definida por $F$ definida anteriormente, cuja probabilidade de transição é:*
+*com a função utilidade definida anteriormente, $\Pi$ sendo a sequência infinita das regras de decisão $\Pi=\{f_t,f_{t+1},...\}$, $f_t$ sendo a decisão de troca do motor no período $t$, função de toda a história do processo $i_t=f_t(x_t,i_{t-1},x_{t-1},i_{t-2},x_{t-2},...)$. A expectativa anterior é tomada com respeito ao processo estocástico controlado $\{x_t\}$, cuja probabilidade é denotada por $F$ (conforme definição anter), cuja probabilidade de transição é:*
 
 \[
 F(x_{t+1}| x_t, i_t, \theta) = 
@@ -119,9 +120,9 @@ F(x_{t+1}| x_t, i_t, \theta) =
   \end{cases}
 \]
 
-*Que mostra a lógica de que a milhagem acumulada advém de uma distribuição exponencial quando o motor é mantido, considerando a diferença entre o período futuro e o atual. Por outro lado, quando a troca é efetuada, a milhagem se regenera e a distribuição da milhagem acumulada é função apenas do período futuro.*
+*A equação acima tem a seguinte lógica: a milhagem acumulada advém de uma distribuição exponencial quando o motor é mantido, considerando a diferença entre o período futuro e o atual; Por outro lado, quando a troca é efetuada, a milhagem se regenera e a distribuição exponencial da milhagem acumulada é função apenas do período futuro.*
 
-*A função definida anteriormente, $V_\theta(x_t)$ é o valor da função e é a solução única para a equação de Bellman, dada por:*
+*A função definida anteriormente, $V_\theta(x_t)$, é o valor da função, sendo solução única para a equação de Bellman, dada por:*
 
 \[
 V_\theta(x_t) = \max_{i_t \in C(x_t)}[u(x_t,i_t,\theta_1)+\beta\mathbb{E}V_\theta(x_t,i_t)]
@@ -155,7 +156,7 @@ Caso esteja interessado em detalhes deste modelo, ele foi derivado por Rust em u
 
 **d) Este modelo sofre de um problema de "sobre-previsão". Explique o que significa. Se pode usar este modelo para estimação? Por que ou por que não?**
 
-
+*Esta especificação implica em uma função de risco degenerada, na qual, após certo limear, sempre é realizada a troca do motor ($x_t \ge \gamma(\theta)$). Todavia, o autor aponta que os dados refutam tal hipótese, uma vez que a troca do motor ocorre numa faixa de milhagem muito ampla (de 82.400 a 387.000), sendo incompatível com uma regra de limear a partir do qual a troca ocorre. Nesse sentido, ao utilizar tal modelo, teríamos um ponto a partir do qual o motor do ônibus é sempre trocado, algo não aderente a realidade. Assim sendo, a utilização desse modelo para previsão não parece ser o mais adequado. Como o autor aponta, a milhagem dos ônibus ($x_t$) não parece ser apenas o único determinante para a troca do motor, existindo um conjunto de outros fatores que podem influenciar tal decisão (o que levará a adição do termo $\varepsilon_t$ ao modelo). Além disso, assume-se que $(x_{t+1}-x_t)$ tem uma distribuição exponencial i.i.d., fato refutado pelo conjunto de dados analisado. $\square$*
 
 ## Modelo Estocástico
 
@@ -176,9 +177,7 @@ $\varepsilon_{it,t}$ é observado por Harold Zurcher, mas não pelo econometrist
 
 **e) Interprete $\omega_t$ e $\varepsilon_t$. Que tipo de erro eles representam? Discuta as vantagens e desvantagens de cada escolha de modelagem. Por que você acha que Rust optou pela segunda opção?**
 
-*Em $\omega_t$, tem-se um componente com variáveis de estado que influenciam a decisão tomada pelo agente, mas desconhecida pelo econometrista. O caso de $\varepsilon_t$ é análogo, mas ele entra na função utilidade, como sendo um componente da alternativa $i$ no período $t$ que, igualmente, é conhecido pelo agente mas desconhecido pelo econometrista. Rust argumenta que a primeira opção seria internamente inconsistente, uma vez que o modelo estrutural partiu da hipótese de que o comportamento do agente é compatível com a solução de um problema de otimização dinâmico. A segunda abordagem trata o termo estocástico de modo que ele seja internamente consistente, sendo incorporado explicitamente na solução do problema, com a interpretação de que $\varepsilon_t$ é uma variável de estado não observável pelo econometrista, mas pelo observada pelo agente. O autor comente ainda que essa estratégia garante um benefício adicional ao abrir a possibilidade de que mais parâmetros possam ser estimados. $\square$*
-
-
+*Em $\omega_t$, tem-se um componente com variáveis de estado que influenciam a decisão tomada pelo agente, mas desconhecida pelo econometrista. O caso de $\varepsilon_t$ é análogo, mas ele entra na função utilidade, como sendo um componente da alternativa $i$ no período $t$ que, igualmente, é conhecido pelo agente mas desconhecido pelo econometrista. Rust argumenta que a primeira opção seria internamente inconsistente, uma vez que o modelo estrutural partiu da hipótese de que o comportamento do agente é compatível com a solução de um problema de otimização dinâmico. A segunda abordagem trata o termo estocástico de modo que ele seja internamente consistente, sendo incorporado explicitamente na solução do problema, com a interpretação de que $\varepsilon_t$ é uma variável de estado não observável pelo econometrista, mas pelo observada pelo agente. O autor comenta ainda que essa estratégia garante um benefício adicional ao abrir a possibilidade de que mais parâmetros possam ser estimados. $\square$*
 
 **f) Escreva a nova função-valor $V(x_t,\varepsilon_t)$**
 
@@ -205,11 +204,54 @@ Rust fez as hipóteses simplificadoras $P (x_{t+1}; \varepsilon_{t+1}| x_t, \var
 **Mostre que**
 
 
-$EV(x_t)=\mathbb{E}_t[\text{max}\{-c(x_t,\theta_1)+\varepsilon_{0,t} + \beta \int EV(x_{t+1})P(dx_{t+1}|x_t); \\ -R -c(0,\theta) + \varepsilon_{1,t} + \beta \int EV(x_{t+1})P(dx_{t+1}|0)\}]$
+\[
+\begin{aligned}
+EV(x_t)=\mathbb{E}_t[\text{max}\{-c(x_t,\theta_1)+\varepsilon_{0,t} + \beta \int EV(x_{t+1})P(dx_{t+1}|x_t); \\ -R -c(0,\theta) + \varepsilon_{1,t} + \beta \int EV(x_{t+1})P(dx_{t+1}|0)\}]
+\end{aligned}
+\]
 
-*Ao assumir a "Conditional Independence Assumption" (CI), duas restrições estão envolvidas. Conforme argumenta Rust, $x_{t+1}$ é uma estatística suficiente para $\varepsilon_{t+1}$, o que significa que $x_{t+1}$ transmite qualquer dependência estatística entre $\varepsilon_{t}$ e $\varepsilon_{t+1}$.*   
+*Ao assumir a "Conditional Independence Assumption" (CI), duas restrições estão envolvidas. Conforme argumenta Rust, $x_{t+1}$ é uma estatística suficiente para $\varepsilon_{t+1}$, o que significa que $x_{t+1}$ transmite qualquer dependência estatística entre $\varepsilon_{t}$ e $\varepsilon_{t+1}$.*
+
+*Assim, aplicando o Teorema 1:*
+
+*Se* 
+
+\[G([u(x,\theta_1)+\beta EV_\theta(x)]|x,\theta_2) \\ \equiv \int_\varepsilon \max_{j \in C(x)} [u(x,j,\theta_1)+ \beta E V_\theta(x,j)]q(d\varepsilon|x,\theta_2)
+\]
+
+*Então, $(P_i|x,\theta)$, dado por:*
+
+\[
+(P_i|x,\theta) = G_i([u(x,\theta_1)+ \beta EV_\theta(x)]|x,\theta_2)
+\]
+
+*em que $G_i$ denota a derivada parcial de $G$ com respeito à $u(x,i,\theta_1)$ e a função $EV_\theta$ é o único ponto fixo para um mapeamento de contração $T_\theta$, $T_\theta(EV_\theta)=EV_\theta$, definido para cada $(x,i) \in \Gamma$ por:*
+
+\[
+EV_\theta(x,i)=\int_yG([u(y,\theta_1)+\beta EV_\theta (y)]|y,\theta_2)p(dy|x,i,\theta_3)
+\]
+
+*Agora, basta passar a função de máximo para avaliar em qual estado se tomara a esperança: em que a troca não é realizada ($-c(x_t,\theta_1)+\varepsilon_{0,t} + \beta \int EV(x_{t+1})P(dx_{t+1}|x_t)$) ou em que ela é realizada ($-R -c(0,\theta) + \varepsilon_{1,t} + \beta \int EV(x_{t+1})P(dx_{t+1}|0)$) $\square$*
 
 **h) (\*) Prove que a equação anterior é um mapeamento de contração (contraction mapping).**
+
+
+*Primeiro, vamos colocar a definiição de contração:*
+
+\begin{definition}
+Seja $(X,d)$ um espaço métrico. Um mapeamento $T:X \rightarrow X$ é um mapeamento de contração, ou contração, se existe uma constante $c$, com $0 \leq c \leq 1$ tal que  
+
+\[
+d(T(x),T(y)) \leq cd(x,y)
+\]
+
+para todo $x,y \in X$
+
+\end{definition}
+
+*Em palavras, uma contração mapeia pontos próximos. Como caso particular, para todo ponto $x \in X$, e qualquer $r>0$, todos os pontos na bola $B_r(x)$ são mapeados para a bola $B_s(Tx)$, com $r > s$. Se $c < 1$, a contração pode ser chamada de estrita.*
+
+*Pela CI, temos um mapeamento do espaço $S=\{(x,\varepsilon\}|x \in R^k, \varepsilon \in R^\#C(x)\}$ para um espaço contraído $\Gamma=\{(x,i)|x \in R^k, i \in C(x)\}$. Sendo a contraçaõ estrita, então existe um único ponto fixo, que, neste caso, é o termo $EV_\theta$ no espaço reduzido. $\square$*
 
 **i) Explique o tradeoff resultante da hipótese de indenpendência condicional (CI). Use um exemplo concreto para explicar o que é descartado (ou deixado de lado). O que esta hipótese "compra" (i.e. ela entrega) para a estimação? Essa hipótese é razoável?**
 
@@ -271,7 +313,7 @@ Primeiro é necessário construir a base de dados. A base consiste em oito arqui
 
 Os dados em cada arquivo estão vetorizados em uma única coluna: e.g. g870.ASC é um vetor 540x1 consistindo nas colunas de uma matriz 110x4 que foi empilhada. Comece importando os dados e reorganizando cada vetor em uma matriz. As primeiras 11 "linhas" de cada matriz consiste no metadado:
 
-```{r,results='asis'}
+```{r,results='asis',warning=F}
 #  Extrair tabela do PDF com a descrição das variáveis
 
 tabulizer::extract_tables("lista2019.pdf",
@@ -281,7 +323,8 @@ tabulizer::extract_tables("lista2019.pdf",
                                     Sample.Entry=4235)) %>%
   xtable::xtable(digits = c(0,0,0,0),
                  caption="Dicionário de variáveis") %>%
-  print(include.rownames=F)
+  print(include.rownames=F,
+                comment=FALSE)
 
 ```
 
@@ -293,7 +336,7 @@ Você deve organizar os dados em objetos que são fáceis de manipular para real
 
 **Importante:** Todos os dados estão nos arquivos em anexo, mas Rust roda o principal procedimento para um conjunto restrito de ônibus. Esta restrição é devido a aparente heterogeneidade na matriz de transição do espaço de estado entre os ônibus. Os arquivos que devem ser usados para comparar com os resultados de Rust são 1, 2, 3 e 8.
 
-## Carga da base de dados
+
 ```{r, results='asis'}
 # Carregar a base de dados
 
@@ -388,7 +431,14 @@ cbind(dados,V12=t) %>%
   dplyr::mutate(V12_adj=case_when(V12.V1>V6&V6>0~V12.V1-V6,
                                 TRUE~V12.V1), # Primeira troca
                 V12_adj=case_when(V12.V1>V9&V9>0~V12.V1-V9,
-                                TRUE~V12_adj))) # Segunda troca
+                                TRUE~V12_adj), # Segunda troca
+                troca=ifelse(V12_adj<lag(V12_adj),1,0), # Criar indicador de troca
+                troca=ifelse(is.na(troca)==T,0,troca),
+                estado=cut(V12_adj,
+                           breaks = c(seq(0,max(V12_adj), by=5000),Inf),
+                           labels = FALSE),
+                difV12=V12_adj-lag(V12_adj),
+                difV12=ifelse(is.na(difV12)==T|difV12<0,V12_adj,difV12))) # Ajustar primeiro valor
 
 # Remover objetos desnecessários
 rm(base,dados,r,ref,t,list=ls(pattern = "V\\d"),b,i,j,nl,nm)
@@ -430,6 +480,356 @@ log(exp(x_1) + exp(x_2))= log (exp(x_1).(1 + exp (x_2 - x_1))) \\
 = x_1 + log((1+exp(x_2-x_1)))
 \]]. **Você deve comparar os números que estimou com os obtidos por Rust no seu paper (a tabela relevante é Table IX).**
 
+```{r}
+library(ggplot2)
+library(msm)
+
+# Criar a base de dados com os grupos 1, 2 e 3
+data= rbind(g870[,c("V1","troca","V12_adj","estado","difV12")],
+            rt50[,c("V1","troca","V12_adj","estado","difV12")],
+            t8h203[,c("V1","troca","V12_adj","estado","difV12")])
+
+# lower=min(data$difV12)
+# upper=max(data$difV12)
+# mu=mean(data$difV12)
+# sigma=sd(data$difV12)
+# 
+# p_x0 = msm::ptnorm(5000,mu,sigma,lower,upper)
+# p_x1 = msm::ptnorm(10000,mu,sigma,lower,upper)-p_x0
+# p_x2 = 1 - p_x1 - p_x0
+# p = c(p_x0, p_x1, p_x2)
+# 
+# p
+
+# Verificar a probabilidade empírica da mudança em cada estado
+p <- data %>%
+  dplyr::mutate(p=cut(difV12,
+                      breaks = c(-Inf,5000,10000,Inf),
+                      labels = c("p_x0","p_x1","p_x2"))) %>%
+  dplyr::group_by(p) %>%
+  dplyr::summarise(n=n()) %>%
+  dplyr::ungroup() %>%
+  dplyr::mutate(n=n/sum(n))
+
+p <- p$n
+
+# p_x0 é a chance de manutenção na mesma faixa de milhagem,
+# p_x1 é a chance de passa para o status 2,
+# enquanto p_x1 chance de estar no último status 
+
+# Decisão do agente
+
+# Variável iniciais
+# O custo de troca, os parâmetros de manutenção da função custo, 
+# e a taxa de desconto são definidas aqui.
+# A taxa de desconto de beta = 0.9999
+
+
+rc = 20
+theta1_1 = 0.5
+theta1_2 = 0.01
+beta = 0.97
+
+# Definição da função custo
+
+custo_miope=function(S, FCM, params, p){
+  
+  "A função custo míope computa o custo esperado associado com
+  cada decisão para cada estado, 
+  retornando um conjunto de decisões/estados de custo.
+    
+   Inputs:
+    * Um inteiro S, descrevendo os possíveis estados do ônibus
+    * A função de custo de manutenção FMC, que tem como input um vetor de parâmetros e estados
+    * O vetor params, como entrada para FMC. O primeiro elemento do vetor 
+      é o custo de substituição cs.
+    * Um vetor (3x1) descrevendo os estados de transição de probabilidades 
+        
+    Outputs:
+    * Uma matriz (Sx2) contendo os custos de manutenção e troca para os N 
+      possíveis estados dos ônibus"
+  
+  cs = params[1]
+  maint_cost = rep(NA,S)
+  repl_cost = rep(NA,S)
+  
+  for(s in 1:S){
+    maint_cost[s] = FCM(s,params[-1])
+    repl_cost[s] = rc
+  }
+  
+  cbind(maint_cost,repl_cost)
+}
+
+# Possíveis formas para a função custo:
+# Linear: FCM(s,theta)=theta_11*s
+# Quadrática: FCM(s,theta)=theta_11*s+theta_12*s^2
+# Exponencial: FCM(s,theta)=exp(theta_11*s)
+# Log: FCM(s,theta)=log(theta_11+theta_12*s)
+
+lin_cost=function(s,params) s*params[1]
+quad_cost=function(s,params) s*params[1]+s^2*params[2]
+exp_cost=function(s,params) exp(s*params[1])
+log_cost=function(s,params) log(params[1] + s*params[2])
+
+# Definição das escolhas de probabilidade, como função do vetor de custos
+
+escolha_prob=function(cost_array){
+  
+  # Retorna a probabilidade de cada escolha, 
+  # condicional a um vetor de custos.
+  
+  S = nrow(cost_array)
+  cost = cost_array-apply(cost_array,1,min) #toma a diferença pois 1) resultados são iguais
+                                            # 2) mais estável com exp()
+  util = exp(-cost)
+  pescolha = util/rowSums(util)
+  
+  pescolha
+}
+
+# Algoritmo do mapeamento de contração (gera a escolha de probabilidade "forward-looking")
+
+contraction_mapping=function(S, p, FCM, params, beta=beta, threshold=1e-9, suppr_output=FALSE){
+  
+  "Computa o valor esperado não-míope do agente para cada decisão possível 
+  e cada possível estado do ônibus.
+  A iteração é realizada até a diferença obtida entre o passo anterior e o atual
+  é menor que o limear.
+  Inputs:
+  * Um número finito de estados S
+  * Um vetor com as probabilidades de transição de estado p = [p(0), p(1), p(2), ..., p(k)] de tamanho k < S
+  * Uma função de manutenção de custos FMC
+  * Um vetor de parâmtros para a função custo
+  * Um fator de desconto beta (opcional)
+  * Um limear para convergência (opcional)
+  Outputs:
+  * A convergência para a escolha de probabilidade forward-looking e 
+  míope para cada estado, condicional aos 'params'"
+  
+  achieved = TRUE
+  
+  # Inicialização das matrizes de estado de transição
+  # ST_mat: descreve as probabilidades de transição de estado se os custos de manutenção ocorrem
+  # RT_mat: Estado regenerado para 0 se o custo de troca acontece.
+  # [a,b] = transição do estado "a" para "b"
+  ST_mat = matrix(0,S,S)
+  lp = length(p)
+  for(i in 1:S){
+    for(j in 1:lp){
+      if((i+j-1)<S)  ST_mat[i,i+j-1] = p[j]
+      if((i+j-1)==S) ST_mat[i,i+j-1] = sum(p[j:lp]) #sobre as colunass (probabilidades colapsadas)
+    }
+  }
+  
+  R_mat = cbind(1,matrix(0,S,S-1))
+  
+  # Inicialização do valor esperado (que também é a decisão de custo do agente míope).
+  # Aqui, o componente forward-looking é inicializado em 0.
+  k = 0
+  EV = matrix(0,S,2)
+  EV_miope = EV_nova = custo_miope(S, FCM, params, p)
+  
+  # Contraction mapping loop
+  while(max(abs(EV_nova-EV)) > threshold){
+    # Guardar o valor esperado anterior
+    EV = EV_nova
+    # Obter a probabilidade de manutenção e troca a partir do valor esperado anterior
+    pescolha = escolha_prob(EV)
+    # Computar o custo esperado para cada estado: vetor Nx1
+    ecost = rowSums(pescolha*EV)
+    # Computar os dois componentes da utilidade forward-looking: 
+    # No caso de manutenção, a utilidade dos futuros estados ponderada pela
+    # probabilidade de transição. No caso de troca,
+    # a utilidade futura é a utilidade do estado 0
+    futil_maint = ST_mat%*%ecost
+    futil_repl = R_mat%*%ecost
+    futil = cbind(futil_maint,futil_repl)
+    # A utilidade futura é descontada por beta, e adicionado ao custo míope. 
+    EV_nova = EV_miope + beta*futil
+    k = k+1
+    if(k == 1000) achieved = FALSE
+  }
+  
+  if(!suppr_output){
+    if(achieved){
+      cat("Convergence achieved in ",k," iterations")
+    } else {
+      cat("CM could not converge! Mean difference = ",round(mean(EV_nova-EV),2))
+    }
+  }
+  
+  list(CP_forward=escolha_prob(EV_nova),CP_miope=escolha_prob(EV_miope))
+}
+
+# IV. Generation of simulated data (using a linear cost specification)
+
+# 1) True coefficients
+
+# Here, we use the same coefficients as the one described earlier:
+
+# Cost and discount coefficients:
+# rc=20
+# theta11=0.5
+# theta12=0.01
+# beta=0.75
+
+# State transition probabilities: (Mileage_t+1-Mileage_t)~NTrunc(6000,4000), such that:
+# p_x0=0.36
+# p_x1=0.48
+# p_x2=0.16
+
+# Finally, we assume that there are 70 discrete states for the bus' mileage 
+# (i.e. no bus has a mileage greater than 345,000 in the dataset).
+
+# 2) Choice probabilities, as a function of the bus' state:
+
+# Using the Contraction Mapping algorithm implemented earlier, we can obtain the 
+# probabibility of maintenance as a function of the bus' state for a forward-looking
+# agent and a myopic agent.
+
+params_lin = c(rc,theta1_1)
+p = p
+S = length(table(data$estado))
+out = contraction_mapping(S=S, p=p, FCM=lin_cost, params=params_lin, beta = beta)
+
+lin_forward=out$CP_forward
+lin_miope=out$CP_miope
+pescolha = lin_forward[,1]
+
+ggdat1 = data.frame(Regra=c(rep("Forward-Looking",nrow(lin_forward)),
+                                   rep("Míope",nrow(lin_forward))),
+                    pMaint=c(lin_forward[,1],lin_miope[,1]),
+                    State=rep(1:S,times=2))
+
+ggplot(ggdat1,aes(y=pMaint,x=State,color=Regra))+
+  geom_line(lwd=1)+
+  theme_bw(12)+
+  scale_x_continuous(breaks = seq(0,length(unique(data$estado)),by=5))+
+  scale_y_continuous(labels = scales::percent)+
+  labs(x="Estado",
+       y="Prob.")
+
+# Estimação
+
+# 1) Modelo Logit de utilidade dinâmica
+
+
+# Grupo 1,2,3
+data= rbind(g870[,c("V1","troca","V12_adj","estado")],
+            rt50[,c("V1","troca","V12_adj","estado")],
+            t8h203[,c("V1","troca","V12_adj","estado")])
+
+# Grupo 4
+# data2= rbind(a530875[,c("V1","troca","V12_adj","estado")])
+
+# Grupo 1,2,3 e 4
+# data3= rbind(g870[,c("V1","troca","V12_adj","estado")],
+#             rt50[,c("V1","troca","V12_adj","estado")],
+#             t8h203[,c("V1","troca","V12_adj","estado")],
+#             a530875[,c("V1","troca","V12_adj","estado")])
+
+dynamiclogit=function(params,data,S,p,FCM){
+  
+  "Avalia os parâmetros de custos subjacente ao padrão de troca do motor
+  do ônibus por um agente forward-looking.
+  
+  Inputs:
+  * Base de dados: um 'data.frame' com:
+    -escolha: nome da coluna contendo uma variável dummy de escolha endógena
+    -estado:nome da coluna contendo uma variável de estado exógeno 
+  
+  * p: o vetor de transição de estado da variável exógena.
+      Exemplo: p = [0, 0.6, 0.4] significa que o ônibus irá  
+      mudar para o próximo estado de milhagem com probabilidade 0.6, 
+      e para o segundo estado de milhagem 0.4.
+  
+  * FCM: Função de custo de manutenção, que deve deve ter como
+  primeiro argumento o estado s e como segundo argumento um vetor
+  de parâmetros."
+  
+  endog = data$troca
+  exog = data$estado
+  
+  N=length(endog)
+  S=max(exog)*2 # Assumes that the true maximum number states is twice the maximum observed state.
+  
+  # Matrices to speed up computations of the log-likelihood
+  
+  # A (SxN) matrix indicating the state of each observation
+  state_mat=matrix(0,S,N)
+  for(s in 0:(S-1)) state_mat[s+1,]=(exog==s)*1 #Note 0 is a state, sum(state_mat)==N should be true
+  
+  # A (2xN) matrix indicating with a dummy the decision taken by the agent for each time/bus observation (replace or maintain)
+  dec_mat = rbind(t(1-endog),endog)
+  
+  "
+  The log-likelihood of the Dynamic model is estimated in several steps.
+  1) The current parameters are supplied to the contraction mapping function
+  2) The function returns a matrix of decision probabilities for each state.
+  3) This matrix is used to compute the loglikelihood of the observations
+  4) The log-likelihood are then summed accross individuals, and returned
+  "
+  
+  util = contraction_mapping(S=S, p=p, FCM=FCM, params=params, beta = beta,suppr_output = TRUE)
+  pescolha = util$CP_forward
+  logprob = log(t(state_mat)%*%pescolha)
+  -sum(logprob*t(dec_mat))
+}
+
+# 2) Fitting the linear cost data
+
+# A. Fitting the true linear cost function to the data
+
+# In this section, we fit the data generated by the linear cost function and recover the parameters RC and ??. We do it for different characterizations of the cost function, and thereby illustrate the consequences of a misspecification.
+# Recall that in the linear model:
+# RC=20
+# theta11=0.5
+
+bounds = c(1e-9, Inf)
+npars=2
+lin_fit = optim(par=rep(.1,npars),fn=dynamiclogit,method=c("L-BFGS-B"),lower=bounds[1],upper=bounds[2],
+                data=data,S=S,p=p,FCM=lin_cost,control=list(fnscale=1))
+
+# Return the parameters obtained after fitting the likelihood function to the data.
+loglike =  lin_fit$value
+fit_params = lin_fit$par
+cat("Log-Likelihood: ",loglike,fill=TRUE)
+cat("RC: ",fit_params[1],fill=TRUE)
+cat("thetas: ",fit_params[-1],fill=TRUE)
+
+#Compare with the true values
+params_lin = c(20,.5)
+linEst = contraction_mapping(S=S, p=p, FCM=lin_cost, params=fit_params, beta =beta)
+lin_forwardEst=linEst$CP_forward
+lin_myopicEst=linEst$CP_miope
+
+gglinEst = data.frame(decisionRule=c(rep("Forward-Looking (Lin)",
+                                         nrow(lin_forward)),
+                                     rep("Myopic (Lin)",nrow(lin_miope)),
+                                     rep("Forward-Looking (Lin Est.)",
+                                         nrow(lin_forwardEst)),
+                                     rep("Myopic (Lin Est.)",
+                                         nrow(lin_myopicEst))),
+                      pMaint=c(lin_forward[,1],
+                               lin_miope[,1],
+                               lin_forwardEst[,1],
+                               lin_myopicEst[,1]),
+                      State=c(0:(nrow(lin_forward)-1),
+                              0:(nrow(lin_miope)-1),
+                              0:(nrow(lin_forwardEst)-1),
+                              0:(nrow(lin_myopicEst)-1)))
+
+ggplot(gglinEst,aes(y=pMaint,x=State,color=decisionRule))+
+  geom_line(lwd=1)+
+  theme_bw(12)+
+  scale_x_continuous(breaks = seq(0,length(unique(data$estado)),by=5))+
+  scale_y_continuous(labels = scales::percent)
+  labs(x="Estado",
+       y="Prob.")
+```
+
+
 **o) Explique como você pode calcular os erros padrão para estes coeficientes.**
 
 **p) (\*)) Calcule o erro padrão usando a metodologia que você descreveu no item o).**
@@ -443,7 +843,7 @@ compute um ponto fixo para cada "guess" de $\theta$. Hotz e Miller propõem um m
 
 **r) Estime $\hat{F}(x_{t+1}|x_t,i_t)$ a partir dos dados. Você pode usar qualquer método (parametric, non-parametric, etc.). Justifique sua escolha.**
 
-*s) Estime $\hat{P}(i_t=1|x_t)$ a partir dos dados. Novamente justifique sua escolha de método.**
+**s) Estime $\hat{P}(i_t=1|x_t)$ a partir dos dados. Novamente justifique sua escolha de método.**
 
 Agora faça
 

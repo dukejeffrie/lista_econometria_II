@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.07.0 (MiKTeX 2.9.6730 64-bit)  (format=lualatex 2018.8.2)  16 JUN 2019 13:18
+This is LuaTeX, Version 1.07.0 (MiKTeX 2.9.6730 64-bit)  (format=lualatex 2018.8.2)  20 JUN 2019 23:41
  restricted system commands enabled.
 **Lista_econometria_II.tex
 (./Lista_econometria_II.tex
@@ -33,7 +33,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.936 seconds ("C:/Program File
+luaotfload | main : initialization completed in 1.390 seconds ("C:/Program File
 s/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size12.clo"
@@ -1031,21 +1031,23 @@ Package: enumitem 2019/02/04 v3.8 Customized lists
 \enit@inbox=\box44
 \enit@count@id=\count280
 \enitdp@description=\count281
-) (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/latex/pdfpages/pdfpages.sty
+)
+\c@definition=\count282
+(C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/latex/pdfpages/pdfpages.sty
 Package: pdfpages 2017/10/31 v0.5l Insert pages of external PDF documents (AM)
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/ifthen.sty"
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 ) ("C:/Program Files/MiKTeX 2.9/tex/latex/tools/calc.sty"
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count282
-\calc@Bcount=\count283
+\calc@Acount=\count283
+\calc@Bcount=\count284
 \calc@Adimen=\dimen168
 \calc@Bdimen=\dimen169
 \calc@Askip=\skip59
 \calc@Bskip=\skip60
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count284
+\calc@Ccount=\count285
 \calc@Cskip=\skip61
 ) (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/latex/eso-pic/eso-pic.sty
 Package: eso-pic 2018/04/12 v2.0h eso-pic (RN)
@@ -1058,7 +1060,7 @@ File: ppluatex.def 2017/10/31 v0.5l Pdfpages driver for LuaTeX (AM)
 \AM@pagebox=\box45
 \AM@global@opts=\toks27
 \AM@toc@title=\toks28
-\c@AM@survey=\count285
+\c@AM@survey=\count286
 \AM@templatesizebox=\box46
 ) (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footers
@@ -1085,7 +1087,7 @@ Package caption3 Info: TeX engine: e-TeX on input line 64.
 \caption@parindent=\dimen177
 \caption@hangindent=\dimen178
 )
-\c@float@type=\count286
+\c@float@type=\count287
 \float@exts=\toks29
 \float@box=\box47
 \@floatcapt=\box48
@@ -1102,18 +1104,18 @@ Package floatrow Info: Modified rotfloat package code loaded on input line 473.
 \FBo@max=\skip74
 \FBc@max=\skip75
 \FBf@max=\skip76
-\c@FBl@b=\count287
-\floatbox@depth=\count288
-\c@FRobj=\count289
-\c@FRsobj=\count290
+\c@FBl@b=\count288
+\floatbox@depth=\count289
+\c@FRobj=\count290
+\c@FRsobj=\count291
 \Xhsize=\skip77
 \sXhsize=\skip78
 \Zhsize=\skip79
 \sZhsize=\skip80
 \flrow@rowbox=\box49
 \FR@Zunitlength=\dimen182
-\c@FBcnt=\count291
-\FPOScnt=\count292
+\c@FBcnt=\count292
+\FPOScnt=\count293
 \LTleft=\skip81
 \LTright=\skip82
 \LTleft=\skip83
@@ -1211,14 +1213,14 @@ tered.code.tex
 \pgf@yc=\dimen194
 \w@pgf@writea=\write4
 \r@pgf@reada=\read3
-\c@pgf@counta=\count293
-\c@pgf@countb=\count294
-\c@pgf@countc=\count295
-\c@pgf@countd=\count296
+\c@pgf@counta=\count294
+\c@pgf@countb=\count295
+\c@pgf@countc=\count296
+\c@pgf@countd=\count297
 \t@pgf@toka=\toks38
 \t@pgf@tokb=\toks39
 \t@pgf@tokc=\toks40
-\pgf@sys@id@count=\count297
+\pgf@sys@id@count=\count298
 (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2019/02/02 v3.1.1 (3.1.1)
 )
@@ -1235,8 +1237,8 @@ File: pgfsys-common-pdf.def 2019/02/02 v3.1.1 (3.1.1)
 (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/generic/pgf/systemlayer/pgfsysso
 ftpath.code.tex
 File: pgfsyssoftpath.code.tex 2019/02/02 v3.1.1 (3.1.1)
-\pgfsyssoftpath@smallbuffer@items=\count298
-\pgfsyssoftpath@bigbuffer@items=\count299
+\pgfsyssoftpath@smallbuffer@items=\count299
+\pgfsyssoftpath@bigbuffer@items=\count300
 )
 (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/generic/pgf/systemlayer/pgfsyspr
 otocol.code.tex
@@ -1255,7 +1257,7 @@ e.tex)
 (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/generic/pgf/math/pgfmathparser.c
 ode.tex
 \pgfmath@dimen=\dimen195
-\pgfmath@count=\count300
+\pgfmath@count=\count301
 \pgfmath@box=\box53
 \pgfmath@toks=\toks41
 \pgfmath@stack@operand=\toks42
@@ -1281,7 +1283,7 @@ s.misc.code.tex)
 s.integerarithmetics.code.tex)))
 (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/generic/pgf/math/pgfmathfloat.co
 de.tex
-\c@pgfmathroundto@lastzeros=\count301
+\c@pgfmathroundto@lastzeros=\count302
 ))
 (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/generic/pgf/basiclayer/pgfcorepo
 ints.code.tex
@@ -1319,7 +1321,7 @@ File: pgfcorescopes.code.tex 2019/02/02 v3.1.1 (3.1.1)
 \pgfpic=\box54
 \pgf@hbox=\box55
 \pgf@layerbox@main=\box56
-\pgf@picture@serial@count=\count302
+\pgf@picture@serial@count=\count303
 )
 (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/generic/pgf/basiclayer/pgfcoregr
 aphicstate.code.tex
@@ -1354,7 +1356,7 @@ File: pgfcorearrows.code.tex 2019/02/02 v3.1.1 (3.1.1)
 ade.code.tex
 File: pgfcoreshade.code.tex 2019/02/02 v3.1.1 (3.1.1)
 \pgf@max=\dimen275
-\pgf@sys@shading@range@num=\count303
+\pgf@sys@shading@range@num=\count304
 )
 (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/generic/pgf/basiclayer/pgfcoreim
 age.code.tex
@@ -1425,7 +1427,7 @@ Package: tikz 2019/02/02 v3.1.1 (3.1.1)
 (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/generic/pgf/libraries/pgflibrary
 plothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2019/02/02 v3.1.1 (3.1.1)
-\pgf@plot@mark@count=\count304
+\pgf@plot@mark@count=\count305
 \pgfplotmarksize=\dimen280
 )
 \tikz@lastx=\dimen281
@@ -1438,19 +1440,19 @@ File: pgflibraryplothandlers.code.tex 2019/02/02 v3.1.1 (3.1.1)
 \tikz@figbox@bg=\box60
 \tikz@tempbox=\box61
 \tikz@tempbox@bg=\box62
-\tikztreelevel=\count305
-\tikznumberofchildren=\count306
-\tikznumberofcurrentchild=\count307
-\tikz@fig@count=\count308
+\tikztreelevel=\count306
+\tikznumberofchildren=\count307
+\tikznumberofcurrentchild=\count308
+\tikz@fig@count=\count309
 
 (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/generic/pgf/modules/pgfmodulemat
 rix.code.tex
 File: pgfmodulematrix.code.tex 2019/02/02 v3.1.1 (3.1.1)
-\pgfmatrixcurrentrow=\count309
-\pgfmatrixcurrentcolumn=\count310
-\pgf@matrix@numberofcolumns=\count311
+\pgfmatrixcurrentrow=\count310
+\pgfmatrixcurrentcolumn=\count311
+\pgf@matrix@numberofcolumns=\count312
 )
-\tikz@expandcount=\count312
+\tikz@expandcount=\count313
 
 (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/generic/pgf/frontendlayer/tikz/l
 ibraries/tikzlibrarytopaths.code.tex
@@ -1467,12 +1469,12 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \cmidrulesep=\dimen294
 \cmidrulekern=\dimen295
 \defaultaddspace=\dimen296
-\@cmidla=\count313
-\@cmidlb=\count314
+\@cmidla=\count314
+\@cmidlb=\count315
 \@aboverulesep=\dimen297
 \@belowrulesep=\dimen298
-\@thisruleclass=\count315
-\@lastruleclass=\count316
+\@thisruleclass=\count316
+\@lastruleclass=\count317
 \@thisrulewidth=\dimen299
 ) ("C:/Program Files/MiKTeX 2.9/tex/latex/tools/tabularx.sty"
 Package: tabularx 2016/02/03 v2.11b `tabularx' package (DPC)
@@ -1481,12 +1483,12 @@ Package: tabularx 2016/02/03 v2.11b `tabularx' package (DPC)
 \TX@old@col=\dimen302
 \TX@target=\dimen303
 \TX@delta=\dimen304
-\TX@cols=\count317
+\TX@cols=\count318
 \TX@ftn=\toks46
 ) (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/latex/caption/caption.sty
 Package: caption 2018/10/06 v3.3-154 Customizing captions (AR)
-\c@caption@flags=\count318
-\c@ContinuedFloat=\count319
+\c@caption@flags=\count319
+\c@ContinuedFloat=\count320
 Package caption Info: float package is loaded.
 Package caption Info: floatrow package is loaded.
 Package caption Info: hyperref package is loaded.
@@ -1521,8 +1523,8 @@ Package tocloft Info: The document has section divisions on input line 51.
 \cftbeforefigskip=\skip112
 \cftfigindent=\skip113
 \cftfignumwidth=\skip114
-\c@lofdepth=\count320
-\c@lotdepth=\count321
+\c@lofdepth=\count321
+\c@lotdepth=\count322
 \cftbeforelottitleskip=\skip115
 \cftafterlottitleskip=\skip116
 \cftbeforetabskip=\skip117
@@ -1534,7 +1536,7 @@ out. on input line 1147.
 
 ) ("C:/Program Files/MiKTeX 2.9/tex/latex/graphics/rotating.sty"
 Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
-\c@r@tfl@t=\count322
+\c@r@tfl@t=\count323
 \rotFPtop=\skip120
 \rotFPbot=\skip121
 \rot@float@box=\box63
@@ -1542,31 +1544,31 @@ Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
 ) (./Lista_econometria_II.aux)
 \openout1 = Lista_econometria_II.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 163.
-LaTeX Font Info:    ... okay on input line 163.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 163.
-LaTeX Font Info:    ... okay on input line 163.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 163.
-LaTeX Font Info:    ... okay on input line 163.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 163.
-LaTeX Font Info:    ... okay on input line 163.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 163.
-LaTeX Font Info:    ... okay on input line 163.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 163.
-LaTeX Font Info:    ... okay on input line 163.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 163.
-LaTeX Font Info:    ... okay on input line 163.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 163.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 163.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 164.
+LaTeX Font Info:    ... okay on input line 164.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 164.
+LaTeX Font Info:    ... okay on input line 164.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 164.
+LaTeX Font Info:    ... okay on input line 164.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 164.
+LaTeX Font Info:    ... okay on input line 164.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 164.
+LaTeX Font Info:    ... okay on input line 164.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 164.
+LaTeX Font Info:    ... okay on input line 164.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 164.
+LaTeX Font Info:    ... okay on input line 164.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 164.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 164.
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 163.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 163.
-LaTeX Font Info:    ... okay on input line 163.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 163.
-LaTeX Font Info:    ... okay on input line 163.
-LaTeX Info: Redefining \microtypecontext on input line 163.
+LaTeX Font Info:    ... okay on input line 164.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 164.
+LaTeX Font Info:    ... okay on input line 164.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 164.
+LaTeX Font Info:    ... okay on input line 164.
+LaTeX Info: Redefining \microtypecontext on input line 164.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
@@ -1615,33 +1617,33 @@ Package microtype Info: Loading generic protrusion settings for font family
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \AtBeginShipoutBox=\box64
-Package hyperref Info: Link coloring OFF on input line 163.
+Package hyperref Info: Link coloring OFF on input line 164.
 ("C:/Program Files/MiKTeX 2.9/tex/latex/hyperref/nameref.sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 ("C:/Program Files/MiKTeX 2.9/tex/generic/oberdiek/gettitlestring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count323
+\c@section@level=\count324
 )
-LaTeX Info: Redefining \ref on input line 163.
-LaTeX Info: Redefining \pageref on input line 163.
-LaTeX Info: Redefining \nameref on input line 163.
+LaTeX Info: Redefining \ref on input line 164.
+LaTeX Info: Redefining \pageref on input line 164.
+LaTeX Info: Redefining \nameref on input line 164.
 (./Lista_econometria_II.out) (./Lista_econometria_II.out)
 \@outlinefile=\write5
 
 \openout5 = Lista_econometria_II.out
 (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count324
+\scratchcounter=\count325
 \scratchdimen=\dimen305
 \scratchbox=\box65
-\nofMPsegments=\count325
-\nofMParguments=\count326
+\nofMPsegments=\count326
+\nofMParguments=\count327
 \everyMPshowfont=\toks48
-\MPscratchCnt=\count327
+\MPscratchCnt=\count328
 \MPscratchDim=\dimen306
-\MPnumerator=\count328
-\makeMPintoPDFobject=\count329
+\MPnumerator=\count329
+\makeMPintoPDFobject=\count330
 \everyMPtoPDFconversion=\toks49
 ) ("C:/Program Files/MiKTeX 2.9/tex/latex/oberdiek/epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -1666,18 +1668,18 @@ Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
 ABD: EveryShipout initializing macros
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 20.67929pt on input line 164.
+(Font)              scaled to size 20.67929pt on input line 165.
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 11.96872pt on input line 164.
+(Font)              scaled to size 11.96872pt on input line 165.
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/it' will be
-(Font)              scaled to size 11.96872pt on input line 164.
+(Font)              scaled to size 11.96872pt on input line 165.
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 14.36246pt on input line 167.
+(Font)              scaled to size 14.36246pt on input line 168.
 LaTeX Font Info:    Font shape `TU/Arial(0)/bx/n' will be
-(Font)              scaled to size 14.36246pt on input line 167.
+(Font)              scaled to size 14.36246pt on input line 168.
 LaTeX Font Info:    Font shape `TU/Arial(0)/bx/n' will be
-(Font)              scaled to size 11.96872pt on input line 170.
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 174.
+(Font)              scaled to size 11.96872pt on input line 171.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 175.
 ("C:/Program Files/MiKTeX 2.9/tex/latex/lm/ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -1686,124 +1688,362 @@ man.cfg
 File: mt-LatinModernRoman.cfg 2013/03/13 v1.0 microtype config. file: Latin Mode
 rn Roman (RS)
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 174.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 175.
 ("C:/Program Files/MiKTeX 2.9/tex/latex/lm/omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 174.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 175.
 
 ("C:/Program Files/MiKTeX 2.9/tex/latex/lm/omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 174.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 175.
 
 ("C:/Program Files/MiKTeX 2.9/tex/latex/lm/omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 174.
+(Font)              <12> on input line 175.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 174.
+(Font)              <8> on input line 175.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 174.
-LaTeX Font Info:    Try loading font information for U+msa on input line 174.
+(Font)              <6> on input line 175.
+LaTeX Font Info:    Try loading font information for U+msa on input line 175.
 ("C:/Program Files/MiKTeX 2.9/tex/latex/amsfonts/umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 174.
+LaTeX Font Info:    Try loading font information for U+msb on input line 175.
 ("C:/Program Files/MiKTeX 2.9/tex/latex/amsfonts/umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (C:/Users/thiga/AppData/Roaming/MiKTeX/2.9/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `TU/Arial(0)/bx/n' will be
-(Font)              scaled to size 9.97394pt on input line 190.
+(Font)              scaled to size 9.97394pt on input line 191.
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/it' will be
-(Font)              scaled to size 9.97394pt on input line 203.
+(Font)              scaled to size 9.97394pt on input line 205.
 [1
 
 {C:/Users/thiga/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 6.64929pt on input line 238.
+(Font)              scaled to size 6.64929pt on input line 240.
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 4.98697pt on input line 238.
-[2] [3] [4] [5] [6]
+(Font)              scaled to size 4.98697pt on input line 240.
+[2] [3] [4] [5] [6] [7]
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 8.31161pt on input line 509.
+(Font)              scaled to size 8.31161pt on input line 585.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 509.
+(Font)              <10> on input line 585.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 509.
+(Font)              <7> on input line 585.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 509.
+(Font)              <5> on input line 585.
 LaTeX Font Info:    Font shape `TU/Arial(0)/m/n' will be
-(Font)              scaled to size 5.81813pt on input line 509.
-[7]
+(Font)              scaled to size 5.81813pt on input line 585.
+[8]
 
-Package xcolor Warning: Incompatible color definition on input line 566.
+Package xcolor Warning: Incompatible color definition on input line 642.
 
 (load luc: C:/Users/thiga/AppData/Local/MiKTeX/2.9/luatex-cache/generic/fonts/ot
 l/lmmono12-regular.luc)(load luc: C:/Users/thiga/AppData/Local/MiKTeX/2.9/luatex
 -cache/generic/fonts/otl/lmmono10-italic.luc)
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 570.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 646.
 (load luc: C:/Users/thiga/AppData/Local/MiKTeX/2.9/luatex-cache/generic/fonts/ot
 l/lmmonolt10-bold.luc)
 
-Package xcolor Warning: Incompatible color definition on input line 579.
+Package xcolor Warning: Incompatible color definition on input line 656.
 
 
-Package xcolor Warning: Incompatible color definition on input line 579.
-
-[8]
-
-Package xcolor Warning: Incompatible color definition on input line 630.
-
-
-Package xcolor Warning: Incompatible color definition on input line 731.
-
-
-Package xcolor Warning: Incompatible color definition on input line 731.
-
-
-Package xcolor Warning: Incompatible color definition on input line 731.
+Package xcolor Warning: Incompatible color definition on input line 656.
 
 [9]
 
-Package xcolor Warning: Incompatible color definition on input line 731.
+Package xcolor Warning: Incompatible color definition on input line 701.
 
 
-Package xcolor Warning: Incompatible color definition on input line 731.
+Package xcolor Warning: Incompatible color definition on input line 809.
 
 
-Underfull \vbox (badness 10000) detected at line 731
- []
+Package xcolor Warning: Incompatible color definition on input line 809.
 
 
-Underfull \vbox (badness 10000) detected at line 731
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 731.
+Package xcolor Warning: Incompatible color definition on input line 809.
 
 [10]
 
-Package xcolor Warning: Incompatible color definition on input line 731.
+Package xcolor Warning: Incompatible color definition on input line 809.
 
 
-Package xcolor Warning: Incompatible color definition on input line 731.
+Package xcolor Warning: Incompatible color definition on input line 809.
 
-[11] [12] [13] [14]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 905.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 905.
+
+Underfull \vbox (badness 10000) detected at line 809
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 809
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 809.
+
+[11]
+
+Package xcolor Warning: Incompatible color definition on input line 809.
+
+
+Package xcolor Warning: Incompatible color definition on input line 809.
+
+
+Underfull \vbox (badness 10000) detected at line 809
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 809
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 809.
+
+[12]
+
+Package xcolor Warning: Incompatible color definition on input line 809.
+
+
+Package xcolor Warning: Incompatible color definition on input line 809.
+
+
+Package xcolor Warning: Incompatible color definition on input line 872.
+
+[13]
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+
+Underfull \vbox (badness 10000) detected at line 1086
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+[14]
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+
+Underfull \vbox (badness 10000) detected at line 1086
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1086
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+[15]
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+
+Underfull \vbox (badness 10000) detected at line 1086
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1086
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+[16]
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+
+Underfull \vbox (badness 10000) detected at line 1086
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1086
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+[17]
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+
+Underfull \vbox (badness 10000) detected at line 1086
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1086
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+[18]
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1086.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1092.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1111.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1111.
+
+<Lista_econometria_II_files/figure-latex/unnamed-chunk-3-1.pdf, id=156, 433.62pt
+ x 289.08pt>
+File: Lista_econometria_II_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file
+ (type pdf)
+<use Lista_econometria_II_files/figure-latex/unnamed-chunk-3-1.pdf>
+Package luatex.def Info: Lista_econometria_II_files/figure-latex/unnamed-chunk-3
+-1.pdf  used on input line 1113.
+(luatex.def)             Requested size: 433.63878pt x 289.09251pt.
+
+Overfull \hbox (4.67088pt too wide) in paragraph at lines 1113--1114
+[][] 
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1115.
+
+[19]
+
+Package xcolor Warning: Incompatible color definition on input line 1203.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1203.
+
+
+Underfull \vbox (badness 10000) detected at line 1203
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1203.
+
+[20<./Lista_econometria_II_files/figure-latex/unnamed-chunk-3-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 1203.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1203.
+
+
+Underfull \vbox (badness 10000) detected at line 1203
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1203
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1203.
+
+[21]
+
+Package xcolor Warning: Incompatible color definition on input line 1203.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1203.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1209.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1213.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1213.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1219.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1223.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1223.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1229.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1235.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1235.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1241.
+
+[22]
+
+Package xcolor Warning: Incompatible color definition on input line 1268.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1268.
+
+<Lista_econometria_II_files/figure-latex/unnamed-chunk-3-2.pdf, id=180, 433.62pt
+ x 289.08pt>
+File: Lista_econometria_II_files/figure-latex/unnamed-chunk-3-2.pdf Graphic file
+ (type pdf)
+<use Lista_econometria_II_files/figure-latex/unnamed-chunk-3-2.pdf>
+Package luatex.def Info: Lista_econometria_II_files/figure-latex/unnamed-chunk-3
+-2.pdf  used on input line 1270.
+(luatex.def)             Requested size: 433.63878pt x 289.09251pt.
+
+Overfull \hbox (4.67088pt too wide) in paragraph at lines 1270--1271
+[][] 
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1272.
+
+[23]
+
+Package xcolor Warning: Incompatible color definition on input line 1277.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1277.
+
+[24<./Lista_econometria_II_files/figure-latex/unnamed-chunk-3-2.pdf>] [25] [26]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1401.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1401.
 (./Lista_econometria_II.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 905.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 905.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1401.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1401.
 Package rerunfilecheck Info: File `Lista_econometria_II.out' has not changed.
-(rerunfilecheck)             Checksum: 40A8BEB12DE8186E1FDD29EE01971C2F;1421.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 905.
+(rerunfilecheck)             Checksum: 6E03298FFDFE13580FF597083C04DC54;1241.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1401.
 )
 (\end occurred inside a group at level 1)
 
@@ -1811,15 +2051,15 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 905.
 ### bottom level
 
 Here is how much of LuaTeX's memory you used:
- 37532 strings out of 494412
+ 37569 strings out of 494412
  125017,953878 words of node,token memory allocated
- 900 words of node memory still in use:
-   8 hlist, 2 vlist, 3 rule, 7 glue, 1 kern, 37 attribute, 103 glue_spec, 37 att
+ 920 words of node memory still in use:
+   8 hlist, 2 vlist, 3 rule, 7 glue, 1 kern, 42 attribute, 103 glue_spec, 42 att
 ribute_list, 1 write nodes
-   avail lists: 2:1839,3:120,4:364,5:336,6:22,7:3617,8:89,9:241,10:33,11:346
- 40418 multiletter control sequences out of 65536+200000
- 78 fonts using 19930383 bytes
- 55i,10n,117p,421b,13152s stack positions out of 5000i,500n,10000p,200000b,50000s
+   avail lists: 2:3451,3:226,4:689,5:574,6:20,7:7329,8:79,9:463,10:33,11:417
+ 40431 multiletter control sequences out of 65536+200000
+ 78 fonts using 19932567 bytes
+ 55i,10n,117p,447b,13225s stack positions out of 5000i,500n,10000p,200000b,50000s
 
 warning  (pdf backend): unreferenced destination with name 'Hfootnote.2'
 
@@ -1842,9 +2082,9 @@ s/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
 ype1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lms
 y8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.p
 fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Lista_econometria_II.pdf (14 pages, 331789 bytes).
+Output written on Lista_econometria_II.pdf (26 pages, 381810 bytes).
 
-PDF statistics: 234 PDF objects out of 1000 (max. 8388607)
- 44 named destinations out of 1000 (max. 131072)
- 88 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 293 PDF objects out of 1000 (max. 8388607)
+ 55 named destinations out of 1000 (max. 131072)
+ 80 words of extra memory for PDF output out of 10000 (max. 100000000)
 

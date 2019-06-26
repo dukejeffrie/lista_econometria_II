@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{20/06/2019}
+    \date{25/06/2019}
 
 \setlength\parindent{24pt}
 \usepackage{indentfirst}
@@ -177,7 +177,7 @@ afeta o custo operacional esperado \(c(x_t; \theta_1)\) que depende da
 milhagem e um vetor de parâmetros não conhecido
 \(\theta_1 = \{\theta_{11}, . . . , \theta_{1n}\}\).
 
-Assuma que os custos dos ônbius vem de dois componentes: manutenção
+Assuma que os custos dos ônibus vem de dois componentes: manutenção
 regular e despesas operacionais \(m(.)\) e o custo \(f(.)\) de
 substituir o motor no caso de falha (que é um evento estocástico que
 ocorre com alguma probabilidade).
@@ -205,7 +205,7 @@ manutenção até certo número de milhas inclusos com a compra do veículo.
 \(\square\)}
 
 \textbf{b) Rust não possui dados suficientes para estimar os vários
-componentes da função custo, então ele simplesmente estimata
+componentes da função custo, então ele simplesmente estima
 \(c(x_t, \theta_1)\). Que dados ele precisaria e que estratégia ele
 poderia empregar se fosse querer identificar separadamente \(m()\) e
 \(f()\)? Descreva qualquer hipótese que você precisa usar com os dados
@@ -223,7 +223,7 @@ c(x,\theta_1) = m(x,\theta_{11}+\mu(x,\theta_{12})b(x,\theta_{13}))
 \emph{em que \((x,\theta_{11}\) é a esperança condicional das despesas
 normais com manutenção e operação, \(\mu(x,\theta_{12})\) é a
 probabilidade condicional de uma falha inesperada no motor e
-\(b(x,\theta_{13})\) é a experança condicional dos custos relacionados a
+\(b(x,\theta_{13})\) é a esperança condicional dos custos relacionados a
 troca do motor (reboque, troca de peças e perda de confiança do
 consumidor). Assim, Rust estima apenas a soma desses componentes, \(c\).
 Como a solução é especificar e estimar a soma dos custos, é preciso que
@@ -265,7 +265,7 @@ toda a história do processo
 \(i_t=f_t(x_t,i_{t-1},x_{t-1},i_{t-2},x_{t-2},...)\). A expectativa
 anterior é tomada com respeito ao processo estocástico controlado
 \(\{x_t\}\), cuja probabilidade é denotada por \(F\) (conforme definição
-anter), cuja probabilidade de transição é:}
+anterior), cuja probabilidade de transição é:}
 
 \[
 F(x_{t+1}| x_t, i_t, \theta) = 
@@ -298,7 +298,7 @@ definido como:}
 
 Se pode obter uma solução analítica para a equação de Bellman em
 \textbf{c)} assumindo que a distância percorrida em cada período é
-distribuida exponencialmente com o parâmetro \(\theta_2\), que é
+distribuída exponencialmente com o parâmetro \(\theta_2\), que é
 independente da milhagem rodada no período anterior: \[
 F(x_{t+1} - x_t) = 1 - exp(-\theta_2(x_{t+1} - x_t))
 \]
@@ -325,11 +325,11 @@ Explique o que significa. Se pode usar este modelo para estimação? Por
 que ou por que não?}
 
 \emph{Esta especificação implica em uma função de risco degenerada, na
-qual, após certo limear, sempre é realizada a troca do motor
+qual, após certo limiar, sempre é realizada a troca do motor
 (\(x_t \ge \gamma(\theta)\)). Todavia, o autor aponta que os dados
 refutam tal hipótese, uma vez que a troca do motor ocorre numa faixa de
 milhagem muito ampla (de 82.400 a 387.000), sendo incompatível com uma
-regra de limear a partir do qual a troca ocorre. Nesse sentido, ao
+regra de limiar a partir do qual a troca ocorre. Nesse sentido, ao
 utilizar tal modelo, teríamos um ponto a partir do qual o motor do
 ônibus é sempre trocado, algo não aderente a realidade. Assim sendo, a
 utilização desse modelo para previsão não parece ser o mais adequado.
@@ -398,11 +398,12 @@ partir de \(\Pi\) e a transição de probabilidade \(p\) é dada por:}
 dp\{x_{t+1},\varepsilon_{t+1},...,x_{N+1},\varepsilon_{N+1}|x_t,\varepsilon_t\} \\ = \prod_{i=t}^{N-1}p(x_{t+1},\varepsilon_{t+1}|x_{i},\varepsilon_{i},\theta_2,\theta_3) \quad \square
 \]
 
-Asolução para este problema é dada por uma regra de decisão estacionária
-\(i_t = i(x_t,\varepsilon_t;\theta)\), que especifica a decisão ótima do
-agente quando a variável de estado é \((x_t, \varepsilon_t)\). Neste
-ponto, o modelo estatístico é completamente especificado mas ainda é
-muito complicado de estimar -- especialmente com dados limitados.
+A solução para este problema é dada por uma regra de decisão
+estacionária \(i_t = i(x_t,\varepsilon_t;\theta)\), que especifica a
+decisão ótima do agente quando a variável de estado é
+\((x_t, \varepsilon_t)\). Neste ponto, o modelo estatístico é
+completamente especificado mas ainda é muito complicado de estimar --
+especialmente com dados limitados.
 
 \hypertarget{simplificando-as-hipoteses-para-estimacao}{%
 \subsection{Simplificando as hipóteses para
@@ -485,10 +486,10 @@ pontos na bola \(B_r(x)\) são mapeados para a bola \(B_s(Tx)\), com
 \emph{Pela CI, temos um mapeamento do espaço
 \(S=\{(x,\varepsilon\}|x \in R^k, \varepsilon \in R^\#C(x)\}\) para um
 espaço contraído \(\Gamma=\{(x,i)|x \in R^k, i \in C(x)\}\). Sendo a
-contraçaõ estrita, então existe um único ponto fixo, que, neste caso, é
+contração estrita, então existe um único ponto fixo, que, neste caso, é
 o termo \(EV_\theta\) no espaço reduzido. \(\square\)}
 
-\textbf{i) Explique o tradeoff resultante da hipótese de indenpendência
+\textbf{i) Explique o tradeoff resultante da hipótese de independência
 condicional (CI). Use um exemplo concreto para explicar o que é
 descartado (ou deixado de lado). O que esta hipótese ``compra''
 (i.e.~ela entrega) para a estimação? Essa hipótese é razoável?}
@@ -497,7 +498,7 @@ descartado (ou deixado de lado). O que esta hipótese ``compra''
 entre os termos não observados pelo econometrista depende apenas de
 \(x_t\), o que acaba sendo uma hipótese forte, conforme Rust aponta.
 Todavia, ao adotar tal estratégia, \(EV_\theta\) deixa de ser função do
-termo não observado, dispensando que as pobrabilidades de escolham
+termo não observado, dispensando que as probabilidades de escolha
 envolvam uma integração sobre essa função desconhecida. Além disso, a CI
 implica que \(EV_\theta\) é um ponto fixo de uma contração sobre o
 espaço de estado reduzido (\(\Gamma=\{(x,i)|x\in R^k, i \in C(x)\}\) ao
@@ -545,7 +546,7 @@ variância.}
 A hipótese de distribuição valor extremo nos permite derivar formas
 funcionais para \(EV(x_t)\), e \(P(1 | x_t, \theta)\).
 
-\textbf{k) Discuta a racionalidade por trás da hipótese da distribução
+\textbf{k) Discuta a racionalidade por trás da hipótese da distribuição
 de \(\varepsilon_t\). Existem outras alternativas? Escolha uma
 alternativa e discuta os prós e contras em relação à distribuição valor
 extremo Tipo I.}
@@ -560,11 +561,11 @@ Entretanto, isso levaria a complicações na definição do modelo,
 demandando maiores informações sobre os custos que envolvem o processo
 decisório de troca do motor.}
 
-A última simplificação que Rust faz é discretizar o espaço de xt divindo
-a milhagem em 90 intervalos de 5000 milhas. Ele assume que o processo xt
-por avançar com pelo menos dois incrementos no tempo, que essencialmente
-reduz a distribuição de \((x_{t+1} - x_t\)) como uma multinomial com
-parâmetros \(\theta_3 = \{\theta_{30}, \theta_{31}\}\).
+A última simplificação que Rust faz é discretizar o espaço de \(x_t\)
+divindo a milhagem em 90 intervalos de 5000 milhas. Ele assume que o
+processo \(x_t\) por avançar com pelo menos dois incrementos no tempo,
+que essencialmente reduz a distribuição de \((x_{t+1} - x_t\)) como uma
+multinomial com parâmetros \(\theta_3 = \{\theta_{30}, \theta_{31}\}\).
 
 \textbf{l) Escreva \(P (x_{t+1}| x_t, i_t, \theta)\).}
 
@@ -591,12 +592,12 @@ c (x_t, \theta_1) = 0.001 \theta_1 x_t
 
 \textbf{m) Observe que não foi incluída uma constante nesta
 especificação de função custo. O que aconteceria se isto fosse feito?
-Poderiamos estimar uma constante separadamente? Discuta como isso
+Poderíamos estimar uma constante separadamente? Discuta como isso
 impacta o resultado final de sua estimativa.}
 
 \emph{Segundo Rust, o nível absoluto de \(c\) não é identificado uma vez
 que a subtração de uma constante da função utilidade não afeta as
-probabulidades de escolha. Assim, o que autor busca estimar, ao menos, a
+probabilidades de escolha. Assim, o que autor busca estimar, ao menos, a
 mudança nos custos operacionais como função da distância percorrida
 pelos ônibus, cuja normalização \(c(0,\theta_1)\) é utilizada}
 
@@ -840,7 +841,7 @@ consistentes e a estimativa \((\hat{\theta_1},\hat{R})\) usando
 \]
 
 Para implementar este método você precisará calcular \(EV(x_t)\) para
-cada valor de \(\theta\) considerado o algoritmo de maxima
+cada valor de \(\theta\) considerado o algoritmo de máxima
 verossimilhança. Portanto, o seu código deve ser estruturado para ter um
 algoritmo de ponto fixo ``interno'' que calcula \(EV(x_t)\) (usando a
 expressão derivada na parte \textbf{k)} e um algoritmo de busca
@@ -863,7 +864,7 @@ função log-verossimilhança equivalente)}\footnote{Você pode cair em um
   \(log(exp(x_1) + exp(x_2))=x_2\), que é errado. Você pode encontrar
   uma descrição detalhada deste problema em
   \url{https://lips.cs.princeton.edu/computing-log-sum-exp/}. A solução
-  consiste enssencialmente em tirar \(exp (x_1)\) da soma do log: \[
+  consiste essencialmente em tirar \(exp (x_1)\) da soma do log: \[
   log(exp(x_1) + exp(x_2))= log (exp(x_1).(1 + exp (x_2 - x_1))) \\
   = x_1 + log((1+exp(x_2-x_1)))
   \]}. \textbf{Você deve comparar os números que estimou com os obtidos
@@ -871,66 +872,19 @@ por Rust no seu paper (a tabela relevante é Table IX).}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(ggplot2)}
-\KeywordTok{library}\NormalTok{(msm)}
-
-\CommentTok{# Criar a base de dados com os grupos 1, 2 e 3}
-\NormalTok{data=}\StringTok{ }\KeywordTok{rbind}\NormalTok{(g870[,}\KeywordTok{c}\NormalTok{(}\StringTok{"V1"}\NormalTok{,}\StringTok{"troca"}\NormalTok{,}\StringTok{"V12_adj"}\NormalTok{,}\StringTok{"estado"}\NormalTok{,}\StringTok{"difV12"}\NormalTok{)],}
-\NormalTok{            rt50[,}\KeywordTok{c}\NormalTok{(}\StringTok{"V1"}\NormalTok{,}\StringTok{"troca"}\NormalTok{,}\StringTok{"V12_adj"}\NormalTok{,}\StringTok{"estado"}\NormalTok{,}\StringTok{"difV12"}\NormalTok{)],}
-\NormalTok{            t8h203[,}\KeywordTok{c}\NormalTok{(}\StringTok{"V1"}\NormalTok{,}\StringTok{"troca"}\NormalTok{,}\StringTok{"V12_adj"}\NormalTok{,}\StringTok{"estado"}\NormalTok{,}\StringTok{"difV12"}\NormalTok{)])}
-
-\CommentTok{# lower=min(data$difV12)}
-\CommentTok{# upper=max(data$difV12)}
-\CommentTok{# mu=mean(data$difV12)}
-\CommentTok{# sigma=sd(data$difV12)}
-\CommentTok{# }
-\CommentTok{# p_x0 = msm::ptnorm(5000,mu,sigma,lower,upper)}
-\CommentTok{# p_x1 = msm::ptnorm(10000,mu,sigma,lower,upper)-p_x0}
-\CommentTok{# p_x2 = 1 - p_x1 - p_x0}
-\CommentTok{# p = c(p_x0, p_x1, p_x2)}
-\CommentTok{# }
-\CommentTok{# p}
-
-\CommentTok{# Verificar a probabilidade empírica da mudança em cada estado}
-\NormalTok{p <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}
-\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{p=}\KeywordTok{cut}\NormalTok{(difV12,}
-                      \DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\OtherTok{Inf}\NormalTok{,}\DecValTok{5000}\NormalTok{,}\DecValTok{10000}\NormalTok{,}\OtherTok{Inf}\NormalTok{),}
-                      \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"p_x0"}\NormalTok{,}\StringTok{"p_x1"}\NormalTok{,}\StringTok{"p_x2"}\NormalTok{))) }\OperatorTok{%>%}
-\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{group_by}\NormalTok{(p) }\OperatorTok{%>%}
-\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{n=}\KeywordTok{n}\NormalTok{()) }\OperatorTok{%>%}
-\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{n=}\NormalTok{n}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(n))}
-
-\NormalTok{p <-}\StringTok{ }\NormalTok{p}\OperatorTok{$}\NormalTok{n}
-
-\CommentTok{# p_x0 é a chance de manutenção na mesma faixa de milhagem,}
-\CommentTok{# p_x1 é a chance de passa para o status 2,}
-\CommentTok{# enquanto p_x1 chance de estar no último status }
-
-\CommentTok{# Decisão do agente}
-
-\CommentTok{# Variável iniciais}
-\CommentTok{# O custo de troca, os parâmetros de manutenção da função custo, }
-\CommentTok{# e a taxa de desconto são definidas aqui.}
-\CommentTok{# A taxa de desconto de beta = 0.9999}
-
-
-\NormalTok{rc =}\StringTok{ }\DecValTok{20}
-\NormalTok{theta1_}\DecValTok{1}\NormalTok{ =}\StringTok{ }\FloatTok{0.5}
-\NormalTok{theta1_}\DecValTok{2}\NormalTok{ =}\StringTok{ }\FloatTok{0.01}
-\NormalTok{beta =}\StringTok{ }\FloatTok{0.97}
-
 \CommentTok{# Definição da função custo}
 
 \NormalTok{custo_miope=}\ControlFlowTok{function}\NormalTok{(S, FCM, params, p)\{}
   
   \StringTok{"A função custo míope computa o custo esperado associado com}
-\StringTok{  cada decisão para cada estado, }
-\StringTok{  retornando um conjunto de decisões/estados de custo.}
+\StringTok{  cada decisão para cada estado, retornando um conjunto de }
+\StringTok{  decisões/estados de custo.}
 \StringTok{    }
 \StringTok{   Inputs:}
-\StringTok{    * Um inteiro S, descrevendo os possíveis estados do ônibus}
-\StringTok{    * A função de custo de manutenção FMC, que tem como input um vetor de parâmetros e estados}
+\StringTok{    * Um inteiro S, descrevendo os possíveis estados do ônibus.}
+\StringTok{    Na pratica, é o número de meses analisados}
+\StringTok{    * A função de custo de manutenção FMC, que tem como input }
+\StringTok{    um vetor de parâmetros e estados}
 \StringTok{    * O vetor params, como entrada para FMC. O primeiro elemento do vetor }
 \StringTok{      é o custo de substituição cs.}
 \StringTok{    * Um vetor (3x1) descrevendo os estados de transição de probabilidades }
@@ -939,8 +893,14 @@ por Rust no seu paper (a tabela relevante é Table IX).}
 \StringTok{    * Uma matriz (Sx2) contendo os custos de manutenção e troca para os N }
 \StringTok{      possíveis estados dos ônibus"}
   
+  \CommentTok{# Definir o custo de substituição a partir dos }
+  \CommentTok{# Parâmetros fornecidos}
 \NormalTok{  cs =}\StringTok{ }\NormalTok{params[}\DecValTok{1}\NormalTok{]}
+  \CommentTok{# Definir um vetor para receber os custos}
+  \CommentTok{# de manutenção}
 \NormalTok{  maint_cost =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,S)}
+  \CommentTok{# Definir um vetor para receber os custos}
+  \CommentTok{# de substituição}
 \NormalTok{  repl_cost =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\OtherTok{NA}\NormalTok{,S)}
   
   \ControlFlowTok{for}\NormalTok{(s }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{S)\{}
@@ -985,14 +945,14 @@ por Rust no seu paper (a tabela relevante é Table IX).}
   \StringTok{"Computa o valor esperado não-míope do agente para cada decisão possível }
 \StringTok{  e cada possível estado do ônibus.}
 \StringTok{  A iteração é realizada até a diferença obtida entre o passo anterior e o atual}
-\StringTok{  é menor que o limear.}
+\StringTok{  é menor que o limiar.}
 \StringTok{  Inputs:}
 \StringTok{  * Um número finito de estados S}
 \StringTok{  * Um vetor com as probabilidades de transição de estado p = [p(0), p(1), p(2), ..., p(k)] de tamanho k < S}
 \StringTok{  * Uma função de manutenção de custos FMC}
-\StringTok{  * Um vetor de parâmtros para a função custo}
+\StringTok{  * Um vetor de parâmetros para a função custo}
 \StringTok{  * Um fator de desconto beta (opcional)}
-\StringTok{  * Um limear para convergência (opcional)}
+\StringTok{  * Um limiar para convergência (opcional)}
 \StringTok{  Outputs:}
 \StringTok{  * A convergência para a escolha de probabilidade forward-looking e }
 \StringTok{  míope para cada estado, condicional aos 'params'"}
@@ -1008,7 +968,7 @@ por Rust no seu paper (a tabela relevante é Table IX).}
   \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{S)\{}
     \ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{lp)\{}
       \ControlFlowTok{if}\NormalTok{((i}\OperatorTok{+}\NormalTok{j}\DecValTok{-1}\NormalTok{)}\OperatorTok{<}\NormalTok{S)  ST_mat[i,i}\OperatorTok{+}\NormalTok{j}\DecValTok{-1}\NormalTok{] =}\StringTok{ }\NormalTok{p[j]}
-      \ControlFlowTok{if}\NormalTok{((i}\OperatorTok{+}\NormalTok{j}\DecValTok{-1}\NormalTok{)}\OperatorTok{==}\NormalTok{S) ST_mat[i,i}\OperatorTok{+}\NormalTok{j}\DecValTok{-1}\NormalTok{] =}\StringTok{ }\KeywordTok{sum}\NormalTok{(p[j}\OperatorTok{:}\NormalTok{lp]) }\CommentTok{#sobre as colunass (probabilidades colapsadas)}
+      \ControlFlowTok{if}\NormalTok{((i}\OperatorTok{+}\NormalTok{j}\DecValTok{-1}\NormalTok{)}\OperatorTok{==}\NormalTok{S) ST_mat[i,i}\OperatorTok{+}\NormalTok{j}\DecValTok{-1}\NormalTok{] =}\StringTok{ }\KeywordTok{sum}\NormalTok{(p[j}\OperatorTok{:}\NormalTok{lp]) }\CommentTok{#sobre as colunas (probabilidades colapsadas)}
 \NormalTok{    \}}
 \NormalTok{  \}}
   
@@ -1038,7 +998,7 @@ por Rust no seu paper (a tabela relevante é Table IX).}
     \CommentTok{# A utilidade futura é descontada por beta, e adicionado ao custo míope. }
 \NormalTok{    EV_nova =}\StringTok{ }\NormalTok{EV_miope }\OperatorTok{+}\StringTok{ }\NormalTok{beta}\OperatorTok{*}\NormalTok{futil}
 \NormalTok{    k =}\StringTok{ }\NormalTok{k}\OperatorTok{+}\DecValTok{1}
-    \ControlFlowTok{if}\NormalTok{(k }\OperatorTok{==}\StringTok{ }\DecValTok{1000}\NormalTok{) achieved =}\StringTok{ }\OtherTok{FALSE}
+    \ControlFlowTok{if}\NormalTok{(k }\OperatorTok{==}\StringTok{ }\DecValTok{10000}\NormalTok{) achieved =}\StringTok{ }\OtherTok{FALSE}
 \NormalTok{  \}}
   
   \ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\NormalTok{suppr_output)\{}
@@ -1052,31 +1012,50 @@ por Rust no seu paper (a tabela relevante é Table IX).}
   \KeywordTok{list}\NormalTok{(}\DataTypeTok{CP_forward=}\KeywordTok{escolha_prob}\NormalTok{(EV_nova),}\DataTypeTok{CP_miope=}\KeywordTok{escolha_prob}\NormalTok{(EV_miope))}
 \NormalTok{\}}
 
-\CommentTok{# IV. Generation of simulated data (using a linear cost specification)}
+\CommentTok{# Criar a base de dados com os grupos 1, 2 e 3}
+\NormalTok{data=}\StringTok{ }\KeywordTok{rbind}\NormalTok{(g870[,}\KeywordTok{c}\NormalTok{(}\StringTok{"V1"}\NormalTok{,}\StringTok{"troca"}\NormalTok{,}\StringTok{"V12_adj"}\NormalTok{,}\StringTok{"estado"}\NormalTok{,}\StringTok{"difV12"}\NormalTok{)],}
+\NormalTok{            rt50[,}\KeywordTok{c}\NormalTok{(}\StringTok{"V1"}\NormalTok{,}\StringTok{"troca"}\NormalTok{,}\StringTok{"V12_adj"}\NormalTok{,}\StringTok{"estado"}\NormalTok{,}\StringTok{"difV12"}\NormalTok{)],}
+\NormalTok{            t8h203[,}\KeywordTok{c}\NormalTok{(}\StringTok{"V1"}\NormalTok{,}\StringTok{"troca"}\NormalTok{,}\StringTok{"V12_adj"}\NormalTok{,}\StringTok{"estado"}\NormalTok{,}\StringTok{"difV12"}\NormalTok{)])}
 
-\CommentTok{# 1) True coefficients}
+\CommentTok{# Verificar a probabilidade empírica da mudança em cada estado}
+\NormalTok{p <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Criar as quebras de [0,5000],(5000,10000],(10000,Inf)}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{p=}\KeywordTok{cut}\NormalTok{(difV12,}
+                      \DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\OtherTok{Inf}\NormalTok{,}\DecValTok{5000}\NormalTok{,}\DecValTok{10000}\NormalTok{,}\OtherTok{Inf}\NormalTok{),}
+                      \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"p_x0"}\NormalTok{,}\StringTok{"p_x1"}\NormalTok{,}\StringTok{"p_x2"}\NormalTok{))) }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Agrupar pelas quebras}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{group_by}\NormalTok{(p) }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Contar a quantidade de observações nas quebras}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{n=}\KeywordTok{n}\NormalTok{()) }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Desagrupar}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Calcular a proporção}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{n=}\NormalTok{n}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(n))}
 
-\CommentTok{# Here, we use the same coefficients as the one described earlier:}
+\CommentTok{# Armazenar proporção em um objeto}
+\NormalTok{p <-}\StringTok{ }\NormalTok{p}\OperatorTok{$}\NormalTok{n}
 
-\CommentTok{# Cost and discount coefficients:}
-\CommentTok{# rc=20}
-\CommentTok{# theta11=0.5}
-\CommentTok{# theta12=0.01}
-\CommentTok{# beta=0.75}
+\CommentTok{# p_x0 é a chance de manutenção na mesma faixa de milhagem,}
+\CommentTok{# p_x1 é a chance de passa para o status 2,}
+\CommentTok{# enquanto p_x1 chance de estar no último status }
 
-\CommentTok{# State transition probabilities: (Mileage_t+1-Mileage_t)~NTrunc(6000,4000), such that:}
-\CommentTok{# p_x0=0.36}
-\CommentTok{# p_x1=0.48}
-\CommentTok{# p_x2=0.16}
+\CommentTok{# Decisão do agente}
 
-\CommentTok{# Finally, we assume that there are 70 discrete states for the bus' mileage }
-\CommentTok{# (i.e. no bus has a mileage greater than 345,000 in the dataset).}
+\CommentTok{# Variável iniciais}
+\CommentTok{# O custo de troca, os parâmetros de manutenção da função custo, }
+\CommentTok{# e a taxa de desconto são definidas aqui.}
+\CommentTok{# A taxa de desconto de beta = 0.9999}
 
-\CommentTok{# 2) Choice probabilities, as a function of the bus' state:}
+\CommentTok{# l_1 <- glm(troca~difV12-1,family = binomial(link = "logit"),}
+\CommentTok{#            data = data)}
+\CommentTok{# l_2 <- glm(difV12~lag(difV12)+lag(troca)-1,family = gaussian(link = "identity"),}
+\CommentTok{#            data = data)}
 
-\CommentTok{# Using the Contraction Mapping algorithm implemented earlier, we can obtain the }
-\CommentTok{# probabibility of maintenance as a function of the bus' state for a forward-looking}
-\CommentTok{# agent and a myopic agent.}
+
+\NormalTok{rc=}\DecValTok{20}
+\NormalTok{theta1_}\DecValTok{1}\NormalTok{=}\FloatTok{0.5}
+\NormalTok{theta1_}\DecValTok{2}\NormalTok{=}\FloatTok{0.01}
+\NormalTok{beta=}\FloatTok{0.98}
 
 \NormalTok{params_lin =}\StringTok{ }\KeywordTok{c}\NormalTok{(rc,theta1_}\DecValTok{1}\NormalTok{)}
 \NormalTok{p =}\StringTok{ }\NormalTok{p}
@@ -1086,7 +1065,7 @@ por Rust no seu paper (a tabela relevante é Table IX).}
 \end{Shaded}
 
 \begin{verbatim}
-## Convergence achieved in  704  iterations
+## Convergence achieved in  1060  iterations
 \end{verbatim}
 
 \begin{Shaded}
@@ -1156,23 +1135,26 @@ por Rust no seu paper (a tabela relevante é Table IX).}
 \NormalTok{  exog =}\StringTok{ }\NormalTok{data}\OperatorTok{$}\NormalTok{estado}
   
 \NormalTok{  N=}\KeywordTok{length}\NormalTok{(endog)}
-\NormalTok{  S=}\KeywordTok{max}\NormalTok{(exog)}\OperatorTok{*}\DecValTok{2} \CommentTok{# Assumes that the true maximum number states is twice the maximum observed state.}
+\NormalTok{  S=}\DecValTok{90}
   
-  \CommentTok{# Matrices to speed up computations of the log-likelihood}
+  \CommentTok{# Matrizes para acelerar a computação do log-likelihood}
   
-  \CommentTok{# A (SxN) matrix indicating the state of each observation}
+  \CommentTok{# Uma matriz (SxN) indicando o estado de cada computação}
 \NormalTok{  state_mat=}\KeywordTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{,S,N)}
-  \ControlFlowTok{for}\NormalTok{(s }\ControlFlowTok{in} \DecValTok{0}\OperatorTok{:}\NormalTok{(S}\DecValTok{-1}\NormalTok{)) state_mat[s}\OperatorTok{+}\DecValTok{1}\NormalTok{,]=(exog}\OperatorTok{==}\NormalTok{s)}\OperatorTok{*}\DecValTok{1} \CommentTok{#Note 0 is a state, sum(state_mat)==N should be true}
   
-  \CommentTok{# A (2xN) matrix indicating with a dummy the decision taken by the agent for each time/bus observation (replace or maintain)}
+  \ControlFlowTok{for}\NormalTok{(s }\ControlFlowTok{in} \DecValTok{0}\OperatorTok{:}\NormalTok{(S}\DecValTok{-1}\NormalTok{)) state_mat[s}\OperatorTok{+}\DecValTok{1}\NormalTok{,]=(exog}\OperatorTok{==}\NormalTok{s)}\OperatorTok{*}\DecValTok{1} 
+  
+  \CommentTok{# Uma matriz (2xN) indicanto com uma dummy a decisão }
+  \CommentTok{# tomada por cada agente (manutenção ou troca)}
 \NormalTok{  dec_mat =}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{t}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{endog),endog)}
   
   \StringTok{"}
-\StringTok{  The log-likelihood of the Dynamic model is estimated in several steps.}
-\StringTok{  1) The current parameters are supplied to the contraction mapping function}
-\StringTok{  2) The function returns a matrix of decision probabilities for each state.}
-\StringTok{  3) This matrix is used to compute the loglikelihood of the observations}
-\StringTok{  4) The log-likelihood are then summed accross individuals, and returned}
+\StringTok{  A log-likelihood do modelo dinâmico é estimada em alguns passos:}
+\StringTok{  1) Os parâmetros atuais entram na função  contraction mapping}
+\StringTok{  2) A função retorna uma matriz de decisão }
+\StringTok{     de probabilidade para cada estado}
+\StringTok{  3) Essa matriz é utilizada para computar a log-likelihood das observações}
+\StringTok{  4) A log-likelihood é somada entre os indivíduos}
 \StringTok{  "}
   
 \NormalTok{  util =}\StringTok{ }\KeywordTok{contraction_mapping}\NormalTok{(}\DataTypeTok{S=}\NormalTok{S, }\DataTypeTok{p=}\NormalTok{p, }\DataTypeTok{FCM=}\NormalTok{FCM, }\DataTypeTok{params=}\NormalTok{params, }\DataTypeTok{beta =}\NormalTok{ beta,}\DataTypeTok{suppr_output =} \OtherTok{TRUE}\NormalTok{)}
@@ -1181,21 +1163,20 @@ por Rust no seu paper (a tabela relevante é Table IX).}
   \OperatorTok{-}\KeywordTok{sum}\NormalTok{(logprob}\OperatorTok{*}\KeywordTok{t}\NormalTok{(dec_mat))}
 \NormalTok{\}}
 
-\CommentTok{# 2) Fitting the linear cost data}
 
-\CommentTok{# A. Fitting the true linear cost function to the data}
+\CommentTok{# Aplicação à função custo}
 
-\CommentTok{# In this section, we fit the data generated by the linear cost function and recover the parameters RC and ??. We do it for different characterizations of the cost function, and thereby illustrate the consequences of a misspecification.}
-\CommentTok{# Recall that in the linear model:}
-\CommentTok{# RC=20}
-\CommentTok{# theta11=0.5}
-
+\CommentTok{# limites}
 \NormalTok{bounds =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{1e-9}\NormalTok{, }\OtherTok{Inf}\NormalTok{)}
+\CommentTok{# Parâmetros}
 \NormalTok{npars=}\DecValTok{2}
-\NormalTok{lin_fit =}\StringTok{ }\KeywordTok{optim}\NormalTok{(}\DataTypeTok{par=}\KeywordTok{rep}\NormalTok{(.}\DecValTok{1}\NormalTok{,npars),}\DataTypeTok{fn=}\NormalTok{dynamiclogit,}\DataTypeTok{method=}\KeywordTok{c}\NormalTok{(}\StringTok{"L-BFGS-B"}\NormalTok{),}\DataTypeTok{lower=}\NormalTok{bounds[}\DecValTok{1}\NormalTok{],}\DataTypeTok{upper=}\NormalTok{bounds[}\DecValTok{2}\NormalTok{],}
+
+\CommentTok{# Aplicação ao custo linear}
+\NormalTok{lin_fit =}\StringTok{ }\KeywordTok{optim}\NormalTok{(}\DataTypeTok{par=}\KeywordTok{rep}\NormalTok{(.}\DecValTok{1}\NormalTok{,npars),}\DataTypeTok{fn=}\NormalTok{dynamiclogit,}\DataTypeTok{method=}\KeywordTok{c}\NormalTok{(}\StringTok{"L-BFGS-B"}\NormalTok{),}
+                \DataTypeTok{lower=}\NormalTok{bounds[}\DecValTok{1}\NormalTok{],}\DataTypeTok{upper=}\NormalTok{bounds[}\DecValTok{2}\NormalTok{],}
                 \DataTypeTok{data=}\NormalTok{data,}\DataTypeTok{S=}\NormalTok{S,}\DataTypeTok{p=}\NormalTok{p,}\DataTypeTok{FCM=}\NormalTok{lin_cost,}\DataTypeTok{control=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{fnscale=}\DecValTok{1}\NormalTok{))}
 
-\CommentTok{# Return the parameters obtained after fitting the likelihood function to the data.}
+\CommentTok{# Retornar os parâmetros obtidos com a função}
 \NormalTok{loglike =}\StringTok{  }\NormalTok{lin_fit}\OperatorTok{$}\NormalTok{value}
 \NormalTok{fit_params =}\StringTok{ }\NormalTok{lin_fit}\OperatorTok{$}\NormalTok{par}
 \KeywordTok{cat}\NormalTok{(}\StringTok{"Log-Likelihood: "}\NormalTok{,loglike,}\DataTypeTok{fill=}\OtherTok{TRUE}\NormalTok{)}
@@ -1203,7 +1184,7 @@ por Rust no seu paper (a tabela relevante é Table IX).}
 \end{Shaded}
 
 \begin{verbatim}
-## Log-Likelihood:  1751.994
+## Log-Likelihood:  1752.529
 \end{verbatim}
 
 \begin{Shaded}
@@ -1223,7 +1204,7 @@ por Rust no seu paper (a tabela relevante é Table IX).}
 \end{Shaded}
 
 \begin{verbatim}
-## thetas:  0.004619508
+## thetas:  0.003033239
 \end{verbatim}
 
 \begin{Shaded}
@@ -1235,7 +1216,7 @@ por Rust no seu paper (a tabela relevante é Table IX).}
 \end{Shaded}
 
 \begin{verbatim}
-## Convergence achieved in  637  iterations
+## Convergence achieved in  940  iterations
 \end{verbatim}
 
 \begin{Shaded}

@@ -56,10 +56,24 @@ dpi: 600
 ---
 
 ```{r setup, include=FALSE}
+# Lista de pacotes a serem utilizados
+pacotes <- c("tidyverse","data.table","tabulizer","knitr","ggplot2")
+
+# Instalar pacotes, caso não estejam installados
+if (length(setdiff(pacotes, rownames(installed.packages()))) > 0) {
+  
+  install.packages(setdiff(pacotes, rownames(installed.packages())))
+
+} else {"Todos os pacotes estão instalados"}
+
 # Carregar pacotes necessários
 library(tidyverse)
 library(data.table)
+library(tabulizer)
+library(knitr)
+library(ggplot2)
 
+# Ajustar opção do chunk para exibição dos resultados
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -69,7 +83,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Harold Zurcher gerencia uma frota de ônibus que é sujeita a todo tipo de problema quando esta na rua. A milhagem (quilometragem) acumulada de um ônibus $x_t$ é a variável de estado do problema. O desgaste do ônibus afeta o custo operacional esperado $c(x_t; \theta_1)$ que depende da milhagem e um vetor de parâmetros não conhecido $\theta_1 = \{\theta_{11}, . . . , \theta_{1n}\}$.
 
-Assuma que os custos dos ônbius vem de dois componentes: manutenção regular e
+Assuma que os custos dos ônibus vem de dois componentes: manutenção regular e
 despesas operacionais $m(.)$ e o custo $f(.)$ de substituir o motor no caso de falha (que é um evento estocástico que ocorre com alguma probabilidade).
 
 **a) Escreva o custo como uma combinação destes dois componentes. Indique claramente quais elementos são função de $x_t$. Argumente informalmente que $\frac{\partial c}{\partial x_t} > 0$. Esta hipótese é necessária para a solução do modelo. Ela é uma boa hipótese? Você pode fazer um argumento para explicar por que $\frac{\partial c}{\partial x_t}$ poderia ser negativa (pelo menos para alguns valores de $x_t$)?**
@@ -77,7 +91,7 @@ despesas operacionais $m(.)$ e o custo $f(.)$ de substituir o motor no caso de f
 *Considere que o custo $m(.)$ pode ser decomposto em $m(m_r(x_t),m_o(.))$, em que $m_r$ denota as despesas com manutenção regular e $m_o$ as despesas operacionais. A função custo pode ser escrita como $c=(m(m_r(x_t),m_o(.)),f(x_t,.))$. Espera-se que, quanto maior for a utilização de um ônibus da frota, maiores serão tanto os custos de manutenção regular quanto os custos para substituição do motor em caso de falha (numa eventual retifica do motor). Com isso, quanto mais o ônibus roda, maior é o desgaste de suas peças e, portanto, maiores serão os custos. O custo poderia diminuir com $x_t$ em seus valores iniciais se, por exemplo, houvesse uma garantia do fornecedor para qualquer tipo de problema nas milhas iniciais ou pacotes de manutenção até certo número de milhas inclusos com a compra do veículo. $\square$*
 
 
-**b) Rust não possui dados suficientes para estimar os vários componentes da função custo, então ele simplesmente estimata $c(x_t, \theta_1)$. Que dados ele precisaria e que estratégia ele poderia empregar se fosse querer identificar separadamente $m()$ e $f()$? Descreva qualquer hipótese que você precisa usar com os dados para fazer funcionar a sua solução.**
+**b) Rust não possui dados suficientes para estimar os vários componentes da função custo, então ele simplesmente estima $c(x_t, \theta_1)$. Que dados ele precisaria e que estratégia ele poderia empregar se fosse querer identificar separadamente $m()$ e $f()$? Descreva qualquer hipótese que você precisa usar com os dados para fazer funcionar a sua solução.**
 
 *Rust afirma que não estavam disponíveis dados detalhados de manutenção e dos custos que envolvem a perda de clientes pela eventual falha de funcionamento nos ônibus, um evento estocástico. Assim, não seria possível decompor o custo como:*
 
@@ -85,7 +99,7 @@ despesas operacionais $m(.)$ e o custo $f(.)$ de substituir o motor no caso de f
 c(x,\theta_1) = m(x,\theta_{11}+\mu(x,\theta_{12})b(x,\theta_{13}))
 \]
 
-*em que $(x,\theta_{11}$ é a esperança condicional das despesas normais com manutenção e operação, $\mu(x,\theta_{12})$ é a probabilidade condicional de uma falha inesperada no motor e $b(x,\theta_{13})$ é a experança condicional dos custos relacionados a troca do motor (reboque, troca de peças e perda de confiança do consumidor). Assim, Rust estima apenas a soma desses componentes, $c$. Como a solução é especificar e estimar a soma dos custos, é preciso que estes custos representem efetivamente separáveis em soma e não sejam dependentes entre si. $\square$*
+*em que $(x,\theta_{11}$ é a esperança condicional das despesas normais com manutenção e operação, $\mu(x,\theta_{12})$ é a probabilidade condicional de uma falha inesperada no motor e $b(x,\theta_{13})$ é a esperança condicional dos custos relacionados a troca do motor (reboque, troca de peças e perda de confiança do consumidor). Assim, Rust estima apenas a soma desses componentes, $c$. Como a solução é especificar e estimar a soma dos custos, é preciso que estes custos representem efetivamente separáveis em soma e não sejam dependentes entre si. $\square$*
 
 No começo de cada período $t$ Harold Zurcher observa $x_t$ e decide quando pagar o custo de manutenção $c(x_t, \theta_1)$ ou substituir o motor, que instantaneamente leva a medida de uso para zero $x_t = 0$. Então, o benefício de um único período é dado por
 
@@ -109,7 +123,7 @@ Faça $F(x_{t+1}| x_t, i_t, \theta)$ representar a função de distribuição cu
 V_\theta(x_t)=\sup_\Pi \mathbb{E}\Bigg\{\sum_{j=t}^\infty \beta^{j-t}u(x_j,f_j,\theta_1)|x_t\Bigg\} 
 \]
 
-*com a função utilidade definida anteriormente, $\Pi$ sendo a sequência infinita das regras de decisão $\Pi=\{f_t,f_{t+1},...\}$, $f_t$ sendo a decisão de troca do motor no período $t$, função de toda a história do processo $i_t=f_t(x_t,i_{t-1},x_{t-1},i_{t-2},x_{t-2},...)$. A expectativa anterior é tomada com respeito ao processo estocástico controlado $\{x_t\}$, cuja probabilidade é denotada por $F$ (conforme definição anter), cuja probabilidade de transição é:*
+*com a função utilidade definida anteriormente, $\Pi$ sendo a sequência infinita das regras de decisão $\Pi=\{f_t,f_{t+1},...\}$, $f_t$ sendo a decisão de troca do motor no período $t$, função de toda a história do processo $i_t=f_t(x_t,i_{t-1},x_{t-1},i_{t-2},x_{t-2},...)$. A expectativa anterior é tomada com respeito ao processo estocástico controlado $\{x_t\}$, cuja probabilidade é denotada por $F$ (conforme definição anterior), cuja probabilidade de transição é:*
 
 \[
 F(x_{t+1}| x_t, i_t, \theta) = 
@@ -134,7 +148,7 @@ V_\theta(x_t) = \max_{i_t \in C(x_t)}[u(x_t,i_t,\theta_1)+\beta\mathbb{E}V_\thet
 \mathbb{E}V_\theta(x_t,i_t)=\int_0^\infty V_\theta(y)p(dy|x_t,i_t,\theta_2) \quad \square
 \]
 
-Se pode obter uma solução analítica para a equação de Bellman em **c)** assumindo que a distância percorrida em cada período é distribuida exponencialmente com o parâmetro $\theta_2$, que é independente da milhagem rodada no período anterior:
+Se pode obter uma solução analítica para a equação de Bellman em **c)** assumindo que a distância percorrida em cada período é distribuída exponencialmente com o parâmetro $\theta_2$, que é independente da milhagem rodada no período anterior:
 \[
 F(x_{t+1} - x_t) = 1 - exp(-\theta_2(x_{t+1} - x_t))
 \]
@@ -156,7 +170,7 @@ Caso esteja interessado em detalhes deste modelo, ele foi derivado por Rust em u
 
 **d) Este modelo sofre de um problema de "sobre-previsão". Explique o que significa. Se pode usar este modelo para estimação? Por que ou por que não?**
 
-*Esta especificação implica em uma função de risco degenerada, na qual, após certo limear, sempre é realizada a troca do motor ($x_t \ge \gamma(\theta)$). Todavia, o autor aponta que os dados refutam tal hipótese, uma vez que a troca do motor ocorre numa faixa de milhagem muito ampla (de 82.400 a 387.000), sendo incompatível com uma regra de limear a partir do qual a troca ocorre. Nesse sentido, ao utilizar tal modelo, teríamos um ponto a partir do qual o motor do ônibus é sempre trocado, algo não aderente a realidade. Assim sendo, a utilização desse modelo para previsão não parece ser o mais adequado. Como o autor aponta, a milhagem dos ônibus ($x_t$) não parece ser apenas o único determinante para a troca do motor, existindo um conjunto de outros fatores que podem influenciar tal decisão (o que levará a adição do termo $\varepsilon_t$ ao modelo). Além disso, assume-se que $(x_{t+1}-x_t)$ tem uma distribuição exponencial i.i.d., fato refutado pelo conjunto de dados analisado. $\square$*
+*Esta especificação implica em uma função de risco degenerada, na qual, após certo limiar, sempre é realizada a troca do motor ($x_t \ge \gamma(\theta)$). Todavia, o autor aponta que os dados refutam tal hipótese, uma vez que a troca do motor ocorre numa faixa de milhagem muito ampla (de 82.400 a 387.000), sendo incompatível com uma regra de limiar a partir do qual a troca ocorre. Nesse sentido, ao utilizar tal modelo, teríamos um ponto a partir do qual o motor do ônibus é sempre trocado, algo não aderente a realidade. Assim sendo, a utilização desse modelo para previsão não parece ser o mais adequado. Como o autor aponta, a milhagem dos ônibus ($x_t$) não parece ser apenas o único determinante para a troca do motor, existindo um conjunto de outros fatores que podem influenciar tal decisão (o que levará a adição do termo $\varepsilon_t$ ao modelo). Além disso, assume-se que $(x_{t+1}-x_t)$ tem uma distribuição exponencial i.i.d., fato refutado pelo conjunto de dados analisado. $\square$*
 
 ## Modelo Estocástico
 
@@ -191,7 +205,7 @@ V_\theta (x_t,\varepsilon_t) = \sup_\Pi \mathbb{E}\Bigg\{\sum_{j=t}^\infty \beta
 dp\{x_{t+1},\varepsilon_{t+1},...,x_{N+1},\varepsilon_{N+1}|x_t,\varepsilon_t\} \\ = \prod_{i=t}^{N-1}p(x_{t+1},\varepsilon_{t+1}|x_{i},\varepsilon_{i},\theta_2,\theta_3) \quad \square
 \]
 
-Asolução para este problema é dada por uma regra de decisão estacionária $i_t = i(x_t,\varepsilon_t;\theta)$, que especifica a decisão ótima do agente quando a variável de estado é $(x_t, \varepsilon_t)$. Neste ponto, o modelo estatístico é completamente especificado mas ainda é muito complicado de estimar – especialmente com dados limitados.
+A solução para este problema é dada por uma regra de decisão estacionária $i_t = i(x_t,\varepsilon_t;\theta)$, que especifica a decisão ótima do agente quando a variável de estado é $(x_t, \varepsilon_t)$. Neste ponto, o modelo estatístico é completamente especificado mas ainda é muito complicado de estimar – especialmente com dados limitados.
 
 ## Simplificando as hipóteses para estimação
 
@@ -251,11 +265,11 @@ para todo $x,y \in X$
 
 *Em palavras, uma contração mapeia pontos próximos. Como caso particular, para todo ponto $x \in X$, e qualquer $r>0$, todos os pontos na bola $B_r(x)$ são mapeados para a bola $B_s(Tx)$, com $r > s$. Se $c < 1$, a contração pode ser chamada de estrita.*
 
-*Pela CI, temos um mapeamento do espaço $S=\{(x,\varepsilon\}|x \in R^k, \varepsilon \in R^\#C(x)\}$ para um espaço contraído $\Gamma=\{(x,i)|x \in R^k, i \in C(x)\}$. Sendo a contraçaõ estrita, então existe um único ponto fixo, que, neste caso, é o termo $EV_\theta$ no espaço reduzido. $\square$*
+*Pela CI, temos um mapeamento do espaço $S=\{(x,\varepsilon\}|x \in R^k, \varepsilon \in R^\#C(x)\}$ para um espaço contraído $\Gamma=\{(x,i)|x \in R^k, i \in C(x)\}$. Sendo a contração estrita, então existe um único ponto fixo, que, neste caso, é o termo $EV_\theta$ no espaço reduzido. $\square$*
 
-**i) Explique o tradeoff resultante da hipótese de indenpendência condicional (CI). Use um exemplo concreto para explicar o que é descartado (ou deixado de lado). O que esta hipótese "compra" (i.e. ela entrega) para a estimação? Essa hipótese é razoável?**
+**i) Explique o tradeoff resultante da hipótese de independência condicional (CI). Use um exemplo concreto para explicar o que é descartado (ou deixado de lado). O que esta hipótese "compra" (i.e. ela entrega) para a estimação? Essa hipótese é razoável?**
 
-*Ao adotar a CI, conforme apontado no item g), qualquer dependência entre os termos não observados pelo econometrista depende apenas de $x_t$, o que acaba sendo uma hipótese forte, conforme Rust aponta. Todavia, ao adotar tal estratégia, $EV_\theta$ deixa de ser função do termo não observado, dispensando que as pobrabilidades de escolham envolvam uma integração sobre essa função desconhecida. Além disso, a CI implica que $EV_\theta$ é um ponto fixo de uma contração sobre o espaço de estado reduzido ($\Gamma=\{(x,i)|x\in R^k, i \in C(x)\}$ ao invés de $S=\{(x,i)|x\in R^k, \varepsilon \in R^{\#C(x)}\}$), o que confere mais um ganho computacional ao evitar o cômputo de mais uma integral para obter $EV_\theta$ a partir de $V_\theta$. Ao fazer isso, para o caso dos ônibus, as decisões de troca do motor não observadas pelo econometristas em dois períodos podem depender de outras coisas além da milhagem percorrida. O agente pode, por exemplo, observar as condições das ruas ou a temperatura do ambiente (que pode afetar a temperatura dos componentes do motor e acelerar seu desgaste) para decidir sobre a troca do motor. Pode ainda, por exemplo, optar por direcionar a troca do motor para o períodos em que a demanda por ônibus é menor (como férias) de modo a diminuir eventuais impactos da troca do motor. Todos esses fatores independem da milhagem $x_t$, afetando a escolha da troca. Apesar de ser uma hipótese forte, parece ser razoável supor que $x_t$ seja o principal fator a influenciar a parcela não observada pelo econometrista*
+*Ao adotar a CI, conforme apontado no item g), qualquer dependência entre os termos não observados pelo econometrista depende apenas de $x_t$, o que acaba sendo uma hipótese forte, conforme Rust aponta. Todavia, ao adotar tal estratégia, $EV_\theta$ deixa de ser função do termo não observado, dispensando que as probabilidades de escolha envolvam uma integração sobre essa função desconhecida. Além disso, a CI implica que $EV_\theta$ é um ponto fixo de uma contração sobre o espaço de estado reduzido ($\Gamma=\{(x,i)|x\in R^k, i \in C(x)\}$ ao invés de $S=\{(x,i)|x\in R^k, \varepsilon \in R^{\#C(x)}\}$), o que confere mais um ganho computacional ao evitar o cômputo de mais uma integral para obter $EV_\theta$ a partir de $V_\theta$. Ao fazer isso, para o caso dos ônibus, as decisões de troca do motor não observadas pelo econometristas em dois períodos podem depender de outras coisas além da milhagem percorrida. O agente pode, por exemplo, observar as condições das ruas ou a temperatura do ambiente (que pode afetar a temperatura dos componentes do motor e acelerar seu desgaste) para decidir sobre a troca do motor. Pode ainda, por exemplo, optar por direcionar a troca do motor para o períodos em que a demanda por ônibus é menor (como férias) de modo a diminuir eventuais impactos da troca do motor. Todos esses fatores independem da milhagem $x_t$, afetando a escolha da troca. Apesar de ser uma hipótese forte, parece ser razoável supor que $x_t$ seja o principal fator a influenciar a parcela não observada pelo econometrista*
 
 Embora equação anterior seja uma contração, ainda é difícil computar sem fazer hipóteses distribucionais adicionais sobre $\varepsilon$. Rust assume que o choque $\varepsilon_{it,t}$$ segue uma distribuição valor extremo Tipo I normalizada. Então:
 
@@ -270,11 +284,11 @@ Embora equação anterior seja uma contração, ainda é difícil computar sem f
 
 A hipótese de distribuição valor extremo nos permite derivar formas funcionais para $EV(x_t)$, e $P(1 | x_t, \theta)$.
 
-**k) Discuta a racionalidade por trás da hipótese da distribução de $\varepsilon_t$. Existem outras alternativas? Escolha uma alternativa e discuta os prós e contras em relação à distribuição valor extremo Tipo I.**
+**k) Discuta a racionalidade por trás da hipótese da distribuição de $\varepsilon_t$. Existem outras alternativas? Escolha uma alternativa e discuta os prós e contras em relação à distribuição valor extremo Tipo I.**
 
 *Ao escolher essa distribuição, o autor assume implicitamente que $\{x_t^j,\varepsilon_t^j\}$ são independentemente distribuídos entre os diferentes ônibus, de menor relevância vis-à-vis sua hipótese de CI. Uma outra possibilidade seria utilizar uma distribuição normal, como no caso de um probit, o que lhe permitiria acomodar possíveis correlações entre o processo decisório envolvendo a troca de motores dos ônibus. Entretanto, isso levaria a complicações na definição do modelo, demandando maiores informações sobre os custos que envolvem o processo decisório de troca do motor.*
 
-A última simplificação que Rust faz é discretizar o espaço de xt divindo a milhagem em 90 intervalos de 5000 milhas. Ele assume que o processo xt por avançar com pelo menos dois incrementos no tempo, que essencialmente reduz a distribuição de $(x_{t+1} - x_t$) como uma multinomial com parâmetros $\theta_3 = \{\theta_{30}, \theta_{31}\}$.
+A última simplificação que Rust faz é discretizar o espaço de $x_t$ divindo a milhagem em 90 intervalos de 5000 milhas. Ele assume que o processo $x_t$ por avançar com pelo menos dois incrementos no tempo, que essencialmente reduz a distribuição de $(x_{t+1} - x_t$) como uma multinomial com parâmetros $\theta_3 = \{\theta_{30}, \theta_{31}\}$.
 
 **l) Escreva $P (x_{t+1}| x_t, i_t, \theta)$.**
 
@@ -292,9 +306,9 @@ Aqui já se está em posição de estimar o modelo. As únicas duas coisas que n
 c (x_t, \theta_1) = 0.001 \theta_1 x_t
 \]
 
-**m) Observe que não foi incluída uma constante nesta especificação de função custo. O que aconteceria se isto fosse feito? Poderiamos estimar uma constante separadamente? Discuta como isso impacta o resultado final de sua estimativa.**
+**m) Observe que não foi incluída uma constante nesta especificação de função custo. O que aconteceria se isto fosse feito? Poderíamos estimar uma constante separadamente? Discuta como isso impacta o resultado final de sua estimativa.**
 
-*Segundo Rust, o nível absoluto de $c$ não é identificado uma vez que a subtração de uma constante da função utilidade não afeta as probabulidades de escolha. Assim, o que autor busca estimar, ao menos, a mudança nos custos operacionais como função da distância percorrida pelos ônibus, cuja normalização $c(0,\theta_1)$ é utilizada*
+*Segundo Rust, o nível absoluto de $c$ não é identificado uma vez que a subtração de uma constante da função utilidade não afeta as probabilidades de escolha. Assim, o que autor busca estimar, ao menos, a mudança nos custos operacionais como função da distância percorrida pelos ônibus, cuja normalização $c(0,\theta_1)$ é utilizada*
 
 # Estimação
 
@@ -470,77 +484,30 @@ Rust usa o seguinte procedimento:
 \ell^2 (x_1,...,x_T,i_1,...,i_T|\theta)= \prod_{t=1}^T P(i_t|x_t,\theta)
 \]
 
-Para implementar este método você precisará calcular $EV(x_t)$ para cada valor de $\theta$ considerado o algoritmo de maxima verossimilhança. Portanto, o seu código deve ser estruturado para ter um algoritmo de ponto fixo "interno" que calcula $EV(x_t)$ (usando a expressão derivada na parte **k)** e um algoritmo de busca "externo" que maximiza a função de verossimilhança. Um bom ponto de partida pode ser o *payoff* do período ou mesmo o valor de $EV(x_t)$ computado na iteração anterior da estimação.
+Para implementar este método você precisará calcular $EV(x_t)$ para cada valor de $\theta$ considerado o algoritmo de máxima verossimilhança. Portanto, o seu código deve ser estruturado para ter um algoritmo de ponto fixo "interno" que calcula $EV(x_t)$ (usando a expressão derivada na parte **k)** e um algoritmo de busca "externo" que maximiza a função de verossimilhança. Um bom ponto de partida pode ser o *payoff* do período ou mesmo o valor de $EV(x_t)$ computado na iteração anterior da estimação.
 
 **Passo 3:** Usando $(\hat{\theta_1},\hat{R},\hat{\theta_3})$ como um ponto inicial, use a função de verossimilhança completa para obter uma estimativa eficiente dos parâmetros.
 
-**n) Estime $(\theta_1, R,\theta_3)$ usando a metodologia de Rust de maximização da função de verossimilhança na equação 2 (ou uma função log-verossimilhança equivalente)**^[Você pode cair em um problema de estimação porque sua linguagem de programação aproxima números bem pequenos para zero. Este é um problema quando estiver calculando (como você verá) $log(exp(x_1) + exp(x_2))$ onde tanto $x_1$ ou $x_2$ (ou ambos) são números negativos bem grandes. Nesse caso, se sua linguagem de programação soluciona $exp(x_1)= 0$, então $log(exp(x_1) + exp(x_2))=x_2$, que é errado. Você pode encontrar uma descrição detalhada deste problema em \url{https://lips.cs.princeton.edu/computing-log-sum-exp/}. A solução consiste enssencialmente em tirar $exp (x_1)$ da soma do log: 
+**n) Estime $(\theta_1, R,\theta_3)$ usando a metodologia de Rust de maximização da função de verossimilhança na equação 2 (ou uma função log-verossimilhança equivalente)**^[Você pode cair em um problema de estimação porque sua linguagem de programação aproxima números bem pequenos para zero. Este é um problema quando estiver calculando (como você verá) $log(exp(x_1) + exp(x_2))$ onde tanto $x_1$ ou $x_2$ (ou ambos) são números negativos bem grandes. Nesse caso, se sua linguagem de programação soluciona $exp(x_1)= 0$, então $log(exp(x_1) + exp(x_2))=x_2$, que é errado. Você pode encontrar uma descrição detalhada deste problema em \url{https://lips.cs.princeton.edu/computing-log-sum-exp/}. A solução consiste essencialmente em tirar $exp (x_1)$ da soma do log: 
 \[
 log(exp(x_1) + exp(x_2))= log (exp(x_1).(1 + exp (x_2 - x_1))) \\
 = x_1 + log((1+exp(x_2-x_1)))
 \]]. **Você deve comparar os números que estimou com os obtidos por Rust no seu paper (a tabela relevante é Table IX).**
 
 ```{r}
-library(ggplot2)
-library(msm)
-
-# Criar a base de dados com os grupos 1, 2 e 3
-data= rbind(g870[,c("V1","troca","V12_adj","estado","difV12")],
-            rt50[,c("V1","troca","V12_adj","estado","difV12")],
-            t8h203[,c("V1","troca","V12_adj","estado","difV12")])
-
-# lower=min(data$difV12)
-# upper=max(data$difV12)
-# mu=mean(data$difV12)
-# sigma=sd(data$difV12)
-# 
-# p_x0 = msm::ptnorm(5000,mu,sigma,lower,upper)
-# p_x1 = msm::ptnorm(10000,mu,sigma,lower,upper)-p_x0
-# p_x2 = 1 - p_x1 - p_x0
-# p = c(p_x0, p_x1, p_x2)
-# 
-# p
-
-# Verificar a probabilidade empírica da mudança em cada estado
-p <- data %>%
-  dplyr::mutate(p=cut(difV12,
-                      breaks = c(-Inf,5000,10000,Inf),
-                      labels = c("p_x0","p_x1","p_x2"))) %>%
-  dplyr::group_by(p) %>%
-  dplyr::summarise(n=n()) %>%
-  dplyr::ungroup() %>%
-  dplyr::mutate(n=n/sum(n))
-
-p <- p$n
-
-# p_x0 é a chance de manutenção na mesma faixa de milhagem,
-# p_x1 é a chance de passa para o status 2,
-# enquanto p_x1 chance de estar no último status 
-
-# Decisão do agente
-
-# Variável iniciais
-# O custo de troca, os parâmetros de manutenção da função custo, 
-# e a taxa de desconto são definidas aqui.
-# A taxa de desconto de beta = 0.9999
-
-
-rc = 20
-theta1_1 = 0.5
-theta1_2 = 0.01
-beta = 0.97
-
 # Definição da função custo
 
 custo_miope=function(S, FCM, params, p){
   
   "A função custo míope computa o custo esperado associado com
-  cada decisão para cada estado, 
-  retornando um conjunto de decisões/estados de custo.
+  cada decisão para cada estado, retornando um conjunto de 
+  decisões/estados de custo.
     
    Inputs:
-    * Um inteiro S, descrevendo os possíveis estados do ônibus
-    * A função de custo de manutenção FMC, que tem como input um vetor de parâmetros e estados
+    * Um inteiro S, descrevendo os possíveis estados do ônibus.
+    Na pratica, é o número de meses analisados
+    * A função de custo de manutenção FMC, que tem como input 
+    um vetor de parâmetros e estados
     * O vetor params, como entrada para FMC. O primeiro elemento do vetor 
       é o custo de substituição cs.
     * Um vetor (3x1) descrevendo os estados de transição de probabilidades 
@@ -549,8 +516,14 @@ custo_miope=function(S, FCM, params, p){
     * Uma matriz (Sx2) contendo os custos de manutenção e troca para os N 
       possíveis estados dos ônibus"
   
+  # Definir o custo de substituição a partir dos 
+  # Parâmetros fornecidos
   cs = params[1]
+  # Definir um vetor para receber os custos
+  # de manutenção
   maint_cost = rep(NA,S)
+  # Definir um vetor para receber os custos
+  # de substituição
   repl_cost = rep(NA,S)
   
   for(s in 1:S){
@@ -595,14 +568,14 @@ contraction_mapping=function(S, p, FCM, params, beta=beta, threshold=1e-9, suppr
   "Computa o valor esperado não-míope do agente para cada decisão possível 
   e cada possível estado do ônibus.
   A iteração é realizada até a diferença obtida entre o passo anterior e o atual
-  é menor que o limear.
+  é menor que o limiar.
   Inputs:
   * Um número finito de estados S
   * Um vetor com as probabilidades de transição de estado p = [p(0), p(1), p(2), ..., p(k)] de tamanho k < S
   * Uma função de manutenção de custos FMC
-  * Um vetor de parâmtros para a função custo
+  * Um vetor de parâmetros para a função custo
   * Um fator de desconto beta (opcional)
-  * Um limear para convergência (opcional)
+  * Um limiar para convergência (opcional)
   Outputs:
   * A convergência para a escolha de probabilidade forward-looking e 
   míope para cada estado, condicional aos 'params'"
@@ -618,7 +591,7 @@ contraction_mapping=function(S, p, FCM, params, beta=beta, threshold=1e-9, suppr
   for(i in 1:S){
     for(j in 1:lp){
       if((i+j-1)<S)  ST_mat[i,i+j-1] = p[j]
-      if((i+j-1)==S) ST_mat[i,i+j-1] = sum(p[j:lp]) #sobre as colunass (probabilidades colapsadas)
+      if((i+j-1)==S) ST_mat[i,i+j-1] = sum(p[j:lp]) #sobre as colunas (probabilidades colapsadas)
     }
   }
   
@@ -648,7 +621,7 @@ contraction_mapping=function(S, p, FCM, params, beta=beta, threshold=1e-9, suppr
     # A utilidade futura é descontada por beta, e adicionado ao custo míope. 
     EV_nova = EV_miope + beta*futil
     k = k+1
-    if(k == 1000) achieved = FALSE
+    if(k == 10000) achieved = FALSE
   }
   
   if(!suppr_output){
@@ -662,31 +635,50 @@ contraction_mapping=function(S, p, FCM, params, beta=beta, threshold=1e-9, suppr
   list(CP_forward=escolha_prob(EV_nova),CP_miope=escolha_prob(EV_miope))
 }
 
-# IV. Generation of simulated data (using a linear cost specification)
+# Criar a base de dados com os grupos 1, 2 e 3
+data= rbind(g870[,c("V1","troca","V12_adj","estado","difV12")],
+            rt50[,c("V1","troca","V12_adj","estado","difV12")],
+            t8h203[,c("V1","troca","V12_adj","estado","difV12")])
 
-# 1) True coefficients
+# Verificar a probabilidade empírica da mudança em cada estado
+p <- data %>%
+  # Criar as quebras de [0,5000],(5000,10000],(10000,Inf)
+  dplyr::mutate(p=cut(difV12,
+                      breaks = c(-Inf,5000,10000,Inf),
+                      labels = c("p_x0","p_x1","p_x2"))) %>%
+  # Agrupar pelas quebras
+  dplyr::group_by(p) %>%
+  # Contar a quantidade de observações nas quebras
+  dplyr::summarise(n=n()) %>%
+  # Desagrupar
+  dplyr::ungroup() %>%
+  # Calcular a proporção
+  dplyr::mutate(n=n/sum(n))
 
-# Here, we use the same coefficients as the one described earlier:
+# Armazenar proporção em um objeto
+p <- p$n
 
-# Cost and discount coefficients:
-# rc=20
-# theta11=0.5
-# theta12=0.01
-# beta=0.75
+# p_x0 é a chance de manutenção na mesma faixa de milhagem,
+# p_x1 é a chance de passa para o status 2,
+# enquanto p_x1 chance de estar no último status 
 
-# State transition probabilities: (Mileage_t+1-Mileage_t)~NTrunc(6000,4000), such that:
-# p_x0=0.36
-# p_x1=0.48
-# p_x2=0.16
+# Decisão do agente
 
-# Finally, we assume that there are 70 discrete states for the bus' mileage 
-# (i.e. no bus has a mileage greater than 345,000 in the dataset).
+# Variável iniciais
+# O custo de troca, os parâmetros de manutenção da função custo, 
+# e a taxa de desconto são definidas aqui.
+# A taxa de desconto de beta = 0.9999
 
-# 2) Choice probabilities, as a function of the bus' state:
+# l_1 <- glm(troca~difV12-1,family = binomial(link = "logit"),
+#            data = data)
+# l_2 <- glm(difV12~lag(difV12)+lag(troca)-1,family = gaussian(link = "identity"),
+#            data = data)
 
-# Using the Contraction Mapping algorithm implemented earlier, we can obtain the 
-# probabibility of maintenance as a function of the bus' state for a forward-looking
-# agent and a myopic agent.
+
+rc=20
+theta1_1=0.5
+theta1_2=0.01
+beta=0.98
 
 params_lin = c(rc,theta1_1)
 p = p
@@ -752,23 +744,26 @@ dynamiclogit=function(params,data,S,p,FCM){
   exog = data$estado
   
   N=length(endog)
-  S=max(exog)*2 # Assumes that the true maximum number states is twice the maximum observed state.
+  S=90
   
-  # Matrices to speed up computations of the log-likelihood
+  # Matrizes para acelerar a computação do log-likelihood
   
-  # A (SxN) matrix indicating the state of each observation
+  # Uma matriz (SxN) indicando o estado de cada computação
   state_mat=matrix(0,S,N)
-  for(s in 0:(S-1)) state_mat[s+1,]=(exog==s)*1 #Note 0 is a state, sum(state_mat)==N should be true
   
-  # A (2xN) matrix indicating with a dummy the decision taken by the agent for each time/bus observation (replace or maintain)
+  for(s in 0:(S-1)) state_mat[s+1,]=(exog==s)*1 
+  
+  # Uma matriz (2xN) indicanto com uma dummy a decisão 
+  # tomada por cada agente (manutenção ou troca)
   dec_mat = rbind(t(1-endog),endog)
   
   "
-  The log-likelihood of the Dynamic model is estimated in several steps.
-  1) The current parameters are supplied to the contraction mapping function
-  2) The function returns a matrix of decision probabilities for each state.
-  3) This matrix is used to compute the loglikelihood of the observations
-  4) The log-likelihood are then summed accross individuals, and returned
+  A log-likelihood do modelo dinâmico é estimada em alguns passos:
+  1) Os parâmetros atuais entram na função  contraction mapping
+  2) A função retorna uma matriz de decisão 
+     de probabilidade para cada estado
+  3) Essa matriz é utilizada para computar a log-likelihood das observações
+  4) A log-likelihood é somada entre os indivíduos
   "
   
   util = contraction_mapping(S=S, p=p, FCM=FCM, params=params, beta = beta,suppr_output = TRUE)
@@ -777,21 +772,20 @@ dynamiclogit=function(params,data,S,p,FCM){
   -sum(logprob*t(dec_mat))
 }
 
-# 2) Fitting the linear cost data
 
-# A. Fitting the true linear cost function to the data
+# Aplicação à função custo
 
-# In this section, we fit the data generated by the linear cost function and recover the parameters RC and ??. We do it for different characterizations of the cost function, and thereby illustrate the consequences of a misspecification.
-# Recall that in the linear model:
-# RC=20
-# theta11=0.5
-
+# limites
 bounds = c(1e-9, Inf)
+# Parâmetros
 npars=2
-lin_fit = optim(par=rep(.1,npars),fn=dynamiclogit,method=c("L-BFGS-B"),lower=bounds[1],upper=bounds[2],
+
+# Aplicação ao custo linear
+lin_fit = optim(par=rep(.1,npars),fn=dynamiclogit,method=c("L-BFGS-B"),
+                lower=bounds[1],upper=bounds[2],
                 data=data,S=S,p=p,FCM=lin_cost,control=list(fnscale=1))
 
-# Return the parameters obtained after fitting the likelihood function to the data.
+# Retornar os parâmetros obtidos com a função
 loglike =  lin_fit$value
 fit_params = lin_fit$par
 cat("Log-Likelihood: ",loglike,fill=TRUE)

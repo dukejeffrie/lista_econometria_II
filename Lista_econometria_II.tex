@@ -123,7 +123,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{25/06/2019}
+    \date{27/06/2019}
 
 \setlength\parindent{24pt}
 \usepackage{indentfirst}
@@ -794,14 +794,20 @@ usados para comparar com os resultados de Rust são 1, 2, 3 e 8.
 \StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{V12_adj=}\KeywordTok{case_when}\NormalTok{(V12.V1}\OperatorTok{>}\NormalTok{V6}\OperatorTok{&}\NormalTok{V6}\OperatorTok{>}\DecValTok{0}\OperatorTok{~}\NormalTok{V12.V1}\OperatorTok{-}\NormalTok{V6,}
                                 \OtherTok{TRUE}\OperatorTok{~}\NormalTok{V12.V1), }\CommentTok{# Primeira troca}
                 \DataTypeTok{V12_adj=}\KeywordTok{case_when}\NormalTok{(V12.V1}\OperatorTok{>}\NormalTok{V9}\OperatorTok{&}\NormalTok{V9}\OperatorTok{>}\DecValTok{0}\OperatorTok{~}\NormalTok{V12.V1}\OperatorTok{-}\NormalTok{V9,}
-                                \OtherTok{TRUE}\OperatorTok{~}\NormalTok{V12_adj), }\CommentTok{# Segunda troca}
-                \DataTypeTok{troca=}\KeywordTok{ifelse}\NormalTok{(V12_adj}\OperatorTok{<}\KeywordTok{lag}\NormalTok{(V12_adj),}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{), }\CommentTok{# Criar indicador de troca}
+                                \OtherTok{TRUE}\OperatorTok{~}\NormalTok{V12_adj)) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# Segunda troca}
+\StringTok{  }\CommentTok{# Agrupar por ônibus}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{group_by}\NormalTok{(V1) }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Criar indicador de troca}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{troca=}\KeywordTok{ifelse}\NormalTok{(V12_adj}\OperatorTok{>}\KeywordTok{lead}\NormalTok{(V12_adj),}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{), }
                 \DataTypeTok{troca=}\KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(troca)}\OperatorTok{==}\NormalTok{T,}\DecValTok{0}\NormalTok{,troca),}
                 \DataTypeTok{estado=}\KeywordTok{cut}\NormalTok{(V12_adj,}
                            \DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\KeywordTok{max}\NormalTok{(V12_adj), }\DataTypeTok{by=}\DecValTok{5000}\NormalTok{),}\OtherTok{Inf}\NormalTok{),}
                            \DataTypeTok{labels =} \OtherTok{FALSE}\NormalTok{),}
                 \DataTypeTok{difV12=}\NormalTok{V12_adj}\OperatorTok{-}\KeywordTok{lag}\NormalTok{(V12_adj),}
-                \DataTypeTok{difV12=}\KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(difV12)}\OperatorTok{==}\NormalTok{T}\OperatorTok{|}\NormalTok{difV12}\OperatorTok{<}\DecValTok{0}\NormalTok{,V12_adj,difV12))) }\CommentTok{# Ajustar primeiro valor}
+                \DataTypeTok{difV12=}\KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(difV12)}\OperatorTok{==}\NormalTok{T}\OperatorTok{|}\NormalTok{difV12}\OperatorTok{<}\DecValTok{0}\NormalTok{,V12_adj,difV12),}
+                \DataTypeTok{diffV12_mult=}\KeywordTok{cut}\NormalTok{(difV12,}
+                                 \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\OtherTok{Inf}\NormalTok{,}\DecValTok{5000}\NormalTok{,}\DecValTok{1000}\NormalTok{,}\OtherTok{Inf}\NormalTok{),}
+                                 \DataTypeTok{labels =}\NormalTok{ F))) }\CommentTok{# Ajustar primeiro valor}
 
 \CommentTok{# Remover objetos desnecessários}
 \KeywordTok{rm}\NormalTok{(base,dados,r,ref,t,}\DataTypeTok{list=}\KeywordTok{ls}\NormalTok{(}\DataTypeTok{pattern =} \StringTok{"V}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d"}\NormalTok{),b,i,j,nl,nm)}
@@ -1013,9 +1019,11 @@ por Rust no seu paper (a tabela relevante é Table IX).}
 \NormalTok{\}}
 
 \CommentTok{# Criar a base de dados com os grupos 1, 2 e 3}
-\NormalTok{data=}\StringTok{ }\KeywordTok{rbind}\NormalTok{(g870[,}\KeywordTok{c}\NormalTok{(}\StringTok{"V1"}\NormalTok{,}\StringTok{"troca"}\NormalTok{,}\StringTok{"V12_adj"}\NormalTok{,}\StringTok{"estado"}\NormalTok{,}\StringTok{"difV12"}\NormalTok{)],}
-\NormalTok{            rt50[,}\KeywordTok{c}\NormalTok{(}\StringTok{"V1"}\NormalTok{,}\StringTok{"troca"}\NormalTok{,}\StringTok{"V12_adj"}\NormalTok{,}\StringTok{"estado"}\NormalTok{,}\StringTok{"difV12"}\NormalTok{)],}
-\NormalTok{            t8h203[,}\KeywordTok{c}\NormalTok{(}\StringTok{"V1"}\NormalTok{,}\StringTok{"troca"}\NormalTok{,}\StringTok{"V12_adj"}\NormalTok{,}\StringTok{"estado"}\NormalTok{,}\StringTok{"difV12"}\NormalTok{)])}
+\NormalTok{data=}\StringTok{ }\KeywordTok{rbind}\NormalTok{(g870[,}\KeywordTok{c}\NormalTok{(}\StringTok{"V1"}\NormalTok{,}\StringTok{"troca"}\NormalTok{,}\StringTok{"V12_adj"}\NormalTok{,}\StringTok{"estado"}\NormalTok{,}\StringTok{"difV12"}\NormalTok{,}\StringTok{"diffV12_mult"}\NormalTok{)],}
+\NormalTok{            rt50[,}\KeywordTok{c}\NormalTok{(}\StringTok{"V1"}\NormalTok{,}\StringTok{"troca"}\NormalTok{,}\StringTok{"V12_adj"}\NormalTok{,}\StringTok{"estado"}\NormalTok{,}\StringTok{"difV12"}\NormalTok{,}\StringTok{"diffV12_mult"}\NormalTok{)],}
+\NormalTok{            t8h203[,}\KeywordTok{c}\NormalTok{(}\StringTok{"V1"}\NormalTok{,}\StringTok{"troca"}\NormalTok{,}\StringTok{"V12_adj"}\NormalTok{,}\StringTok{"estado"}\NormalTok{,}\StringTok{"difV12"}\NormalTok{,}\StringTok{"diffV12_mult"}\NormalTok{)])}
+
+  
 
 \CommentTok{# Verificar a probabilidade empírica da mudança em cada estado}
 \NormalTok{p <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}
@@ -1046,11 +1054,19 @@ por Rust no seu paper (a tabela relevante é Table IX).}
 \CommentTok{# e a taxa de desconto são definidas aqui.}
 \CommentTok{# A taxa de desconto de beta = 0.9999}
 
-\CommentTok{# l_1 <- glm(troca~difV12-1,family = binomial(link = "logit"),}
-\CommentTok{#            data = data)}
-\CommentTok{# l_2 <- glm(difV12~lag(difV12)+lag(troca)-1,family = gaussian(link = "identity"),}
-\CommentTok{#            data = data)}
+\CommentTok{# l_1 <- glm(troca~difV12-1,family = "binomial",}
+\CommentTok{#             data = data)}
+\CommentTok{# coef(l_1)}
+\CommentTok{# est = predict(l_1)}
+\CommentTok{# prob0 = 1/(1+est)                           }
+\CommentTok{# prob0 = cbind(1-prob0,prob0)}
 
+
+\CommentTok{# l_2 <- nnet::multinom(diffV12_mult~lag(diffV12_mult)-1,family = "binomial",}
+\CommentTok{#            data = data)}
+\CommentTok{# est = l_2$fitted.values}
+\CommentTok{# }
+\CommentTok{# p <- c(mean(est[,1]),mean(est[,2]),mean(est[,3]))}
 
 \NormalTok{rc=}\DecValTok{20}
 \NormalTok{theta1_}\DecValTok{1}\NormalTok{=}\FloatTok{0.5}
@@ -1059,7 +1075,7 @@ por Rust no seu paper (a tabela relevante é Table IX).}
 
 \NormalTok{params_lin =}\StringTok{ }\KeywordTok{c}\NormalTok{(rc,theta1_}\DecValTok{1}\NormalTok{)}
 \NormalTok{p =}\StringTok{ }\NormalTok{p}
-\NormalTok{S =}\StringTok{ }\KeywordTok{length}\NormalTok{(}\KeywordTok{table}\NormalTok{(data}\OperatorTok{$}\NormalTok{estado))}
+\NormalTok{S =}\StringTok{ }\DecValTok{90}
 \NormalTok{out =}\StringTok{ }\KeywordTok{contraction_mapping}\NormalTok{(}\DataTypeTok{S=}\NormalTok{S, }\DataTypeTok{p=}\NormalTok{p, }\DataTypeTok{FCM=}\NormalTok{lin_cost, }\DataTypeTok{params=}\NormalTok{params_lin, }\DataTypeTok{beta =}\NormalTok{ beta)}
 \end{Highlighting}
 \end{Shaded}
@@ -1082,7 +1098,7 @@ por Rust no seu paper (a tabela relevante é Table IX).}
 \KeywordTok{ggplot}\NormalTok{(ggdat1,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y=}\NormalTok{pMaint,}\DataTypeTok{x=}\NormalTok{State,}\DataTypeTok{color=}\NormalTok{Regra))}\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{lwd=}\DecValTok{1}\NormalTok{)}\OperatorTok{+}
 \StringTok{  }\KeywordTok{theme_bw}\NormalTok{(}\DecValTok{12}\NormalTok{)}\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\KeywordTok{length}\NormalTok{(}\KeywordTok{unique}\NormalTok{(data}\OperatorTok{$}\NormalTok{estado)),}\DataTypeTok{by=}\DecValTok{5}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{90}\NormalTok{,}\DataTypeTok{by=}\DecValTok{5}\NormalTok{))}\OperatorTok{+}
 \StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ scales}\OperatorTok{::}\NormalTok{percent)}\OperatorTok{+}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x=}\StringTok{"Estado"}\NormalTok{,}
        \DataTypeTok{y=}\StringTok{"Prob."}\NormalTok{)}
@@ -1184,7 +1200,7 @@ por Rust no seu paper (a tabela relevante é Table IX).}
 \end{Shaded}
 
 \begin{verbatim}
-## Log-Likelihood:  1752.529
+## Log-Likelihood:  377.1644
 \end{verbatim}
 
 \begin{Shaded}
@@ -1204,7 +1220,7 @@ por Rust no seu paper (a tabela relevante é Table IX).}
 \end{Shaded}
 
 \begin{verbatim}
-## thetas:  0.003033239
+## thetas:  0.002978073
 \end{verbatim}
 
 \begin{Shaded}
@@ -1216,7 +1232,7 @@ por Rust no seu paper (a tabela relevante é Table IX).}
 \end{Shaded}
 
 \begin{verbatim}
-## Convergence achieved in  940  iterations
+## Convergence achieved in  1092  iterations
 \end{verbatim}
 
 \begin{Shaded}

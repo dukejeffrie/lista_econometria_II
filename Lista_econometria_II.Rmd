@@ -445,14 +445,20 @@ cbind(dados,V12=t) %>%
   dplyr::mutate(V12_adj=case_when(V12.V1>V6&V6>0~V12.V1-V6,
                                 TRUE~V12.V1), # Primeira troca
                 V12_adj=case_when(V12.V1>V9&V9>0~V12.V1-V9,
-                                TRUE~V12_adj), # Segunda troca
-                troca=ifelse(V12_adj<lag(V12_adj),1,0), # Criar indicador de troca
+                                TRUE~V12_adj)) %>% # Segunda troca
+  # Agrupar por ônibus
+  dplyr::group_by(V1) %>%
+  # Criar indicador de troca
+  dplyr::mutate(troca=ifelse(V12_adj>lead(V12_adj),1,0), 
                 troca=ifelse(is.na(troca)==T,0,troca),
                 estado=cut(V12_adj,
                            breaks = c(seq(0,max(V12_adj), by=5000),Inf),
                            labels = FALSE),
                 difV12=V12_adj-lag(V12_adj),
-                difV12=ifelse(is.na(difV12)==T|difV12<0,V12_adj,difV12))) # Ajustar primeiro valor
+                difV12=ifelse(is.na(difV12)==T|difV12<0,V12_adj,difV12),
+                diffV12_mult=cut(difV12,
+                                 c(-Inf,5000,1000,Inf),
+                                 labels = F))) # Ajustar primeiro valor
 
 # Remover objetos desnecessários
 rm(base,dados,r,ref,t,list=ls(pattern = "V\\d"),b,i,j,nl,nm)
@@ -636,9 +642,11 @@ contraction_mapping=function(S, p, FCM, params, beta=beta, threshold=1e-9, suppr
 }
 
 # Criar a base de dados com os grupos 1, 2 e 3
-data= rbind(g870[,c("V1","troca","V12_adj","estado","difV12")],
-            rt50[,c("V1","troca","V12_adj","estado","difV12")],
-            t8h203[,c("V1","troca","V12_adj","estado","difV12")])
+data= rbind(g870[,c("V1","troca","V12_adj","estado","difV12","diffV12_mult")],
+            rt50[,c("V1","troca","V12_adj","estado","difV12","diffV12_mult")],
+            t8h203[,c("V1","troca","V12_adj","estado","difV12","diffV12_mult")])
+
+  
 
 # Verificar a probabilidade empírica da mudança em cada estado
 p <- data %>%
@@ -669,11 +677,19 @@ p <- p$n
 # e a taxa de desconto são definidas aqui.
 # A taxa de desconto de beta = 0.9999
 
-# l_1 <- glm(troca~difV12-1,family = binomial(link = "logit"),
-#            data = data)
-# l_2 <- glm(difV12~lag(difV12)+lag(troca)-1,family = gaussian(link = "identity"),
-#            data = data)
+# l_1 <- glm(troca~difV12-1,family = "binomial",
+#             data = data)
+# coef(l_1)
+# est = predict(l_1)
+# prob0 = 1/(1+est)                           
+# prob0 = cbind(1-prob0,prob0)
 
+
+# l_2 <- nnet::multinom(diffV12_mult~lag(diffV12_mult)-1,family = "binomial",
+#            data = data)
+# est = l_2$fitted.values
+# 
+# p <- c(mean(est[,1]),mean(est[,2]),mean(est[,3]))
 
 rc=20
 theta1_1=0.5
@@ -682,7 +698,7 @@ beta=0.98
 
 params_lin = c(rc,theta1_1)
 p = p
-S = length(table(data$estado))
+S = 90
 out = contraction_mapping(S=S, p=p, FCM=lin_cost, params=params_lin, beta = beta)
 
 lin_forward=out$CP_forward
@@ -697,7 +713,7 @@ ggdat1 = data.frame(Regra=c(rep("Forward-Looking",nrow(lin_forward)),
 ggplot(ggdat1,aes(y=pMaint,x=State,color=Regra))+
   geom_line(lwd=1)+
   theme_bw(12)+
-  scale_x_continuous(breaks = seq(0,length(unique(data$estado)),by=5))+
+  scale_x_continuous(breaks = seq(0,90,by=5))+
   scale_y_continuous(labels = scales::percent)+
   labs(x="Estado",
        y="Prob.")

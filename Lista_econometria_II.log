@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.07.0 (MiKTeX 2.9.6730 64-bit)  (format=lualatex 2018.8.2)  25 JUN 2019 22:25
+This is LuaTeX, Version 1.07.0 (MiKTeX 2.9.6730 64-bit)  (format=lualatex 2018.8.2)  27 JUN 2019 18:58
  restricted system commands enabled.
 **Lista_econometria_II.tex
 (./Lista_econometria_II.tex
@@ -33,7 +33,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.827 seconds ("C:/Program File
+luaotfload | main : initialization completed in 1.559 seconds ("C:/Program File
 s/MiKTeX 2.9/tex/latex/base/article.cls"
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 ("C:/Program Files/MiKTeX 2.9/tex/latex/base/size12.clo"
@@ -1764,144 +1764,157 @@ Package xcolor Warning: Incompatible color definition on input line 657.
 Package xcolor Warning: Incompatible color definition on input line 702.
 
 
-Package xcolor Warning: Incompatible color definition on input line 810.
+Package xcolor Warning: Incompatible color definition on input line 816.
 
 
-Package xcolor Warning: Incompatible color definition on input line 810.
+Package xcolor Warning: Incompatible color definition on input line 816.
 
 
-Package xcolor Warning: Incompatible color definition on input line 810.
+Package xcolor Warning: Incompatible color definition on input line 816.
 
 [10]
 
-Package xcolor Warning: Incompatible color definition on input line 810.
+Package xcolor Warning: Incompatible color definition on input line 816.
 
 
-Package xcolor Warning: Incompatible color definition on input line 810.
+Package xcolor Warning: Incompatible color definition on input line 816.
 
 
-Underfull \vbox (badness 10000) detected at line 810
+Underfull \vbox (badness 10000) detected at line 816
  []
 
 
-Underfull \vbox (badness 10000) detected at line 810
+Underfull \vbox (badness 10000) detected at line 816
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 810.
+Package xcolor Warning: Incompatible color definition on input line 816.
 
 [11]
 
-Package xcolor Warning: Incompatible color definition on input line 810.
+Package xcolor Warning: Incompatible color definition on input line 816.
 
 
-Package xcolor Warning: Incompatible color definition on input line 810.
+Package xcolor Warning: Incompatible color definition on input line 816.
 
 
-Underfull \vbox (badness 10000) detected at line 810
+Underfull \vbox (badness 10000) detected at line 816
  []
 
 
-Underfull \vbox (badness 10000) detected at line 810
+Underfull \vbox (badness 10000) detected at line 816
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 810.
+Package xcolor Warning: Incompatible color definition on input line 816.
 
 [12]
 
-Package xcolor Warning: Incompatible color definition on input line 810.
+Package xcolor Warning: Incompatible color definition on input line 816.
 
 
-Package xcolor Warning: Incompatible color definition on input line 810.
-
-
-Package xcolor Warning: Incompatible color definition on input line 873.
+Package xcolor Warning: Incompatible color definition on input line 816.
 
 [13]
 
-Package xcolor Warning: Incompatible color definition on input line 1065.
+Package xcolor Warning: Incompatible color definition on input line 879.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1065.
+Package xcolor Warning: Incompatible color definition on input line 1081.
 
 
-Underfull \vbox (badness 10000) detected at line 1065
- []
+Package xcolor Warning: Incompatible color definition on input line 1081.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1065.
+Package xcolor Warning: Incompatible color definition on input line 1081.
 
 [14]
 
-Package xcolor Warning: Incompatible color definition on input line 1065.
+Package xcolor Warning: Incompatible color definition on input line 1081.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1065.
+Package xcolor Warning: Incompatible color definition on input line 1081.
 
 
-Underfull \vbox (badness 10000) detected at line 1065
+Underfull \vbox (badness 10000) detected at line 1081
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1065
+Underfull \vbox (badness 10000) detected at line 1081
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1065.
+Package xcolor Warning: Incompatible color definition on input line 1081.
 
 [15]
 
-Package xcolor Warning: Incompatible color definition on input line 1065.
+Package xcolor Warning: Incompatible color definition on input line 1081.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1065.
+Package xcolor Warning: Incompatible color definition on input line 1081.
 
 
-Underfull \vbox (badness 10000) detected at line 1065
+Underfull \vbox (badness 10000) detected at line 1081
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1065
+Underfull \vbox (badness 10000) detected at line 1081
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1065.
+Package xcolor Warning: Incompatible color definition on input line 1081.
 
 [16]
 
-Package xcolor Warning: Incompatible color definition on input line 1065.
+Package xcolor Warning: Incompatible color definition on input line 1081.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1065.
+Package xcolor Warning: Incompatible color definition on input line 1081.
 
 
-Underfull \vbox (badness 10000) detected at line 1065
+Underfull \vbox (badness 10000) detected at line 1081
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1065
+Underfull \vbox (badness 10000) detected at line 1081
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1065.
+Package xcolor Warning: Incompatible color definition on input line 1081.
 
 [17]
 
-Package xcolor Warning: Incompatible color definition on input line 1065.
+Package xcolor Warning: Incompatible color definition on input line 1081.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1065.
+Package xcolor Warning: Incompatible color definition on input line 1081.
+
+
+Underfull \vbox (badness 10000) detected at line 1081
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1081
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1081.
 
 [18]
 
-Package xcolor Warning: Incompatible color definition on input line 1071.
+Package xcolor Warning: Incompatible color definition on input line 1081.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1090.
+Package xcolor Warning: Incompatible color definition on input line 1081.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1090.
+Package xcolor Warning: Incompatible color definition on input line 1087.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1106.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1106.
 
 <Lista_econometria_II_files/figure-latex/unnamed-chunk-3-1.pdf, id=156, 433.62pt
  x 289.08pt>
@@ -1909,89 +1922,60 @@ File: Lista_econometria_II_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file
  (type pdf)
 <use Lista_econometria_II_files/figure-latex/unnamed-chunk-3-1.pdf>
 Package luatex.def Info: Lista_econometria_II_files/figure-latex/unnamed-chunk-3
--1.pdf  used on input line 1092.
+-1.pdf  used on input line 1108.
 (luatex.def)             Requested size: 433.63878pt x 289.09251pt.
 
-Overfull \hbox (4.67088pt too wide) in paragraph at lines 1092--1093
+Overfull \hbox (4.67088pt too wide) in paragraph at lines 1108--1109
 [][] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1094.
+Package xcolor Warning: Incompatible color definition on input line 1110.
 
+[19]
 
-Package xcolor Warning: Incompatible color definition on input line 1184.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1184.
-
-
-Underfull \vbox (badness 10000) detected at line 1184
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 1184.
-
-[19<./Lista_econometria_II_files/figure-latex/unnamed-chunk-3-1.pdf>]
-
-Package xcolor Warning: Incompatible color definition on input line 1184.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1184.
-
-
-Underfull \vbox (badness 10000) detected at line 1184
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1184
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 1184.
-
-[20]
-
-Package xcolor Warning: Incompatible color definition on input line 1184.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1184.
-
-
-Underfull \vbox (badness 10000) detected at line 1184
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1184
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 1184.
-
-[21]
-
-Package xcolor Warning: Incompatible color definition on input line 1184.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1184.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1190.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1194.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1194.
+Package xcolor Warning: Incompatible color definition on input line 1200.
 
 
 Package xcolor Warning: Incompatible color definition on input line 1200.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1204.
+Underfull \vbox (badness 10000) detected at line 1200
+ []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1204.
+Package xcolor Warning: Incompatible color definition on input line 1200.
+
+[20<./Lista_econometria_II_files/figure-latex/unnamed-chunk-3-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 1200.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1200.
+
+
+Underfull \vbox (badness 10000) detected at line 1200
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1200
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1200.
+
+[21]
+
+Package xcolor Warning: Incompatible color definition on input line 1200.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1200.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1206.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1210.
 
 
 Package xcolor Warning: Incompatible color definition on input line 1210.
@@ -2000,26 +1984,29 @@ Package xcolor Warning: Incompatible color definition on input line 1210.
 Package xcolor Warning: Incompatible color definition on input line 1216.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1216.
+Package xcolor Warning: Incompatible color definition on input line 1220.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1222.
+Package xcolor Warning: Incompatible color definition on input line 1220.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1249.
+Package xcolor Warning: Incompatible color definition on input line 1226.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1249.
+Package xcolor Warning: Incompatible color definition on input line 1232.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1249.
+Package xcolor Warning: Incompatible color definition on input line 1232.
 
 [22]
 
-Package xcolor Warning: Incompatible color definition on input line 1249.
+Package xcolor Warning: Incompatible color definition on input line 1238.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1249.
+Package xcolor Warning: Incompatible color definition on input line 1265.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1265.
 
 <Lista_econometria_II_files/figure-latex/unnamed-chunk-3-2.pdf, id=180, 433.62pt
  x 289.08pt>
@@ -2027,31 +2014,32 @@ File: Lista_econometria_II_files/figure-latex/unnamed-chunk-3-2.pdf Graphic file
  (type pdf)
 <use Lista_econometria_II_files/figure-latex/unnamed-chunk-3-2.pdf>
 Package luatex.def Info: Lista_econometria_II_files/figure-latex/unnamed-chunk-3
--2.pdf  used on input line 1251.
+-2.pdf  used on input line 1267.
 (luatex.def)             Requested size: 433.63878pt x 289.09251pt.
 
-Overfull \hbox (4.67088pt too wide) in paragraph at lines 1251--1252
+Overfull \hbox (4.67088pt too wide) in paragraph at lines 1267--1268
 [][] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1253.
+Package xcolor Warning: Incompatible color definition on input line 1269.
+
+[23]
+
+Package xcolor Warning: Incompatible color definition on input line 1274.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1258.
+Package xcolor Warning: Incompatible color definition on input line 1274.
 
-
-Package xcolor Warning: Incompatible color definition on input line 1258.
-
-[23<./Lista_econometria_II_files/figure-latex/unnamed-chunk-3-2.pdf>] [24] [25]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1382.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1382.
+[24<./Lista_econometria_II_files/figure-latex/unnamed-chunk-3-2.pdf>] [25] [26]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1398.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1398.
 (./Lista_econometria_II.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1382.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1382.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1398.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1398.
 Package rerunfilecheck Info: File `Lista_econometria_II.out' has not changed.
 (rerunfilecheck)             Checksum: 6E03298FFDFE13580FF597083C04DC54;1241.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1382.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1398.
 )
 (\end occurred inside a group at level 1)
 
@@ -2059,12 +2047,12 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1382.
 ### bottom level
 
 Here is how much of LuaTeX's memory you used:
- 37565 strings out of 494412
+ 37566 strings out of 494412
  125017,953878 words of node,token memory allocated
  920 words of node memory still in use:
    8 hlist, 2 vlist, 3 rule, 7 glue, 1 kern, 42 attribute, 103 glue_spec, 42 att
 ribute_list, 1 write nodes
-   avail lists: 2:3205,3:204,4:665,5:531,6:20,7:6874,8:80,9:419,10:33,11:417
+   avail lists: 2:3377,3:246,4:686,5:576,6:20,7:8090,8:79,9:476,10:33,11:417
  40431 multiletter control sequences out of 65536+200000
  78 fonts using 19931631 bytes
  55i,10n,117p,421b,13225s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2090,9 +2078,9 @@ s/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
 ype1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lms
 y8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.p
 fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Lista_econometria_II.pdf (25 pages, 379984 bytes).
+Output written on Lista_econometria_II.pdf (26 pages, 381972 bytes).
 
-PDF statistics: 289 PDF objects out of 1000 (max. 8388607)
- 54 named destinations out of 1000 (max. 131072)
+PDF statistics: 293 PDF objects out of 1000 (max. 8388607)
+ 55 named destinations out of 1000 (max. 131072)
  80 words of extra memory for PDF output out of 10000 (max. 100000000)
 

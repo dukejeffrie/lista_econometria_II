@@ -880,7 +880,9 @@ cbind(dados,V12=t) %>%
                             estado-lag(estado)==3~4,
                             estado-lag(estado)==4~5,
                             estado-lag(estado)>4~6,),
-                diffV12_mult=ifelse(is.na(diffV12_mult)==T,1,diffV12_mult)) %>%
+                diffV12_mult=ifelse(is.na(diffV12_mult)==T,
+                                    1,
+                                    diffV12_mult)) %>%
   na.omit)  # Ajustar primeiro valor
   
 
@@ -1056,7 +1058,8 @@ resultados <- rbind(resultados,r)
 ```{r,results='asis'}
 resultados %>%
   xtable::xtable(digits = c(0,rep(3,ncol(resultados))),
-                 caption="Estimativas para o modelo modificado: Grid: 2.500, S: 180 e função custo logarítmica",
+                 caption="Estimativas para o modelo modificado: 
+                 Grid: 2.500, S: 180 e função custo logarítmica",
                  label="tab:4") %>%
   print(include.rownames=F,
         comment=FALSE)
@@ -1262,7 +1265,8 @@ Isto fornece um $\tilde{P}$ simulado para cada "guess" de $\theta$ e agora o que
 ```{r,message=F,warning=F,comment=NA}
 
 # Fonte:
-# https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/blob/master/Import%20Data%20and%20Estimate.R
+# https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/blob/
+# master/Import%20Data%20and%20Estimate.R
 
                                                        
 #  Programa para estimar o modelo de Rust, Econometrica 1987,  
@@ -1453,7 +1457,8 @@ resultados %>%
 ```{r}
 # Definir a função de custo míope
 # Fonte:
-# https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/blob/master/Rust%20Data%20Generating%20Process.R
+# https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/
+# blob/master/Rust%20Data%20Generating%20Process.R
 custo_miope=function(S, FCM, params, p){
   
   "A função custo míope computa o custo esperado associado com
@@ -1656,7 +1661,8 @@ dynamiclogit=function(params,data,S,p,FCM){
   1) Os parâmetros atuais entram na função  contraction mapping
   2) A função retorna uma matriz de decisão 
      de probabilidade para cada estado
-  3) Essa matriz é utilizada para computar a log-likelihood das observações
+  3) Essa matriz é utilizada para computar a log-likelihood 
+  das observações
   4) A log-likelihood é somada entre os indivíduos
   "
   
@@ -1680,7 +1686,8 @@ clogit=function(ydum,x,restx,namesb,sup_out=FALSE){
   o algorítmo de otimização: Newton's com
   Gradiente e Hessiano analítico
   
-  Fonte: https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/blob/master/clogit.R
+  Fonte: https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/
+  blob/master/clogit.R
 
   Input       ydum    - (nobs x 1) vetor da variável dependente categórica:
                         {1, 2, ..., nalt}
@@ -1815,7 +1822,8 @@ npl_sing=function(inda,indx,zmat,pini,bdisc,fmat,names){
   de escolha discreta de programação dinâmica (single-agent)
   usando o algorítmo NPL (Aguirregabiria and Mira, Econometrica, 2002)
   
-  Fonte: https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/blob/master/npl_sing.R 
+  Fonte: https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/
+  blob/master/npl_sing.R 
    
   ---------------------------------------------------------------
   
@@ -1899,7 +1907,7 @@ npl_sing=function(inda,indx,zmat,pini,bdisc,fmat,names){
     
     #1. Obter as matrizes 
     #"A=(I-beta*Fu)", "Bz=sumj{Pj*Zj}" e o vetor Be=sumj{Pj*ej}
-    #-----------------------------------------------------------------------------------
+    #--------------------------------------------------------
     
     i_fu = matrix(0,numx,numx)
     sumpz = matrix(0,numx,npar)
@@ -1909,9 +1917,11 @@ npl_sing=function(inda,indx,zmat,pini,bdisc,fmat,names){
     # Loop da escolha
     
     while (j<=nchoice){
-      i_fu = i_fu + pini[,j]*fmat[,(numx*(j-1)+1):(numx*j)] #coluna de referência
+      #coluna de referência
+      i_fu = i_fu + pini[,j]*fmat[,(numx*(j-1)+1):(numx*j)] 
       sumpz = sumpz + pini[,j]*zmat[,(npar*(j-1)+1):(npar*j)]
-      sumpe = sumpe + pini[,j]*(eulerc - log(pini[,j]+myzero)) # Tratamento para o log
+      # Tratamento para o log
+      sumpe = sumpe + pini[,j]*(eulerc - log(pini[,j]+myzero))
       j=j+1 ;
     }
     
@@ -1941,7 +1951,9 @@ npl_sing=function(inda,indx,zmat,pini,bdisc,fmat,names){
     etilda = matrix(0,numx,nchoice)
     j=1
     while(j<=nchoice){
-      ztilda[,(npar*(j-1)+1):(npar*j)] = zmat[,(npar*(j-1)+1):(npar*j)]+bdisc*fmat[,(numx*(j-1)+1):(numx*j)]%*%wz
+      ztilda[,(npar*(j-1)+1):(npar*j)] =
+        zmat[,(npar*(j-1)+1):(npar*j)]+
+        bdisc*fmat[,(numx*(j-1)+1):(numx*j)]%*%wz
       etilda[,j] = bdisc * fmat[,(numx*(j-1)+1):(numx*j)]%*%we  
       j=j+1
     }

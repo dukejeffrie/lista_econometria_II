@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{01/07/2019}
+    \date{03/07/2019}
 
 \setlength\parindent{24pt}
 \usepackage{indentfirst}
@@ -1397,7 +1397,9 @@ função logarítmica.}
 \NormalTok{                            estado}\OperatorTok{-}\KeywordTok{lag}\NormalTok{(estado)}\OperatorTok{==}\DecValTok{3}\OperatorTok{~}\DecValTok{4}\NormalTok{,}
 \NormalTok{                            estado}\OperatorTok{-}\KeywordTok{lag}\NormalTok{(estado)}\OperatorTok{==}\DecValTok{4}\OperatorTok{~}\DecValTok{5}\NormalTok{,}
 \NormalTok{                            estado}\OperatorTok{-}\KeywordTok{lag}\NormalTok{(estado)}\OperatorTok{>}\DecValTok{4}\OperatorTok{~}\DecValTok{6}\NormalTok{,),}
-                \DataTypeTok{diffV12_mult=}\KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(diffV12_mult)}\OperatorTok{==}\NormalTok{T,}\DecValTok{1}\NormalTok{,diffV12_mult)) }\OperatorTok{%>%}
+                \DataTypeTok{diffV12_mult=}\KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(diffV12_mult)}\OperatorTok{==}\NormalTok{T,}
+                                    \DecValTok{1}\NormalTok{,}
+\NormalTok{                                    diffV12_mult)) }\OperatorTok{%>%}
 \StringTok{  }\NormalTok{na.omit)  }\CommentTok{# Ajustar primeiro valor}
   
 
@@ -1578,7 +1580,8 @@ função logarítmica.}
 \begin{Highlighting}[]
 \NormalTok{resultados }\OperatorTok{%>%}
 \StringTok{  }\NormalTok{xtable}\OperatorTok{::}\KeywordTok{xtable}\NormalTok{(}\DataTypeTok{digits =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\KeywordTok{rep}\NormalTok{(}\DecValTok{3}\NormalTok{,}\KeywordTok{ncol}\NormalTok{(resultados))),}
-                 \DataTypeTok{caption=}\StringTok{"Estimativas para o modelo modificado: Grid: 2.500, S: 180 e função custo logarítmica"}\NormalTok{,}
+                 \DataTypeTok{caption=}\StringTok{"Estimativas para o modelo modificado: }
+\StringTok{                 Grid: 2.500, S: 180 e função custo logarítmica"}\NormalTok{,}
                  \DataTypeTok{label=}\StringTok{"tab:4"}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{print}\NormalTok{(}\DataTypeTok{include.rownames=}\NormalTok{F,}
         \DataTypeTok{comment=}\OtherTok{FALSE}\NormalTok{)}
@@ -1596,7 +1599,8 @@ Grupo 1, 2 e 3 & -166.892 & 26.073 & 7.203 & 0.004 & 0.096 & 0.420 & 0.463 & 0.0
   Grupo 1, 2, 3 e 4 & -447.602 & 29.404 & 6.229 & 0.005 & 0.108 & 0.493 & 0.377 & 0.021 & 0.001 \\ 
    \hline
 \end{tabular}
-\caption{Estimativas para o modelo modificado: Grid: 2.500, S: 180 e função custo logarítmica} 
+\caption{Estimativas para o modelo modificado: 
+                 Grid: 2.500, S: 180 e função custo logarítmica} 
 \label{tab:4}
 \end{table}
 
@@ -1903,7 +1907,8 @@ Comente as diferenças.}
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Fonte:}
-\CommentTok{# https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/blob/master/Import%20Data%20and%20Estimate.R}
+\CommentTok{# https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/blob/}
+\CommentTok{# master/Import%20Data%20and%20Estimate.R}
 
                                                        
 \CommentTok{#  Programa para estimar o modelo de Rust, Econometrica 1987,  }
@@ -2140,7 +2145,8 @@ suas estimativas ficam estáveis? Por que novos aumentos no valor de
 \begin{Highlighting}[]
 \CommentTok{# Definir a função de custo míope}
 \CommentTok{# Fonte:}
-\CommentTok{# https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/blob/master/Rust%20Data%20Generating%20Process.R}
+\CommentTok{# https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/}
+\CommentTok{# blob/master/Rust%20Data%20Generating%20Process.R}
 \NormalTok{custo_miope=}\ControlFlowTok{function}\NormalTok{(S, FCM, params, p)\{}
   
   \StringTok{"A função custo míope computa o custo esperado associado com}
@@ -2343,7 +2349,8 @@ suas estimativas ficam estáveis? Por que novos aumentos no valor de
 \StringTok{  1) Os parâmetros atuais entram na função  contraction mapping}
 \StringTok{  2) A função retorna uma matriz de decisão }
 \StringTok{     de probabilidade para cada estado}
-\StringTok{  3) Essa matriz é utilizada para computar a log-likelihood das observações}
+\StringTok{  3) Essa matriz é utilizada para computar a log-likelihood }
+\StringTok{  das observações}
 \StringTok{  4) A log-likelihood é somada entre os indivíduos}
 \StringTok{  "}
   
@@ -2367,7 +2374,8 @@ suas estimativas ficam estáveis? Por que novos aumentos no valor de
 \StringTok{  o algorítmo de otimização: Newton's com}
 \StringTok{  Gradiente e Hessiano analítico}
 \StringTok{  }
-\StringTok{  Fonte: https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/blob/master/clogit.R}
+\StringTok{  Fonte: https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/}
+\StringTok{  blob/master/clogit.R}
 
 \StringTok{  Input       ydum    - (nobs x 1) vetor da variável dependente categórica:}
 \StringTok{                        \{1, 2, ..., nalt\}}
@@ -2502,7 +2510,8 @@ suas estimativas ficam estáveis? Por que novos aumentos no valor de
 \StringTok{  de escolha discreta de programação dinâmica (single-agent)}
 \StringTok{  usando o algorítmo NPL (Aguirregabiria and Mira, Econometrica, 2002)}
 \StringTok{  }
-\StringTok{  Fonte: https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/blob/master/npl_sing.R }
+\StringTok{  Fonte: https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/}
+\StringTok{  blob/master/npl_sing.R }
 \StringTok{   }
 \StringTok{  ---------------------------------------------------------------}
 \StringTok{  }
@@ -2586,7 +2595,7 @@ suas estimativas ficam estáveis? Por que novos aumentos no valor de
     
     \CommentTok{#1. Obter as matrizes }
     \CommentTok{#"A=(I-beta*Fu)", "Bz=sumj\{Pj*Zj\}" e o vetor Be=sumj\{Pj*ej\}}
-    \CommentTok{#-----------------------------------------------------------------------------------}
+    \CommentTok{#--------------------------------------------------------}
     
 \NormalTok{    i_fu =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{,numx,numx)}
 \NormalTok{    sumpz =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{,numx,npar)}
@@ -2596,9 +2605,11 @@ suas estimativas ficam estáveis? Por que novos aumentos no valor de
     \CommentTok{# Loop da escolha}
     
     \ControlFlowTok{while}\NormalTok{ (j}\OperatorTok{<=}\NormalTok{nchoice)\{}
-\NormalTok{      i_fu =}\StringTok{ }\NormalTok{i_fu }\OperatorTok{+}\StringTok{ }\NormalTok{pini[,j]}\OperatorTok{*}\NormalTok{fmat[,(numx}\OperatorTok{*}\NormalTok{(j}\DecValTok{-1}\NormalTok{)}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{:}\NormalTok{(numx}\OperatorTok{*}\NormalTok{j)] }\CommentTok{#coluna de referência}
+      \CommentTok{#coluna de referência}
+\NormalTok{      i_fu =}\StringTok{ }\NormalTok{i_fu }\OperatorTok{+}\StringTok{ }\NormalTok{pini[,j]}\OperatorTok{*}\NormalTok{fmat[,(numx}\OperatorTok{*}\NormalTok{(j}\DecValTok{-1}\NormalTok{)}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{:}\NormalTok{(numx}\OperatorTok{*}\NormalTok{j)] }
 \NormalTok{      sumpz =}\StringTok{ }\NormalTok{sumpz }\OperatorTok{+}\StringTok{ }\NormalTok{pini[,j]}\OperatorTok{*}\NormalTok{zmat[,(npar}\OperatorTok{*}\NormalTok{(j}\DecValTok{-1}\NormalTok{)}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{:}\NormalTok{(npar}\OperatorTok{*}\NormalTok{j)]}
-\NormalTok{      sumpe =}\StringTok{ }\NormalTok{sumpe }\OperatorTok{+}\StringTok{ }\NormalTok{pini[,j]}\OperatorTok{*}\NormalTok{(eulerc }\OperatorTok{-}\StringTok{ }\KeywordTok{log}\NormalTok{(pini[,j]}\OperatorTok{+}\NormalTok{myzero)) }\CommentTok{# Tratamento para o log}
+      \CommentTok{# Tratamento para o log}
+\NormalTok{      sumpe =}\StringTok{ }\NormalTok{sumpe }\OperatorTok{+}\StringTok{ }\NormalTok{pini[,j]}\OperatorTok{*}\NormalTok{(eulerc }\OperatorTok{-}\StringTok{ }\KeywordTok{log}\NormalTok{(pini[,j]}\OperatorTok{+}\NormalTok{myzero))}
 \NormalTok{      j=j}\OperatorTok{+}\DecValTok{1}\NormalTok{ ;}
 \NormalTok{    \}}
     
@@ -2628,7 +2639,9 @@ suas estimativas ficam estáveis? Por que novos aumentos no valor de
 \NormalTok{    etilda =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{,numx,nchoice)}
 \NormalTok{    j=}\DecValTok{1}
     \ControlFlowTok{while}\NormalTok{(j}\OperatorTok{<=}\NormalTok{nchoice)\{}
-\NormalTok{      ztilda[,(npar}\OperatorTok{*}\NormalTok{(j}\DecValTok{-1}\NormalTok{)}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{:}\NormalTok{(npar}\OperatorTok{*}\NormalTok{j)] =}\StringTok{ }\NormalTok{zmat[,(npar}\OperatorTok{*}\NormalTok{(j}\DecValTok{-1}\NormalTok{)}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{:}\NormalTok{(npar}\OperatorTok{*}\NormalTok{j)]}\OperatorTok{+}\NormalTok{bdisc}\OperatorTok{*}\NormalTok{fmat[,(numx}\OperatorTok{*}\NormalTok{(j}\DecValTok{-1}\NormalTok{)}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{:}\NormalTok{(numx}\OperatorTok{*}\NormalTok{j)]}\OperatorTok{%*%}\NormalTok{wz}
+\NormalTok{      ztilda[,(npar}\OperatorTok{*}\NormalTok{(j}\DecValTok{-1}\NormalTok{)}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{:}\NormalTok{(npar}\OperatorTok{*}\NormalTok{j)] =}
+\StringTok{        }\NormalTok{zmat[,(npar}\OperatorTok{*}\NormalTok{(j}\DecValTok{-1}\NormalTok{)}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{:}\NormalTok{(npar}\OperatorTok{*}\NormalTok{j)]}\OperatorTok{+}
+\StringTok{        }\NormalTok{bdisc}\OperatorTok{*}\NormalTok{fmat[,(numx}\OperatorTok{*}\NormalTok{(j}\DecValTok{-1}\NormalTok{)}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{:}\NormalTok{(numx}\OperatorTok{*}\NormalTok{j)]}\OperatorTok{%*%}\NormalTok{wz}
 \NormalTok{      etilda[,j] =}\StringTok{ }\NormalTok{bdisc }\OperatorTok{*}\StringTok{ }\NormalTok{fmat[,(numx}\OperatorTok{*}\NormalTok{(j}\DecValTok{-1}\NormalTok{)}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{:}\NormalTok{(numx}\OperatorTok{*}\NormalTok{j)]}\OperatorTok{%*%}\NormalTok{we  }
 \NormalTok{      j=j}\OperatorTok{+}\DecValTok{1}
 \NormalTok{    \}}

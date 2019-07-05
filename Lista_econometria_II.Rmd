@@ -67,6 +67,10 @@ dpi: 600
 # Versão do R disponível em:
 # https://mran.microsoft.com/download
 
+# Alguns pacotes, para certas plataformas,
+# podem solicitar a instalação do Rtools. Ele está disponível em:
+# https://cran.r-project.org/bin/windows/Rtools/
+
 # Para rodar este documento com o Rmarkdown foi utilizada a
 # versão RStudio 1.2.1335 - Windows 7+ (64-bit) disponível em:
 # https://www.rstudio.com/products/rstudio/download/

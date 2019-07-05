@@ -1,3 +1,19 @@
+# Informações da sessão do R em que esta lista foi realizada:
+# R version 3.5.3 (2019-03-11)
+# Platform: x86_64-w64-mingw32/x64 (64-bit)
+# Running under: Windows 10 x64 (build 18362)
+
+# Versão do R disponível em:
+# https://mran.microsoft.com/download
+
+# Alguns pacotes, para certas plataformas,
+# podem solicitar a instalação do Rtools. Ele está disponível em:
+# https://cran.r-project.org/bin/windows/Rtools/
+
+# Para rodar este documento com o Rmarkdown foi utilizada a
+# versão RStudio 1.2.1335 - Windows 7+ (64-bit) disponível em:
+# https://www.rstudio.com/products/rstudio/download/
+
 # Lista de pacotes a utilizados
 # Criar um objeto com os pacotes
 pacotes <- c("tidyverse","data.table","tabulizer","knitr","ggplot2",
@@ -905,3 +921,9 @@ resultados %>%
                  label="tab:5") %>%
   print(include.rownames=F,
         comment=FALSE)
+
+# Fontes:
+#
+# https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/blob/master/Import%20Data%20and%20Estimate.R
+# https://github.com/waynejtaylor/Single-Agent-Dynamic-Choice/blob/master/Rust%20Data%20Generating%20Process.R
+# 
